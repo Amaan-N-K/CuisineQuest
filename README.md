@@ -28,8 +28,9 @@ Our meal planner is designed for those who wish to organize their culinary week 
 # Exploring API
 <img width="960" alt="Screenshot 2023-09-28 180512" src="https://github.com/Amaan-N-K/CuisineQuest/assets/113640712/84467900-d07c-4012-b1ef-446887e1fe57">
 
-# Output from Java example call
+# Example output of running Java code
 
+```bash
 1/2 cup olive oil
 5 cloves garlic, peeled
 2 large russet potatoes, peeled and cut into chunks
