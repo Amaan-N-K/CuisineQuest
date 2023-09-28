@@ -1,4 +1,4 @@
-# csc207-groupproject
+# CuisineQuest
 
 **Problem Domain:** Recipes
 
@@ -27,4 +27,18 @@ Our meal planner is designed for those who wish to organize their culinary week 
 - Scheduling meals for specific times and days.
 # Exploring API
 <img width="960" alt="Screenshot 2023-09-28 180512" src="https://github.com/Amaan-N-K/CuisineQuest/assets/113640712/84467900-d07c-4012-b1ef-446887e1fe57">
+
+# Output from Java example call
+
+1/2 cup olive oil
+5 cloves garlic, peeled
+2 large russet potatoes, peeled and cut into chunks
+1 3-4 pound chicken, cut into 8 pieces (or 3 pound chicken legs)
+3/4 cup white wine
+3/4 cup chicken stock
+3 tablespoons chopped parsley
+1 tablespoon dried oregano
+Salt and pepper
+1 cup frozen peas, thawed
+
 
