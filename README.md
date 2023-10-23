@@ -12,13 +12,14 @@ This tool allows users to:
   - Ingredients on hand
   - Preferred calorie range
   - Desired cuisine type
-  - dietary restrictions
+  - Dietary restrictions
 - Gain insights into preparation time, difficulty level, and more.
 
 ## 2. Meal Planner
 
 Our meal planner is designed for those who wish to organize their culinary week ahead. Features include:
 - Crafting a comprehensive meal plan based on:
+  - BMR (weight in kg, height in cm, age in years)
   - Available ingredients
   - Caloric goals
   - Specific cuisines
