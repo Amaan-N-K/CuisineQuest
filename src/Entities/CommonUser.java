@@ -1,8 +1,11 @@
 pacakge Entities;
+import java.util.List;
+import java.util.ArrayList;
 class CommonUser implements User {
     private final String name;
     private final String password;
     private final List<Recipe> favorites;
+
 
     CommonUser(String name, String password){
         this.name = name;

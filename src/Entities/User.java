@@ -4,6 +4,6 @@ public interface User {
     String getName();
     String getPassword();
 
-    List getFavorites();
+    List<Recipe> getFavorites();
 
 }
