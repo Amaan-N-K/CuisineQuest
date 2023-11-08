@@ -7,7 +7,7 @@ public class Criteria {
     private List<String> ingredientsAvailable;
     private int prepTime;
 
-    Criteria(int calorieGoal, List<String> dietaryRestrictions, List<String ingredientsAvailable, int prepTime){
+    Criteria(int calorieGoal, List<String> dietaryRestrictions, List<String> ingredientsAvailable, int prepTime){
         this.calorieGoal = calorieGoal;
         this.dietaryRestrictions = dietaryRestrictions;
         this.ingredientsAvailable = ingredientsAvailable;
