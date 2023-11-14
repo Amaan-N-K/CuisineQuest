@@ -13,15 +13,15 @@ public class InMemoryGroceryDataAccessObject implements GroceryDataAccessObject 
         this.recipes = new ArrayList<>(recipes);
     }
 
-    public List<String> getGroceryItems(MealPlan mealPlan) {
-        List<String> groceryItems = new ArrayList<>();
+    public List<String> getGroceryList(MealPlan mealPlan) {
+        List<String> groceryList = new ArrayList<>();
         for (Recipe recipe: mealPlan.getRecipes()) {
-            groceryItems.addAll(getGroceryItemsFromRecipes(recipe));
+            groceryList.addAll(getGroceryListFromRecipes(recipe));
         }
-        return groceryItems;
+        return groceryList;
     }
 
-    private List<String> getGroceryItemsFromRecipes(Recipe recipe) {
+    private List<String> getGroceryListFromRecipes(Recipe recipe) {
         return new ArrayList<>(recipe.getIngredients());
     }
 }

@@ -6,5 +6,5 @@ import Entities.Recipe;
 import java.util.List;
 
 public interface GroceryDataAccessObject {
-    List<String getGroceryItems(MealPlan mealPlan);
+    List<String getGroceryList(MealPlan mealPlan);
 }
