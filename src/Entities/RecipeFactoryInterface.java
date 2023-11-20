@@ -8,6 +8,11 @@ public interface RecipeFactoryInterface {
                   List<String> diet,
                   List<String> health,
                   List<String> cuisineType,
-                  Nutrition nutrition,
-                  String description);
+                  String description,
+                  int calorie,
+                  int carbohydrates,
+                  int protein,
+                  int sugar,
+                  int fiber
+                  );
 }

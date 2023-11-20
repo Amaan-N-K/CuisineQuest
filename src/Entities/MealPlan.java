@@ -39,7 +39,7 @@ public class MealPlan {
     public String getEndDate() {
         return endDate;
     }
-    public String getDiet() {
+    public String getDiets() {
         return diet;
     }
     public int getCalorieLimit() {
