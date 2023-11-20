@@ -5,13 +5,15 @@ import java.util.Collections;
 import java.util.List;
 
 public class MealPlan {
+    private final String identifier;
     private final String startDate;
     private final String endDate;
     private final String diet;
     private final int calorieLimit;
-    private List<Recipe> recipes;
+    private List<MealPlanDay> recipes;
 
     public MealPlan(String startDate, String endDate, String diet, int calorieLimit) {
+        this.identifier = startDate + "to" + endDate;
         this.recipes = new ArrayList<>();
         this.startDate = startDate;
         this.endDate = endDate;
@@ -19,29 +21,30 @@ public class MealPlan {
         this.calorieLimit = calorieLimit;
     }
 
-    public void addRecipe(Recipe recipe) {
-        recipes.add(recipe);
+    public void addMealPlanDay(MealPlanDay mealPlanDay) {
+        recipes.add(mealPlanDay);
     }
 
-    public boolean removeRecipe(Recipe recipe) {
-        return recipes.remove(recipe);
+    public boolean removeMealPlanDay(MealPlanDay mealPlanDay) {
+        return recipes.remove(mealPlanDay);
     }
 
-    public List<Recipe> getRecipes() {
+    public List<MealPlanDay> getRecipes() {
         return Collections.unmodifiableList(recipes);
     }
 
-    public String getStartDate() {
-        return startDate;
-    }
+    public String getIdentifier() { return identifier; }
+    public String getStartDate() { return startDate; }
 
     public String getEndDate() {
         return endDate;
     }
-    public String getDiet() {
+    public String getDiets() {
         return diet;
     }
     public int getCalorieLimit() {
         return calorieLimit;
     }
+
+
 }
