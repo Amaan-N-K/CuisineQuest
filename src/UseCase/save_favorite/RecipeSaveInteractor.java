@@ -19,7 +19,7 @@ public class RecipeSaveInteractor implements RecipeSaveInputBoundry{
             recipeSavePresenter.prepareFailView("User doesn't exists!");
         }
         else {
-            User existingUser = dataAccess.GetByID(user.getUserId());
+            User existingUser = dataAccess.getByID(user.getUserId());
             if (existingUser.getFavoriteRecipes().contains(recipe)){
                 recipeSavePresenter.prepareFailView("Recipe already saved!");
             }
