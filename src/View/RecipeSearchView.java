@@ -27,20 +27,12 @@ public class RecipeSearchView {
         panel.add(titleLabel);
 
         // Calories
-        JLabel caloriesMinLabel = new JLabel("Calories (Min):");
+        JLabel caloriesMinLabel = new JLabel("Calories Goal:");
         JTextField caloriesMinField = new JTextField(10);  // Set columns to 10 or adjust as necessary
         JPanel caloriesMinPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         caloriesMinPanel.add(caloriesMinLabel);
         caloriesMinPanel.add(caloriesMinField);
         panel.add(caloriesMinPanel);
-
-
-        JLabel caloriesMaxLabel = new JLabel("Calories (Max):");
-        JTextField caloriesMaxField = new JTextField(10);  // Set columns to 10 or adjust as necessary
-        JPanel caloriesMaxPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        caloriesMaxPanel.add(caloriesMaxLabel);
-        caloriesMaxPanel.add(caloriesMaxField);
-        panel.add(caloriesMaxPanel);
 
         // Ingredients
         JLabel ingredientsLabel = new JLabel("Ingredients:");
@@ -71,8 +63,7 @@ public class RecipeSearchView {
         searchButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Calorie Min: " + caloriesMinField.getText());
-                System.out.println("Calorie Max: " + caloriesMaxField.getText());
+                System.out.println("Calorie Goal: " + caloriesMinField.getText());
                 System.out.println("Ingredients: " + ingredientsArea.getText());
                 System.out.println("Halal: " + halalCheckBox.isSelected());
                 System.out.println("Gluten Free: " + glutenFreeCheckBox.isSelected());
