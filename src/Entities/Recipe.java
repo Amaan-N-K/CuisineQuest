@@ -5,6 +5,7 @@ import java.util.Collections;
 
 public class Recipe {
 
+    private final String recipeId;
     private final String name;
     private final List<String> ingredients;
     private final List<String> mealType;
@@ -14,7 +15,8 @@ public class Recipe {
     private final Nutrition nutrition;
     private final String description;
 
-    public Recipe(String name,
+    public Recipe(String recipeId,
+                  String name,
                   List<String> ingredients,
                   List<String> mealType,
                   List<String> diet,
@@ -22,6 +24,7 @@ public class Recipe {
                   List<String> cuisineType,
                   Nutrition nutrition,
                   String description) {
+        this.recipeId = recipeId;
         this.name = name;
         this.ingredients = Collections.unmodifiableList(ingredients);
         this.mealType = Collections.unmodifiableList(mealType);
@@ -30,6 +33,10 @@ public class Recipe {
         this.cuisineType = Collections.unmodifiableList(cuisineType);
         this.nutrition = nutrition;
         this.description = description;
+    }
+
+    public String getRecipeId() {
+        return recipeId;
     }
 
     public String getName() {
