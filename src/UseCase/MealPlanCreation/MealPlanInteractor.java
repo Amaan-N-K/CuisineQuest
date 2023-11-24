@@ -4,17 +4,19 @@ import Entities.MealPlan;
 import Entities.MealPlanDay;
 import Entities.MealPlanFactory;
 import Entities.Recipe;
+
+import java.io.IOException;
 import java.util.List;
 import java.util.ArrayList;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 public class MealPlanInteractor implements MealPlanInputBoundary{
-    private final MealPlanDataAccessInterface mealPlanDataAccessObject;
+    private final MealPlanAPIDataAccessInterface mealPlanAPIDataAccessObject;
     private final MealPlanOutputBoundary mealPlanPresenter;
 
-    public MealPlanInteractor(MealPlanDataAccessInterface mealPlanDataAccessInterface,
+    public MealPlanInteractor(MealPlanAPIDataAccessInterface mealPlanAPIDataAccessInterface,
                               MealPlanOutputBoundary mealPlanOutputBoundary) {
-        this.mealPlanDataAccessObject = mealPlanDataAccessInterface;
+        this.mealPlanAPIDataAccessObject = mealPlanAPIDataAccessInterface;
         this.mealPlanPresenter = mealPlanOutputBoundary;
     }
     @Override
@@ -25,7 +27,14 @@ public class MealPlanInteractor implements MealPlanInputBoundary{
             mealPlanPresenter.prepareFailView("Invalid dates.");
             return;
         }
-        List<Recipe> filteredRecipes = mealPlanDataAccessObject.findRecipes(mealPlanInputData);
+        String diets = mealPlanInputData.getDiets();
+        int calorieLimit  = mealPlanInputData.getCalorieLimit();
+        List<Recipe> filteredRecipes = null;
+        try {
+            filteredRecipes = mealPlanAPIDataAccessObject.findRecipes(diets, calorieLimit);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
         MealPlan mealPlan = generateMealPlan(startDate, endDate, filteredRecipes, mealPlanInputData);
 
@@ -48,7 +57,7 @@ public class MealPlanInteractor implements MealPlanInputBoundary{
             MealPlanInputData mealPlanInputData
     ) {
         int duration = (int) ChronoUnit.DAYS.between(startDate, endDate) + 1;
-        MealPlan mealPlan = new MealPlan(startDate.toString(), endDate.toString(), MealPlanInputData.getDiet(), mealPlanInputData.getCalorieLimit());
+        MealPlan mealPlan = new MealPlan(startDate.toString(), endDate.toString(), mealPlanInputData.getDiets(), mealPlanInputData.getCalorieLimit());
 
         for (int dayIndex = 0; dayIndex < duration; dayIndex++) {
             Recipe breakfast = selectRecipeByMealType(filteredRecipes, "breakfast");
