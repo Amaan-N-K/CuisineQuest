@@ -3,7 +3,8 @@ package Entities;
 import java.util.List;
 
 public interface RecipeFactoryInterface {
-    Recipe create(List<String> ingredients,
+    Recipe create(String name,
+                  List<String> ingredients,
                   List<String> mealType,
                   List<String> diet,
                   List<String> health,

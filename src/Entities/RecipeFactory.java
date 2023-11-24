@@ -5,7 +5,7 @@ import java.util.List;
 public class RecipeFactory implements RecipeFactoryInterface {
 
 
-    public Recipe create(List<String> ingredients,
+    public Recipe create(String name, List<String> ingredients,
                   List<String> mealType,
                   List<String> diet,
                   List<String> health,
@@ -19,7 +19,7 @@ public class RecipeFactory implements RecipeFactoryInterface {
     ) {
         Nutrition nutrition = NutritionFactory.create(calorie, carbohydrates, protein, sugar, fiber);
 
-        return new Recipe(ingredients, mealType, diet, health, cuisineType, nutrition, description);
+        return new Recipe(name, ingredients, mealType, diet, health, cuisineType, nutrition, description);
     }
 
 }
