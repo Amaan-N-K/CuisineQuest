@@ -1,4 +1,4 @@
-package InterfaceAdapter.MealPlanCreation;
+package InterfaceAdapters.MealPlanCreation;
  import Entities.MealPlan;
 public class MealPlanState {
     private MealPlan mealPlan;

@@ -1,8 +1,8 @@
-package InterfaceAdapter.MealPlanCreation;
+package InterfaceAdapters.MealPlanCreation;
 
 
 import Entities.MealPlan;
-import InterfaceAdapter.ViewModel;
+import InterfaceAdapters.ViewModel;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;

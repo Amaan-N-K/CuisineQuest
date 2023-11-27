@@ -1,9 +1,8 @@
-package InterfaceAdapter.MealPlanCreation;
+package InterfaceAdapters.MealPlanCreation;
 
 import UseCase.MealPlanCreation.MealPlanInputBoundary;
 import UseCase.MealPlanCreation.MealPlanInputData;
 
-import java.util.List;
 public class MealPlanController {
     private final MealPlanInputBoundary mealPlanInteractor;
     private final MealPlanPresenter mealPlanPresenter;
