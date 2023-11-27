@@ -2,14 +2,14 @@ package UseCase.MealPlanCreation;
 
 import Entities.MealPlan;
 import Entities.Recipe;
+
+import java.io.IOException;
 import java.util.List;
 
 public interface MealPlanDataAccessInterface {
-    List<Recipe> findRecipes(MealPlanInputData mealPlanInputData);
 
-    void saveMealPlan(MealPlan mealPlan);
+    void saveMealPlan(MealPlan mealPlan) throws IOException;
 
-    MealPlan loadMealPlan();
-
+    MealPlan loadMealPlan(String identifier) throws IOException;
 
 }
