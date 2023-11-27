@@ -1,6 +1,6 @@
-package InterfaceAdapter.MealPlanCreation;
+package InterfaceAdapters.MealPlanCreation;
 
-import InterfaceAdapter.ViewManagerModel;
+import InterfaceAdapters.ViewManagerModel;
 import UseCase.MealPlanCreation.MealPlanOutputBoundary;
 import UseCase.MealPlanCreation.MealPlanOutputData;
 public class MealPlanPresenter implements MealPlanOutputBoundary {
