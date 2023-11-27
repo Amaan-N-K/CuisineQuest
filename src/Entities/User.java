@@ -9,7 +9,7 @@ public class User {
     private final String username;
     private final String password;
     private final LocalDateTime creationTime;
-    private final List<Recipe> favoriteRecipes;
+    private final List<String> favoriteRecipes;
     public User(String userId, String username, String password, LocalDateTime creationTime){
         this.userId = userId;
         this.username = username;
@@ -22,7 +22,7 @@ public class User {
         return userId;
     }
 
-    public String getName() {
+    public String getUsername() {
         return username;
     }
 
@@ -35,10 +35,10 @@ public class User {
         return creationTime;
     }
 
-    public List<Recipe> getFavoriteRecipes() {
+    public List<String> getFavoriteRecipes() {
         return favoriteRecipes;
     }
-    public void addFavoriteRecipe(Recipe recipe){
-        this.favoriteRecipes.add(recipe);
+    public void addFavoriteRecipe(String recipeId){
+        this.favoriteRecipes.add(recipeId);
     }
 }
