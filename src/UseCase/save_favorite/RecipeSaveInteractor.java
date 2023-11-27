@@ -13,23 +13,21 @@ public class RecipeSaveInteractor implements RecipeSaveInputBoundry{
 
     @Override
     public void execute(RecipeSaveInputData recipeSaveInputData) {
-        String userId = recipeSaveInputData.getUserID();
-        String recipeId = recipeSaveInputData.getRecipeID();
-        if (!dataAccess.existsByID(userId)) {
-            RecipeSaveOutputData fail = new RecipeSaveOutputData("User doesn't exists!");
-            recipeSavePresenter.prepareFailView(fail);
+        User user = recipeSaveInputData.getUser();
+        Recipe recipe = recipeSaveInputData.getRecipe();
+        if (!dataAccess.existsByID(user.getUserId())) {
+            recipeSavePresenter.prepareFailView("User doesn't exists!");
         }
         else {
-            User existingUser = dataAccess.getByID(userId);
-            if (existingUser.getFavoriteRecipes().contains(recipeId)){
-                RecipeSaveOutputData fail = new RecipeSaveOutputData("Recipe already saved!");
-                recipeSavePresenter.prepareFailView(fail);
+            User existingUser = dataAccess.getByID(user.getUserId());
+            if (existingUser.getFavoriteRecipes().contains(recipe)){
+                recipeSavePresenter.prepareFailView("Recipe already saved!");
             }
             else {
-                existingUser.addFavoriteRecipe(recipeId);
+                existingUser.addFavoriteRecipe(recipe);
                 dataAccess.updateUser(existingUser);
                 String success = "The recipe was successfully added";
-                RecipeSaveOutputData outputData = new RecipeSaveOutputData(success);
+                RecipeSaveOutputData outputData = new RecipeSaveOutputData(existingUser, recipe, success);
                 recipeSavePresenter.prepareSuccessView(outputData);
 
 
