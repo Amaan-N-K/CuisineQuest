@@ -32,31 +32,31 @@ class MealPlanDayTest {
         breakfast = new Recipe("id1", "WaterMelon Lemonade recipes", ingredientsB, mealTypeB, dietB, healthB, cuisineTypeB, nutritionB, descriptionB);
 
         List<String> ingredientsL = new ArrayList<>();
-        ingredientsB.add("watermelon");
-        ingredientsB.add("lettuce");
+        ingredientsL.add("watermelon");
+        ingredientsL.add("lettuce");
         List<String> mealTypeL = new ArrayList<>();
-        mealTypeB.add("lunch");
+        mealTypeL.add("lunch");
         List<String> dietL = new ArrayList<>();
-        dietB.add("Vegetarian");
+        dietL.add("Vegetarian");
         List<String> healthL = new ArrayList<>();
-        healthB.add("Balanced");
+        healthL.add("Balanced");
         List<String> cuisineTypeL = new ArrayList<>();
-        cuisineTypeB.add("n/a");
+        cuisineTypeL.add("n/a");
         Nutrition nutritionL = new Nutrition(164, 17, 14, 14,1);
         String descriptionL = "Mix it all together.";
         lunch = new Recipe("id2", "WaterMelon Star Salads", ingredientsL, mealTypeL, dietL, healthL, cuisineTypeL, nutritionL, descriptionL);
 
         List<String> ingredientsD = new ArrayList<>();
-        ingredientsB.add("watermelon");
-        ingredientsB.add("onion");
+        ingredientsD.add("watermelon");
+        ingredientsD.add("onion");
         List<String> mealTypeD = new ArrayList<>();
-        mealTypeB.add("dinner");
+        mealTypeD.add("dinner");
         List<String> dietD = new ArrayList<>();
-        dietB.add("Vegetarian");
+        dietD.add("Vegetarian");
         List<String> healthD = new ArrayList<>();
-        healthB.add("Gluten-Free");
+        healthD.add("Gluten-Free");
         List<String> cuisineTypeD = new ArrayList<>();
-        cuisineTypeB.add("n/a");
+        cuisineTypeD.add("n/a");
         Nutrition nutritionD = new Nutrition(258, 41, 6, 29,4);
         String descriptionD = "Slice the watermelon and top with onion.";
         dinner = new Recipe("id3", "WaterMelon Pizza", ingredientsD, mealTypeD, dietD, healthD, cuisineTypeD, nutritionD, descriptionD);
@@ -66,16 +66,16 @@ class MealPlanDayTest {
 
     @Test
     void getBreakfastRecipe() {
-        assertSame(breakfast, mealPlanDay.getBreakfastRecipe());
+        assertEquals(breakfast, mealPlanDay.getBreakfastRecipe());
     }
 
     @Test
     void getLunchRecipe() {
-        assertSame(lunch, mealPlanDay.getLunchRecipe());
+        assertEquals(lunch, mealPlanDay.getLunchRecipe());
     }
 
     @Test
     void getDinnerRecipe() {
-        assertSame(dinner, mealPlanDay.getDinnerRecipe());
+        assertEquals(dinner, mealPlanDay.getDinnerRecipe());
     }
 }
