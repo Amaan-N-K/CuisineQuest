@@ -1,6 +1,6 @@
 package InterfaceAdapters.recipesearch;
 
-import InterfaceAdapters.DashboardViewModel;
+import InterfaceAdapters.dashboard.DashboardViewModel;
 import InterfaceAdapters.ViewManagerModel;
 import UseCase.recipesearch.RecipeSearchOutputBoundary;
 import UseCase.recipesearch.RecipeSearchOutputData;

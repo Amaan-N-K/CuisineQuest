@@ -1,23 +1,25 @@
 package app;
 
-import InterfaceAdapters.RecipeSearchController;
-import InterfaceAdapters.RecipeSearchPresenter;
-import InterfaceAdapters.RecipeSearchViewModel;
-import UseCase.RecipeDataAccessInterface;
-import UseCase.RecipeSearchInputBoundary;
-import UseCase.RecipeSearchInteractor;
-import UseCase.RecipeSearchOutputBoundary;
+import InterfaceAdapters.ViewManagerModel;
+import InterfaceAdapters.recipesearch.RecipeSearchController;
+import InterfaceAdapters.recipesearch.RecipeSearchPresenter;
+import InterfaceAdapters.recipesearch.RecipeSearchViewModel;
+import InterfaceAdapters.dashboard.DashboardViewModel;
+import UseCase.recipesearch.RecipeDataAccessInterface;
+import UseCase.recipesearch.RecipeSearchInputBoundary;
+import UseCase.recipesearch.RecipeSearchInteractor;
+import UseCase.recipesearch.RecipeSearchOutputBoundary;
 import View.RecipeSearchView;
 
 public class RecipeSearchUseCaseFactory {
     private RecipeSearchUseCaseFactory() {
     }
 
-    private static RecipeSearchController createRecipeSearchController(RecipeSearchViewModel recipeSearchViewModel,
-                                                RecipeDataAccessInterface recipeDataAccessObject) {
+    private static RecipeSearchController createRecipeSearchController(RecipeSearchViewModel recipeSearchViewModel, DashboardViewModel dashboardViewModel,
+                                                                       RecipeDataAccessInterface recipeDataAccessObject, ViewManagerModel viewManagerModel) {
 
         // Create the output boundary (presenter)
-        RecipeSearchOutputBoundary recipeSearchPresenter = new RecipeSearchPresenter(recipeSearchViewModel);
+        RecipeSearchOutputBoundary recipeSearchPresenter = new RecipeSearchPresenter(viewManagerModel, recipeSearchViewModel, dashboardViewModel);
 
         // Create the interactor (use case) which will handle the search logic
         RecipeSearchInputBoundary recipeSearchInteractor = new RecipeSearchInteractor(recipeSearchPresenter, recipeDataAccessObject);
@@ -28,9 +30,10 @@ public class RecipeSearchUseCaseFactory {
 
     public static RecipeSearchView createRecipeSearchView(
             RecipeSearchViewModel recipeSearchViewModel,
-            RecipeDataAccessInterface recipeDataAccessObject) {
+            DashboardViewModel dashboardViewModel,
+            RecipeDataAccessInterface recipeDataAccessObject, ViewManagerModel viewManagerModel) {
 
-        RecipeSearchController recipeSearchController = createRecipeSearchController(recipeSearchViewModel, recipeDataAccessObject);
+        RecipeSearchController recipeSearchController = createRecipeSearchController(recipeSearchViewModel, dashboardViewModel, recipeDataAccessObject, viewManagerModel);
 
         return new RecipeSearchView(recipeSearchViewModel, recipeSearchController);
     }
