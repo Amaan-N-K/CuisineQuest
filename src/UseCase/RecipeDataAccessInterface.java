@@ -1,8 +1,9 @@
 package UseCase;
 
+import Entities.Recipe;
+
+import java.util.List;
+
 public interface RecipeDataAccessInterface {
-    void addAllRecipe();
-
-    void deleteAllRecipe();
-
+    List<Recipe> searchReturnResults(RecipeSearchInputData searchData);
 }
