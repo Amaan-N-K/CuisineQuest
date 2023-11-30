@@ -1,5 +1,10 @@
 package UseCase;
 
+import Entities.Recipe;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class RecipeSearchInteractor implements RecipeSearchInputBoundary {
     private final RecipeSearchOutputBoundary outputBoundary;
     private final RecipeDataAccessInterface apiSearch;
@@ -12,8 +17,15 @@ public class RecipeSearchInteractor implements RecipeSearchInputBoundary {
 
     @Override
     public void execute(RecipeSearchInputData inputData) {
+        List<Recipe> recipes = apiSearch.searchReturnResults(inputData);
 
-        RecipeSearchOutputData outputData = new RecipeSearchOutputData(apiSearch.searchReturnResults(inputData)); // You'll need to define the appropriate constructor
+        List<RecipeSearchDTO> recipeSearchDTOList = recipes.stream()
+                .map(RecipeSearchDTO::new)
+                .collect(Collectors.toList());
+
+        RecipeSearchOutputData outputData = new RecipeSearchOutputData(recipeSearchDTOList);
+
         outputBoundary.present(outputData);
     }
+
 }
