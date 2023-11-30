@@ -27,7 +27,7 @@ public class RecipeSaveInteractor implements RecipeSaveInputBoundry{
             }
             else {
                 existingUser.addFavoriteRecipe(recipeId);
-                dataAccess.updateUser(existingUser);
+                dataAccess.save(existingUser);
                 String success = "The recipe was successfully added";
                 RecipeSaveOutputData outputData = new RecipeSaveOutputData(success);
                 recipeSavePresenter.prepareSuccessView(outputData);

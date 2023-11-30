@@ -7,5 +7,5 @@ public interface UserDataAccessInterface {
 
     User getByID(String userId);
 
-    void updateUser(User existingUser);
+    void save(User existingUser);
 }
