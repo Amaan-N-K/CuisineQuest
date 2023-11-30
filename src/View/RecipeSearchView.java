@@ -133,12 +133,14 @@ public class RecipeSearchView extends JPanel implements PropertyChangeListener {
         List<String> recipeNames = state.getRecipeNames();
         List<String> recipeDescriptions = state.getRecipeDescriptions();
         List<List<String>> recipeIngredients = state.getRecipeIngredients();
+        List<String> recipeIDs = state.getRecipeIDs();
 
         // Iterate over the names, descriptions, and ingredients to update the display
         for (int i = 0; i < recipeNames.size(); i++) {
             String name = recipeNames.get(i);
             String description = recipeDescriptions.get(i);
             List<String> ingredients = recipeIngredients.get(i);
+            String recipeID = recipeIDs.get(i);
 
             // Create a panel for each recipe
             JPanel recipePanel = new JPanel();
@@ -161,8 +163,8 @@ public class RecipeSearchView extends JPanel implements PropertyChangeListener {
             // Create a favorite button and add it to the panel
             JButton favoriteButton = new JButton("Favorite");
             favoriteButton.addActionListener(e -> {
-                // Handle the favorite button click
-                // You might want to update the state or model to reflect the favorite status
+                // yazdan you will need to include your controller as a class attribute for this view
+                // then you should use your execute method on recipeId. e.g favouriteController.favourite(recipeID)
             });
             recipePanel.add(favoriteButton);
 
