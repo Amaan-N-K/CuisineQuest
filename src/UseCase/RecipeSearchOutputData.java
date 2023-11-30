@@ -1,21 +1,16 @@
 package UseCase;
 
-
-import Entities.Recipe;
-
 import java.util.List;
 
 public class RecipeSearchOutputData {
-    private final List<Recipe> searchResults;
+    public List<RecipeSearchDTO> recipeSearchDTOList;
 
-    // Constructor that initializes the search results and the success status.
-    public RecipeSearchOutputData(List<Recipe> searchResults) {
-        this.searchResults = searchResults;
+    public RecipeSearchOutputData (List<RecipeSearchDTO> recipeSearchDTOList) {
+        this.recipeSearchDTOList = recipeSearchDTOList;
     }
 
-    // Getter for the search results.
-    public List<Recipe> getSearchResults() {
-        return searchResults;
+    public List<RecipeSearchDTO> getRecipeSearchDTOList(){
+        return recipeSearchDTOList;
     }
-
 }
+
