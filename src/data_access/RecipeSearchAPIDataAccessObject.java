@@ -1,6 +1,7 @@
 package data_access;
 
 import Entities.NutritionFactory;
+import Entities.RecipeFactory;
 import UseCase.RecipeDataAccessInterface;
 import UseCase.RecipeSearchInputData;
 import Entities.Recipe;
@@ -110,7 +111,6 @@ public class RecipeSearchAPIDataAccessObject implements RecipeDataAccessInterfac
         int sugar = nutrients.path("SUGAR").path("quantity").asInt();
         int fiber = nutrients.path("FIBTG").path("quantity").asInt();
 
-        Nutrition nutrition = NutritionFactory.create(calorie, carbohydrates, protein, sugar, fiber);
-        return new Recipe(recipeId, name, ingredients, mealType, diet, health, cuisineType, nutrition, description);
+        return new RecipeFactory().create(recipeId, name, ingredients, mealType, diet, health, cuisineType, description, calorie, carbohydrates, protein, sugar, fiber);
     }
 }

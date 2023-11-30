@@ -2,7 +2,7 @@ package Entities;
 
 import java.util.List;
 
-public class RecipeFactory implements RecipeFactoryInterface {
+public class RecipeFactory {
 
 
     public Recipe create(String recipeId, String name, List<String> ingredients,
