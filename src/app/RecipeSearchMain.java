@@ -2,7 +2,7 @@ package app;
 
 import InterfaceAdapters.RecipeSearchViewModel;
 import View.RecipeSearchView;
-import DAO.RecipeSearchAPIDataAccessObject;
+import data_access.RecipeSearchAPIDataAccessObject;
 
 import javax.swing.*;
 

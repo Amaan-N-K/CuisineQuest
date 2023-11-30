@@ -1,4 +1,4 @@
-package DAO;
+package data_access;
 
 import Entities.NutritionFactory;
 import UseCase.RecipeDataAccessInterface;
