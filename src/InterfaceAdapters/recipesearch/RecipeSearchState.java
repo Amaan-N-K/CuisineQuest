@@ -1,6 +1,6 @@
-package InterfaceAdapters;
+package InterfaceAdapters.recipesearch;
 
-import UseCase.RecipeSearchDTO;
+import UseCase.recipesearch.RecipeSearchDTO;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;

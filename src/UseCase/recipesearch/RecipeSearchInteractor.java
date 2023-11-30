@@ -1,4 +1,4 @@
-package UseCase;
+package UseCase.recipesearch;
 
 import Entities.Recipe;
 
@@ -26,6 +26,11 @@ public class RecipeSearchInteractor implements RecipeSearchInputBoundary {
         RecipeSearchOutputData outputData = new RecipeSearchOutputData(recipeSearchDTOList);
 
         outputBoundary.present(outputData);
+    }
+
+    @Override
+    public void back(){
+        outputBoundary.back();
     }
 
 }

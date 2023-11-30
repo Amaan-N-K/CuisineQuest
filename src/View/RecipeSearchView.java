@@ -1,9 +1,9 @@
 package View;
 
 
-import InterfaceAdapters.RecipeSearchController;
-import InterfaceAdapters.RecipeSearchState;
-import InterfaceAdapters.RecipeSearchViewModel;
+import InterfaceAdapters.recipesearch.RecipeSearchController;
+import InterfaceAdapters.recipesearch.RecipeSearchState;
+import InterfaceAdapters.recipesearch.RecipeSearchViewModel;
 
 
 import javax.swing.*;
@@ -16,8 +16,9 @@ import java.util.List;
 
 public class RecipeSearchView extends JPanel implements PropertyChangeListener {
     private final RecipeSearchViewModel viewModel;
-
     private final RecipeSearchController controller;
+
+    public final String viewName = "recipe search";
 
 
     // UI Components
@@ -43,6 +44,12 @@ public class RecipeSearchView extends JPanel implements PropertyChangeListener {
         titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         this.add(titleLabel);
 
+        // Back Button
+        JButton backButton = new JButton("Back");
+        backButton.addActionListener(e -> controller.back());
+        backButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        this.add(backButton);
+
         // Calories Goal Input
         JLabel caloriesMinLabel = new JLabel("Calories Goal:");
         caloriesMinField = new JTextField(10);
@@ -50,6 +57,7 @@ public class RecipeSearchView extends JPanel implements PropertyChangeListener {
         caloriesMinPanel.add(caloriesMinLabel);
         caloriesMinPanel.add(caloriesMinField);
         this.add(caloriesMinPanel);
+
 
         // Ingredients Input
         JLabel ingredientsLabel = new JLabel("Ingredients:");

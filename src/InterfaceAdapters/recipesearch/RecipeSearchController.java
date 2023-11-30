@@ -1,7 +1,7 @@
-package InterfaceAdapters;
+package InterfaceAdapters.recipesearch;
 
-import UseCase.RecipeSearchInputBoundary;
-import UseCase.RecipeSearchInputData;
+import UseCase.recipesearch.RecipeSearchInputBoundary;
+import UseCase.recipesearch.RecipeSearchInputData;
 
 import java.util.List;
 
@@ -21,5 +21,9 @@ public class RecipeSearchController {
         );
 
         recipeSearch.execute(inputData);
+    }
+
+    public void back(){
+        recipeSearch.back();
     }
 }
