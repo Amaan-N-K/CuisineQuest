@@ -2,6 +2,8 @@ package Entities;
 
 import java.util.List;
 import java.util.Collections;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Recipe {
 
@@ -15,15 +17,15 @@ public class Recipe {
     private final Nutrition nutrition;
     private final String description;
 
-    public Recipe(String recipeId,
-                  String name,
-                  List<String> ingredients,
-                  List<String> mealType,
-                  List<String> diet,
-                  List<String> health,
-                  List<String> cuisineType,
-                  Nutrition nutrition,
-                  String description) {
+    public Recipe(@JsonProperty("recipeId") String recipeId,
+                  @JsonProperty("name")String name,
+                  @JsonProperty("ingredients") List<String> ingredients,
+                  @JsonProperty("mealType") List<String> mealType,
+                  @JsonProperty("diet") List<String> diet,
+                  @JsonProperty("health") List<String> health,
+                  @JsonProperty("cuisineType") List<String> cuisineType,
+                  @JsonProperty("nutrition") Nutrition nutrition,
+                  @JsonProperty("description") String description) {
         this.recipeId = recipeId;
         this.name = name;
         this.ingredients = Collections.unmodifiableList(ingredients);

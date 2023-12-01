@@ -12,8 +12,8 @@ public class MealPlanController {
         this.mealPlanPresenter = mealPlanPresenter;
     }
 
-    public void createMealPlan(String startDate, String endDate, String diets, int calorieLimit) {
-        MealPlanInputData mealPlanInputData = new MealPlanInputData(startDate, endDate, diets, calorieLimit);
+    public void createMealPlan(String startDate, String endDate, String diet, int calorieLimit) {
+        MealPlanInputData mealPlanInputData = new MealPlanInputData(startDate, endDate, diet, calorieLimit);
         mealPlanInteractor.createMealPlan(mealPlanInputData);
     }
 }

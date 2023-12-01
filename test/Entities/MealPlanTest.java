@@ -111,8 +111,8 @@ class MealPlanTest {
     }
 
     @Test
-    void getDiets() {
-        assertEquals(diet, mealPlan.getDiets());
+    void getDiet() {
+        assertEquals(diet, mealPlan.getDiet());
     }
 
     @Test

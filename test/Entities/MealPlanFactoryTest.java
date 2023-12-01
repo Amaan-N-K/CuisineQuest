@@ -81,7 +81,7 @@ class MealPlanFactoryTest {
         assertNotNull(mealPlan);
         assertEquals(startDate, mealPlan.getStartDate());
         assertEquals(endDate, mealPlan.getEndDate());
-        assertEquals(diet, mealPlan.getDiets());
+        assertEquals(diet, mealPlan.getDiet());
         assertEquals(calorieLimit, mealPlan.getCalorieLimit());
     }
 }

@@ -3,6 +3,8 @@ package Entities;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class MealPlan {
     private final String identifier;
@@ -12,7 +14,8 @@ public class MealPlan {
     private final int calorieLimit;
     private List<MealPlanDay> mealPlanDays;
 
-    public MealPlan(String startDate, String endDate, String diet, int calorieLimit) {
+    @JsonCreator
+    public MealPlan(@JsonProperty("startDate") String startDate, @JsonProperty("endDate")String endDate, @JsonProperty("diet") String diet, @JsonProperty("calorieLimit") int calorieLimit) {
         this.identifier = startDate + " to " + endDate;
         this.mealPlanDays = new ArrayList<>();
         this.startDate = startDate;
@@ -39,7 +42,7 @@ public class MealPlan {
     public String getEndDate() {
         return endDate;
     }
-    public String getDiets() {
+    public String getDiet() {
         return diet;
     }
     public int getCalorieLimit() {
