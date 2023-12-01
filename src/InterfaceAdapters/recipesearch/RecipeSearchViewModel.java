@@ -1,17 +1,15 @@
-package InterfaceAdapters;
+package InterfaceAdapters.recipesearch;
 
-import UseCase.RecipeSearchDTO;
+import UseCase.recipesearch.RecipeSearchDTO;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.List;
 
 public class RecipeSearchViewModel {
 
+    public final String viewName = "recipe search";
     private RecipeSearchState state = new RecipeSearchState();
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
-
-    // There's no need to expose the entire state setter if we only update it from within the ViewModel.
-    // Removed the setState method.
 
     public void addPropertyChangeListener(PropertyChangeListener listener) {
         support.addPropertyChangeListener(listener);
@@ -21,7 +19,7 @@ public class RecipeSearchViewModel {
         return state;
     }
 
-    private void firePropertyChanged(String propertyName) {
+    public void firePropertyChanged(String propertyName) {
         support.firePropertyChange(propertyName, null, null);
     }
 

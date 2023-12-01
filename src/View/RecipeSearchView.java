@@ -1,9 +1,9 @@
 package View;
 
 
-import InterfaceAdapters.RecipeSearchController;
-import InterfaceAdapters.RecipeSearchState;
-import InterfaceAdapters.RecipeSearchViewModel;
+import InterfaceAdapters.recipesearch.RecipeSearchController;
+import InterfaceAdapters.recipesearch.RecipeSearchState;
+import InterfaceAdapters.recipesearch.RecipeSearchViewModel;
 
 
 import javax.swing.*;
@@ -16,8 +16,9 @@ import java.util.List;
 
 public class RecipeSearchView extends JPanel implements PropertyChangeListener {
     private final RecipeSearchViewModel viewModel;
-
     private final RecipeSearchController controller;
+
+    public final String viewName = "recipe search";
 
 
     // UI Components
@@ -43,6 +44,12 @@ public class RecipeSearchView extends JPanel implements PropertyChangeListener {
         titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         this.add(titleLabel);
 
+        // Back Button
+        JButton backButton = new JButton("Back");
+        backButton.addActionListener(e -> controller.back());
+        backButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        this.add(backButton);
+
         // Calories Goal Input
         JLabel caloriesMinLabel = new JLabel("Calories Goal:");
         caloriesMinField = new JTextField(10);
@@ -50,6 +57,7 @@ public class RecipeSearchView extends JPanel implements PropertyChangeListener {
         caloriesMinPanel.add(caloriesMinLabel);
         caloriesMinPanel.add(caloriesMinField);
         this.add(caloriesMinPanel);
+
 
         // Ingredients Input
         JLabel ingredientsLabel = new JLabel("Ingredients:");
@@ -125,12 +133,14 @@ public class RecipeSearchView extends JPanel implements PropertyChangeListener {
         List<String> recipeNames = state.getRecipeNames();
         List<String> recipeDescriptions = state.getRecipeDescriptions();
         List<List<String>> recipeIngredients = state.getRecipeIngredients();
+        List<String> recipeIDs = state.getRecipeIDs();
 
         // Iterate over the names, descriptions, and ingredients to update the display
         for (int i = 0; i < recipeNames.size(); i++) {
             String name = recipeNames.get(i);
             String description = recipeDescriptions.get(i);
             List<String> ingredients = recipeIngredients.get(i);
+            String recipeID = recipeIDs.get(i);
 
             // Create a panel for each recipe
             JPanel recipePanel = new JPanel();
@@ -153,8 +163,8 @@ public class RecipeSearchView extends JPanel implements PropertyChangeListener {
             // Create a favorite button and add it to the panel
             JButton favoriteButton = new JButton("Favorite");
             favoriteButton.addActionListener(e -> {
-                // Handle the favorite button click
-                // You might want to update the state or model to reflect the favorite status
+                // yazdan you will need to include your controller as a class attribute for this view
+                // then you should use your execute method on recipeId. e.g favouriteController.favourite(recipeID)
             });
             recipePanel.add(favoriteButton);
 
