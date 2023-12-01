@@ -7,11 +7,11 @@ import java.io.File;
 import java.io.IOException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-public class FileDataAccessObject implements MealPlanDataAccessInterface {
+public class MealPlanDataAccessObject implements MealPlanDataAccessInterface {
     private final ObjectMapper objectMapper;
     private final String directoryPath;
 
-    public FileDataAccessObject(String directoryPath) {
+    public MealPlanDataAccessObject(String directoryPath) {
         this.directoryPath = directoryPath;
         this.objectMapper = new ObjectMapper();
         objectMapper.enable(SerializationFeature.INDENT_OUTPUT);

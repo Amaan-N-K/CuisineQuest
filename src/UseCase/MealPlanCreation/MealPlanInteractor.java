@@ -2,12 +2,10 @@ package UseCase.MealPlanCreation;
 
 import Entities.MealPlan;
 import Entities.MealPlanDay;
-import Entities.MealPlanFactory;
 import Entities.Recipe;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.ArrayList;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 public class MealPlanInteractor implements MealPlanInputBoundary{
@@ -27,11 +25,11 @@ public class MealPlanInteractor implements MealPlanInputBoundary{
             mealPlanPresenter.prepareFailView("Invalid dates.");
             return;
         }
-        String diets = mealPlanInputData.getDiets();
+        String diet = mealPlanInputData.getDiet();
         int calorieLimit  = mealPlanInputData.getCalorieLimit();
         List<Recipe> filteredRecipes = null;
         try {
-            filteredRecipes = mealPlanAPIDataAccessObject.findRecipes(diets, calorieLimit);
+            filteredRecipes = mealPlanAPIDataAccessObject.findRecipes(diet, calorieLimit);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -57,8 +55,9 @@ public class MealPlanInteractor implements MealPlanInputBoundary{
             MealPlanInputData mealPlanInputData
     ) {
         int duration = (int) ChronoUnit.DAYS.between(startDate, endDate) + 1;
-        MealPlan mealPlan = new MealPlan(startDate.toString(), endDate.toString(), mealPlanInputData.getDiets(), mealPlanInputData.getCalorieLimit());
+        MealPlan mealPlan = new MealPlan(startDate.toString(), endDate.toString(), mealPlanInputData.getDiet(), mealPlanInputData.getCalorieLimit());
 
+        List copyFilteredRecipes = filteredRecipes;
         for (int dayIndex = 0; dayIndex < duration; dayIndex++) {
             Recipe breakfast = selectRecipeByMealType(filteredRecipes, "breakfast");
             Recipe lunch = selectRecipeByMealType(filteredRecipes, "lunch");
@@ -77,7 +76,7 @@ public class MealPlanInteractor implements MealPlanInputBoundary{
 
     private Recipe selectRecipeByMealType(List<Recipe> recipes, String mealType) {
         for (Recipe recipe : recipes) {
-            if (recipe.getMealType().equals(mealType)) {
+            if (recipe.getMealType().contains(mealType)) {
                 return recipe;
             }
         }
