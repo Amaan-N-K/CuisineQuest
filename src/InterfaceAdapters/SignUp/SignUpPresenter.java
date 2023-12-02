@@ -50,7 +50,7 @@ public class SignUpPresenter implements SignUpOutputBoundry {
         signupViewModel.setState(signupState);
         signupViewModel.firePropertyChanged();
         // Change the view to Dashboard
-        viewManagerModel.setActiveView("MainDashboardView"); // Assuming "MainDashboardView" is the name of the dashboard view
+        viewManagerModel.setActiveView("dashboard");
         viewManagerModel.firePropertyChanged();
 
 
