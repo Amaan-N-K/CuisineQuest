@@ -29,8 +29,8 @@ public class MealPlanDataAccessObject implements MealPlanDataAccessInterface {
         objectMapper.writeValue(file, mealPlan);
     }
 
-    public MealPlan loadMealPlan(String userId, String identifier) throws IOException {
-        File file = new File(directoryPath + File.separator + userId, identifier + ".json");
+    public MealPlan loadMealPlan(String userId) throws IOException {
+        File file = new File(directoryPath + File.separator + userId);
         if (!file.exists()) {
             return null;
         }
