@@ -38,7 +38,7 @@ public class User {
     public List<String> getFavoriteRecipes() {
         return favoriteRecipes;
     }
-    public void addFavoriteRecipe(String recipeId){
-        this.favoriteRecipes.add(recipeId);
+    public void addFavoriteRecipe(String recipeDescription){
+        this.favoriteRecipes.add(recipeDescription);
     }
 }

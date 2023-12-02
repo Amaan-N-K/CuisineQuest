@@ -12,8 +12,8 @@ public class RecipeSaveController {
         this.recipeSaveInteractor = recipeSaveInteractor;
     }
 
-    public void execute(String recipeId){
-        RecipeSaveInputData inputData = new RecipeSaveInputData(recipeId);
+    public void execute(String recipeDescription){
+        RecipeSaveInputData inputData = new RecipeSaveInputData(recipeDescription);
         recipeSaveInteractor.execute(inputData);
 
     }
