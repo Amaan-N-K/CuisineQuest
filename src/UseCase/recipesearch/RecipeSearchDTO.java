@@ -1,4 +1,4 @@
-package UseCase;
+package UseCase.recipesearch;
 import Entities.Recipe;
 import java.util.List;
 
