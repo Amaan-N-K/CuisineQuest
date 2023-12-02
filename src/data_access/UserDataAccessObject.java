@@ -15,6 +15,7 @@ public class UserDataAccessObject implements UserDataAccessInterface, SignUpData
     private final Map<String, User> accounts = new HashMap<>();
 
     private String activeUser = "";
+    private final UserFactory userFactory;
 
 
     public UserDataAccessObject(String csvPath, UserFactory userFactory) throws IOException {
