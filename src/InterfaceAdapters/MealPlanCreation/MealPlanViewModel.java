@@ -1,6 +1,5 @@
 package InterfaceAdapters.MealPlanCreation;
 
-
 import Entities.MealPlan;
 import InterfaceAdapters.ViewModel;
 
@@ -32,8 +31,7 @@ public class MealPlanViewModel extends ViewModel {
     }
 
     public void updateMealPlanState(MealPlan mealPlan){
-        state.setMealPlan(mealPlan);
-        state.setCreationSuccess(true);
+        state.updateMealPlan(mealPlan);
         firePropertyChanged();
     }
 }
