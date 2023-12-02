@@ -1,94 +1,53 @@
 package InterfaceAdapters.MealPlanCreation;
- import Entities.MealPlan;
+
+import Entities.MealPlan;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
+
 public class MealPlanState {
     private MealPlan mealPlan;
-    private boolean creationSuccess;
     private String errorMessage;
-    private String startDate;
-    private String endDate;
-    private String diet;
-    private int calorieLimit;
+    private final PropertyChangeSupport support = new PropertyChangeSupport(this);
 
     public MealPlanState() {
-        this.creationSuccess = false;
         this.errorMessage = "";
     }
 
-    // Copy constructor
-    public MealPlanState(MealPlanState copy) {
-        this.creationSuccess = copy.creationSuccess;
-        this.errorMessage = copy.errorMessage;
-        this.startDate = copy.startDate;
-        this.endDate = copy.endDate;
-        this.diet = copy.diet;
-        this.calorieLimit = copy.calorieLimit;
-    }
-
-    // Getters and setters
-
-    public MealPlan getMealPlan(){
-        return mealPlan;
-    }
-
-    public void setMealPlan(MealPlan mealPlan) {
+    // Private setters
+    private void setMealPlan(MealPlan mealPlan) {
         this.mealPlan = mealPlan;
-    }
-
-    public boolean isCreationSuccess() {
-        return creationSuccess;
-    }
-
-    public void setCreationSuccess(boolean creationSuccess) {
-        this.creationSuccess = creationSuccess;
-    }
-
-    public String getErrorMessage() {
-        return errorMessage;
     }
 
     public void setErrorMessage(String errorMessage) {
         this.errorMessage = errorMessage;
     }
 
-    public String getStartDate() {
-        return startDate;
+
+    // Update the state with a new meal plan
+    public void updateMealPlan(MealPlan newMealPlan) {
+        setMealPlan(newMealPlan);
+        firePropertyChanged("Display MealPlan", null, null);
     }
 
-    public void setStartDate(String startDate) {
-        this.startDate = startDate;
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        support.addPropertyChangeListener(listener);
     }
 
-    public String getEndDate() {
-        return endDate;
+    public void removePropertyChangeListener(PropertyChangeListener listener) {
+        support.removePropertyChangeListener(listener);
     }
 
-    public void setEndDate(String endDate) {
-        this.endDate = endDate;
+    // Notify observers of property changes
+    protected void firePropertyChanged(String propertyName, Object oldValue, Object newValue) {
+        support.firePropertyChange(propertyName, null, null);
     }
 
-    public String getDiet() {
-        return diet;
+    // Getters
+    public MealPlan getMealPlan() {
+        return mealPlan;
     }
 
-    public void setDiet(String diet) {
-        this.diet = diet;
-    }
-
-    public int getCalorieLimit() {
-        return calorieLimit;
-    }
-
-    public void setCalorieLimit(int calorieLimit) {
-        this.calorieLimit = calorieLimit;
-    }
-
-    // Override toString for debugging purposes
-    @Override
-    public String toString() {
-        return "MealPlanState{" +
-                "startDate='" + startDate + '\'' +
-                ", endDate='" + endDate + '\'' +
-                ", diet='" + diet + '\'' + ", calorieLimit='" + calorieLimit + '\'' +
-                '}';
+    public String getErrorMessage() {
+        return errorMessage;
     }
 }
