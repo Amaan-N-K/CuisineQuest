@@ -4,19 +4,16 @@ import Entities.Recipe;
 import Entities.User;
 
 public class RecipeSaveInputData {
-    private final Recipe recipe;
-    private final User user;
+    private final String recipeDescription;
 
-    public RecipeSaveInputData(User user, Recipe recipe) {
-        this.user = user;
-        this.recipe = recipe;
+
+    public RecipeSaveInputData(String recipeDescription) {
+
+        this.recipeDescription = recipeDescription;
     }
 
-    public Recipe getRecipe() {
-        return recipe;
+    public String getRecipeDescription() {
+        return recipeDescription;
     }
 
-    public User getUser() {
-        return user;
-    }
 }

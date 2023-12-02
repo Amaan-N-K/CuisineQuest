@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Recipe {
 
-    private final String recipeId;
+    private final String recipeId; // New parameter
     private final String name;
     private final List<String> ingredients;
     private final List<String> mealType;
