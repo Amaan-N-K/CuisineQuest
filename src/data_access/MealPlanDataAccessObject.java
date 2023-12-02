@@ -7,10 +7,10 @@ import java.io.File;
 import java.io.IOException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+
 public class MealPlanDataAccessObject implements MealPlanDataAccessInterface {
     private final ObjectMapper objectMapper;
     private final String directoryPath;
-
 
     public MealPlanDataAccessObject(String directoryPath) {
         this.directoryPath = directoryPath;
@@ -25,12 +25,13 @@ public class MealPlanDataAccessObject implements MealPlanDataAccessInterface {
             userDirectory.mkdirs();
         }
 
-        File file = new File(userDirectory, mealPlan.getIdentifier() + ".json");
+        // Save using userId as the filename, assuming each user has only one meal plan
+        File file = new File(userDirectory, userId + ".json");
         objectMapper.writeValue(file, mealPlan);
     }
 
-    public MealPlan loadMealPlan(String userId, String identifier) throws IOException {
-        File file = new File(directoryPath + File.separator + userId, identifier + ".json");
+    public MealPlan loadMealPlan(String userId) throws IOException {
+        File file = new File(directoryPath + File.separator + userId, userId + ".json");
         if (!file.exists()) {
             return null;
         }
