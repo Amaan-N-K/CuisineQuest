@@ -13,22 +13,19 @@ public class MealPlanPresenter implements MealPlanOutputBoundary {
     }
 
     @Override
-    public void presentMealPlan(MealPlanOutputData response){
-        MealPlanState state = mealPlanviewModel.getState();
-        state.setCreationSuccess(true);
-        state.setMealPlan(response.getMealPlan());
-        mealPlanviewModel.setState(state);
+    public void presentMealPlan(MealPlanOutputData outputData){
+        mealPlanviewModel.updateMealPlanState(outputData.getMealPlan());
         mealPlanviewModel.firePropertyChanged();
 
         viewManagerModel.setActiveView("MealPlanDisplayView");
         viewManagerModel.firePropertyChanged();
 
     }
+
     @Override
-    public void prepareFailView(String message) {
+    public void prepareFailView(String error) {
         MealPlanState state = mealPlanviewModel.getState();
-        state.setCreationSuccess(false);
-        state.setErrorMessage(message);
+        state.setErrorMessage(error);
         mealPlanviewModel.setState(state);
         mealPlanviewModel.firePropertyChanged();
     }

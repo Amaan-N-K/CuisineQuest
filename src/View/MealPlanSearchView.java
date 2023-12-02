@@ -1,5 +1,9 @@
 package View;
 
+
+import Entities.MealPlan;
+import Entities.MealPlanDay;
+
 import InterfaceAdapters.MealPlanCreation.MealPlanController;
 import InterfaceAdapters.MealPlanCreation.MealPlanViewModel;
 import InterfaceAdapters.MealPlanCreation.MealPlanState;
@@ -15,48 +19,26 @@ import java.util.List;
 
 
 public class MealPlanSearchView extends JPanel implements ActionListener, PropertyChangeListener {
-    public final String ViewName = "Meal Plan Creation";
     private MealPlanViewModel mealPlanViewModel;
     private MealPlanController mealPlanController;
 
-    private JFrame frame;
+    // UI Components
     private JTextField startDateField, endDateField;
     private JList<String> dietTypeList, healthList;
     private JSpinner calorieSpinner;
+    private JPanel mealPlanDisplayPanel;
+    private JFrame frame;
+
+
     public MealPlanSearchView(MealPlanController mealPlanController, MealPlanViewModel mealPlanViewModel) {
 
         this.mealPlanController = mealPlanController;
         this.mealPlanViewModel = mealPlanViewModel;
-        mealPlanViewModel.addPropertyChangeListener(new PropertyChangeListener(){
-
-            @Override
-            public void propertyChange(PropertyChangeEvent evt) {
-                updateViewOnStateChange();
-            }
-        });
-
+        mealPlanViewModel.addPropertyChangeListener(this);
         createAndShowGUI();
     }
 
-    private void updateViewOnStateChange() {
-        MealPlanState state = mealPlanViewModel.getState();
-        if (state.isCreationSuccess()) {
-            MealPlanDisplayView mealPlanView = new MealPlanDisplayView(state.getMealPlan());
-            mealPlanView.displayMealPlan();
-            frame.dispose(); // Optionally close the search view
-        } else {
-            JOptionPane.showMessageDialog(frame, state.getErrorMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    }
-
-
-
     public void createAndShowGUI() {
-        JFrame frame = new JFrame("Meal Plan Generator");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(500, 500);
-        frame.setLayout(new BorderLayout());
-
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
@@ -129,10 +111,25 @@ public class MealPlanSearchView extends JPanel implements ActionListener, Proper
         // Generate Button
         JButton generateButton = new JButton("Generate Meal Plan");
         generateButton.addActionListener(this);
-        generateButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        panel.add(generateButton);
+        this.add(generateButton);
 
+        mealPlanDisplayPanel = new JPanel();
+        mealPlanDisplayPanel.setLayout(new BoxLayout(mealPlanDisplayPanel, BoxLayout.Y_AXIS));
+        this.add(new JScrollPane(mealPlanDisplayPanel));
+
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() instanceof JButton) {
+            JButton button = (JButton) e.getSource();
+            if (button.getText().equals("Generate Meal Plan")) {
+                handleGenerateButtonAction();
+            }
         }
+    }
+
+
         private void handleGenerateButtonAction(){
             String startDate = startDateField.getText();
             String endDate = endDateField.getText();
@@ -143,22 +140,65 @@ public class MealPlanSearchView extends JPanel implements ActionListener, Proper
             int calorieLimit = (Integer) calorieSpinner.getValue();
             mealPlanController.createMealPlan(startDate, endDate, combinedPreferences.toString(), calorieLimit);
         }
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        // Call handleGenerateButtonAction when generateButton is clicked
-        if (e.getSource() instanceof JButton) {
-            JButton button = (JButton) e.getSource();
-            if (button.getText().equals("Generate Meal Plan")) {
-                handleGenerateButtonAction();
-            }
-        }
-    }
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        // Handle property change events
         if (evt.getPropertyName().equals("state")) {
-            updateViewOnStateChange();
+            updateMealPlanDisplay(mealPlanViewModel.getState());
         }
+    }
+
+    private void updateMealPlanDisplay(MealPlanState state) {
+        mealPlanDisplayPanel.removeAll();
+        MealPlan mealPlan = state.getMealPlan();
+
+        JFrame frame = new JFrame("Meal Plan");
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setLayout(new BorderLayout());
+
+        // Panel for showing input criteria
+        JPanel criteriaPanel = new JPanel(new GridLayout(0, 2));
+        criteriaPanel.setBorder(BorderFactory.createTitledBorder("Meal Plan Criteria"));
+
+        // Adding input criteria
+        criteriaPanel.add(new JLabel("Meal Plan "));
+        criteriaPanel.add(new JLabel(mealPlan.getIdentifier().toString()));
+        criteriaPanel.add(new JLabel("Start Day:"));
+        criteriaPanel.add(new JLabel(mealPlan.getStartDate().toString()));
+        criteriaPanel.add(new JLabel("End Day:"));
+        criteriaPanel.add(new JLabel(mealPlan.getEndDate().toString()));
+        criteriaPanel.add(new JLabel("Diet:"));
+        criteriaPanel.add(new JLabel(String.join(", ", mealPlan.getDiet())));
+        criteriaPanel.add(new JLabel("Caloric Limit:"));
+        criteriaPanel.add(new JLabel(String.valueOf(mealPlan.getCalorieLimit())));
+
+        frame.add(criteriaPanel, BorderLayout.NORTH);
+
+        // Panel for meal plans
+        JPanel daysPanel = new JPanel();
+        daysPanel.setLayout(new BoxLayout(daysPanel, BoxLayout.Y_AXIS));
+
+        for (MealPlanDay mealPlanDay : mealPlan.getMealPlanDays()) {
+            JPanel dayPanel = new JPanel();
+            dayPanel.setLayout(new BoxLayout(dayPanel, BoxLayout.Y_AXIS));
+            dayPanel.setBorder(BorderFactory.createTitledBorder("Day"));
+
+            // Add meal details for each day
+            JLabel breakfastLabel = new JLabel("Breakfast: " + mealPlanDay.getBreakfastRecipe());
+            JLabel lunchLabel = new JLabel("Lunch: " + mealPlanDay.getLunchRecipe());
+            JLabel dinnerLabel = new JLabel("Dinner: " + mealPlanDay.getDinnerRecipe());
+
+            dayPanel.add(breakfastLabel);
+            dayPanel.add(lunchLabel);
+            dayPanel.add(dinnerLabel);
+
+            daysPanel.add(dayPanel);
+        }
+
+        JScrollPane scrollPane = new JScrollPane(daysPanel);
+        frame.add(scrollPane, BorderLayout.CENTER);
+
+        mealPlanDisplayPanel.revalidate();
+        mealPlanDisplayPanel.repaint();
     }
 }

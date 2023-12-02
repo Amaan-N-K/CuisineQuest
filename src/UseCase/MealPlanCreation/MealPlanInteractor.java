@@ -57,11 +57,13 @@ public class MealPlanInteractor implements MealPlanInputBoundary{
         int duration = (int) ChronoUnit.DAYS.between(startDate, endDate) + 1;
         MealPlan mealPlan = new MealPlan(startDate.toString(), endDate.toString(), mealPlanInputData.getDiet(), mealPlanInputData.getCalorieLimit());
 
-        List copyFilteredRecipes = filteredRecipes;
         for (int dayIndex = 0; dayIndex < duration; dayIndex++) {
             Recipe breakfast = selectRecipeByMealType(filteredRecipes, "breakfast");
+            filteredRecipes.remove(breakfast);
             Recipe lunch = selectRecipeByMealType(filteredRecipes, "lunch");
+            filteredRecipes.remove(lunch);
             Recipe dinner = selectRecipeByMealType(filteredRecipes, "dinner");
+            filteredRecipes.remove(dinner);
 
             if (breakfast == null || lunch == null || dinner == null) {
                 return null;

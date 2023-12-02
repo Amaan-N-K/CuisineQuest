@@ -8,8 +8,8 @@ import java.util.List;
 
 public interface MealPlanDataAccessInterface {
 
-    void saveMealPlan(MealPlan mealPlan) throws IOException;
+    void saveMealPlan(String userId, MealPlan mealPlan) throws IOException;
 
-    MealPlan loadMealPlan(String identifier) throws IOException;
+    MealPlan loadMealPlan(String userId, String identifier) throws IOException;
 
 }
