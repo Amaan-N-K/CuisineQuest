@@ -8,4 +8,7 @@ public interface UserDataAccessInterface {
     User getByID(String userId);
 
     void save(User existingUser);
+
+    String getActive();
+
 }

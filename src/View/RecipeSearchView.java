@@ -1,9 +1,13 @@
 package View;
 
 
+import InterfaceAdapters.saveFavorite.RecipeSaveController;
+import InterfaceAdapters.saveFavorite.RecipeSaveState;
+import InterfaceAdapters.saveFavorite.RecipeSaveViewModel;
 import InterfaceAdapters.recipesearch.RecipeSearchController;
 import InterfaceAdapters.recipesearch.RecipeSearchState;
 import InterfaceAdapters.recipesearch.RecipeSearchViewModel;
+
 
 
 import javax.swing.*;
@@ -17,6 +21,8 @@ import java.util.List;
 public class RecipeSearchView extends JPanel implements PropertyChangeListener {
     private final RecipeSearchViewModel viewModel;
     private final RecipeSearchController controller;
+    private final RecipeSaveController saveController;
+    private final RecipeSaveViewModel recipeSaveViewModel;
 
     public final String viewName = "recipe search";
 
@@ -28,10 +34,15 @@ public class RecipeSearchView extends JPanel implements PropertyChangeListener {
     private JPanel recipeDisplayPanel; // This is where recipes will be displayed
 
 
-    public RecipeSearchView(RecipeSearchViewModel viewModel, RecipeSearchController controller) {
+    public RecipeSearchView(RecipeSearchViewModel viewModel, RecipeSearchController controller,
+                            RecipeSaveController saveController, RecipeSaveViewModel recipeSaveViewModel) {
         this.viewModel = viewModel;
+        this.recipeSaveViewModel = recipeSaveViewModel;
         this.controller = controller;
+        this.saveController = saveController;
+
         viewModel.addPropertyChangeListener(this);
+        recipeSaveViewModel.addPropertyChangeListener(this);
         initializeUI();
     }
 
@@ -126,6 +137,19 @@ public class RecipeSearchView extends JPanel implements PropertyChangeListener {
             // Update the view with the new state
             updateRecipeDisplay(viewModel.getState());
         }
+        if ("state".equals(evt.getPropertyName())) {
+            handleSaveStateChange(recipeSaveViewModel.getState());
+        }
+    }
+
+    private void handleSaveStateChange(RecipeSaveState state) {
+        if (state.isSaveSuccessful()) {
+            JOptionPane.showMessageDialog(this, state.getMessage(), "Success",
+                    JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(this, state.getMessage(), "Error",
+                    JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     private void updateRecipeDisplay(RecipeSearchState state) {
@@ -162,10 +186,7 @@ public class RecipeSearchView extends JPanel implements PropertyChangeListener {
 
             // Create a favorite button and add it to the panel
             JButton favoriteButton = new JButton("Favorite");
-            favoriteButton.addActionListener(e -> {
-                // yazdan you will need to include your controller as a class attribute for this view
-                // then you should use your execute method on recipeId. e.g favouriteController.favourite(recipeID)
-            });
+            favoriteButton.addActionListener(e -> saveController.execute(description));
             recipePanel.add(favoriteButton);
 
             // Add the complete recipe panel to the display panel
