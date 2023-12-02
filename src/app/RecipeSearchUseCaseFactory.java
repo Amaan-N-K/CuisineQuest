@@ -5,11 +5,18 @@ import InterfaceAdapters.recipesearch.RecipeSearchController;
 import InterfaceAdapters.recipesearch.RecipeSearchPresenter;
 import InterfaceAdapters.recipesearch.RecipeSearchViewModel;
 import InterfaceAdapters.dashboard.DashboardViewModel;
+import InterfaceAdapters.saveFavorite.RecipeSaveController;
+import InterfaceAdapters.saveFavorite.RecipeSavePresenter;
+import InterfaceAdapters.saveFavorite.RecipeSaveViewModel;
 import UseCase.recipesearch.RecipeDataAccessInterface;
 import UseCase.recipesearch.RecipeSearchInputBoundary;
 import UseCase.recipesearch.RecipeSearchInteractor;
 import UseCase.recipesearch.RecipeSearchOutputBoundary;
+import UseCase.save_favorite.RecipeSaveInputBoundary;
+import UseCase.save_favorite.RecipeSaveInteractor;
+import UseCase.save_favorite.RecipeSaveOutputBoundary;
 import View.RecipeSearchView;
+import data_access.UserDataAccessObject;
 
 public class RecipeSearchUseCaseFactory {
     private RecipeSearchUseCaseFactory() {
@@ -28,13 +35,27 @@ public class RecipeSearchUseCaseFactory {
         return new RecipeSearchController(recipeSearchInteractor);
     }
 
+    private static RecipeSaveController createRecipeSaveController(
+            RecipeSaveViewModel recipeSaveViewModel,
+            UserDataAccessObject userDataAccessObject) {
+
+
+        RecipeSaveOutputBoundary recipeSavePresenter = new RecipeSavePresenter(recipeSaveViewModel);
+
+        RecipeSaveInputBoundary recipeSaveInteractor = new RecipeSaveInteractor(recipeSavePresenter, userDataAccessObject);
+
+        return new RecipeSaveController(recipeSaveInteractor);
+    }
+
+
     public static RecipeSearchView createRecipeSearchView(
             RecipeSearchViewModel recipeSearchViewModel,
             DashboardViewModel dashboardViewModel,
-            RecipeDataAccessInterface recipeDataAccessObject, ViewManagerModel viewManagerModel) {
+            RecipeDataAccessInterface recipeDataAccessObject, ViewManagerModel viewManagerModel,
+            RecipeSaveViewModel recipeSaveViewModel, UserDataAccessObject userDataAccessObject) {
 
         RecipeSearchController recipeSearchController = createRecipeSearchController(recipeSearchViewModel, dashboardViewModel, recipeDataAccessObject, viewManagerModel);
-
-        return new RecipeSearchView(recipeSearchViewModel, recipeSearchController, null, null);
+        RecipeSaveController recipeSaveController = createRecipeSaveController(recipeSaveViewModel, userDataAccessObject);
+        return new RecipeSearchView(recipeSearchViewModel, recipeSearchController, recipeSaveController, recipeSaveViewModel);
     }
 }

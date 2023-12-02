@@ -1,12 +1,11 @@
 package UseCase.save_favorite;
-import Entities.Recipe;
 import Entities.User;
 
-public class RecipeSaveInteractor implements RecipeSaveInputBoundry{
-    private final RecipeSaveOutputBoundry recipeSavePresenter;
+public class RecipeSaveInteractor implements RecipeSaveInputBoundary {
+    private final RecipeSaveOutputBoundary recipeSavePresenter;
     private final UserDataAccessInterface dataAccess;
 
-    public RecipeSaveInteractor(RecipeSaveOutputBoundry outputBoundry, UserDataAccessInterface dataAccess){
+    public RecipeSaveInteractor(RecipeSaveOutputBoundary outputBoundry, UserDataAccessInterface dataAccess){
         this.recipeSavePresenter = outputBoundry;
         this.dataAccess = dataAccess;
     }

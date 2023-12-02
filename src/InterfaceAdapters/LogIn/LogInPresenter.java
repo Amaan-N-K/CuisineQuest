@@ -1,17 +1,16 @@
 package InterfaceAdapters.LogIn;
 
-import InterfaceAdapters.SignUp.SignUpState;
 import InterfaceAdapters.ViewManagerModel;
-import UseCase.LogIn.LogInOutputBoundry;
+import UseCase.LogIn.LogInOutputBoundary;
 import UseCase.LogIn.LogInOutputData;
 
 import java.util.Objects;
 
-public class LoginPresenter implements LogInOutputBoundry {
+public class LogInPresenter implements LogInOutputBoundary {
     private final LogInViewModel loginViewModel;
     private final ViewManagerModel viewManagerModel;
 
-    public LoginPresenter(LogInViewModel loginViewModel,ViewManagerModel viewManagerModel) {
+    public LogInPresenter(LogInViewModel loginViewModel, ViewManagerModel viewManagerModel) {
         this.loginViewModel = loginViewModel;
         this.viewManagerModel = viewManagerModel;
 

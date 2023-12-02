@@ -1,13 +1,13 @@
 
 package InterfaceAdapters.SignUp;
 
-import UseCase.SignUp.SignUpInputBoundry;
+import UseCase.SignUp.SignUpInputBoundary;
 import UseCase.SignUp.SignUpInputData;
 
 public class SignUpController {
-    final SignUpInputBoundry signUpInteractor;
+    final SignUpInputBoundary signUpInteractor;
 
-    public SignUpController(SignUpInputBoundry signUpInteractor) {
+    public SignUpController(SignUpInputBoundary signUpInteractor) {
         this.signUpInteractor = signUpInteractor;
     }
 

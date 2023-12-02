@@ -1,9 +1,9 @@
 package InterfaceAdapters.saveFavorite;
 
-import UseCase.save_favorite.RecipeSaveOutputBoundry;
+import UseCase.save_favorite.RecipeSaveOutputBoundary;
 import UseCase.save_favorite.RecipeSaveOutputData;
 
-public class RecipeSavePresenter  implements RecipeSaveOutputBoundry {
+public class RecipeSavePresenter  implements RecipeSaveOutputBoundary {
     private final RecipeSaveViewModel recipesaveViewModel;
 
     public RecipeSavePresenter(RecipeSaveViewModel recipesaveViewModel) {

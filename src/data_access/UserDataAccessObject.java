@@ -18,7 +18,6 @@ public class UserDataAccessObject implements UserDataAccessInterface, SignUpData
     private final UserFactory userFactory;
 
     private String activeUser = "";
-    private final UserFactory userFactory;
 
 
     public UserDataAccessObject(String csvPath, UserFactory userFactory) throws IOException {
