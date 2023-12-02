@@ -1,8 +1,8 @@
 package View;
 
-import InterfaceAdapter.MealPlanCreation.MealPlanController;
-import InterfaceAdapter.MealPlanCreation.MealPlanViewModel;
-import InterfaceAdapter.MealPlanCreation.MealPlanState;
+import InterfaceAdapters.MealPlanCreation.MealPlanController;
+import InterfaceAdapters.MealPlanCreation.MealPlanViewModel;
+import InterfaceAdapters.MealPlanCreation.MealPlanState;
 
 import javax.swing.*;
 import java.awt.*;
