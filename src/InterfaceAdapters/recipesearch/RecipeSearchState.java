@@ -1,6 +1,6 @@
-package InterfaceAdapters;
+package InterfaceAdapters.recipesearch;
 
-import UseCase.RecipeSearchDTO;
+import UseCase.recipesearch.RecipeSearchDTO;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
@@ -11,6 +11,8 @@ public class RecipeSearchState {
     private List<String> recipeDescriptions = new ArrayList<>();
     private List<List<String>> recipeIngredients = new ArrayList<>();
 
+    private List<String> recipeIDs = new ArrayList<>();
+
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
 
     // Private setters that update individual aspects of the state
@@ -20,6 +22,10 @@ public class RecipeSearchState {
 
     private void setRecipeDescriptions(List<String> recipeDescriptions) {
         this.recipeDescriptions = new ArrayList<>(recipeDescriptions);
+    }
+
+    private void  setRecipeIDs(List<String> recipeIDs) {
+        this.recipeIDs = recipeIDs;
     }
 
     private void setRecipeIngredients(List<List<String>> recipeIngredients) {
@@ -34,11 +40,13 @@ public class RecipeSearchState {
         List<String> names = new ArrayList<>();
         List<String> descriptions = new ArrayList<>();
         List<List<String>> ingredients = new ArrayList<>();
+        List<String> recipeids = new ArrayList<>();
 
         for (RecipeSearchDTO dto : recipeSearchDTOList) {
             names.add(dto.getName());
             descriptions.add(dto.getDescription());
             ingredients.add(new ArrayList<>(dto.getIngredients()));
+            recipeids.add(dto.getRecipeID());
         }
 
         // Call the private setters to update the state
@@ -74,4 +82,6 @@ public class RecipeSearchState {
     public List<List<String>> getRecipeIngredients() {
         return recipeIngredients;
     }
+
+    public List<String> getRecipeIDs() {return recipeIDs;}
 }

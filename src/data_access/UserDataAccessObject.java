@@ -13,8 +13,9 @@ public class UserDataAccessObject implements UserDataAccessInterface, SignUpData
     final private File csv;
     private final Map<String, Integer> headers = new LinkedHashMap<>();
     private final Map<String, User> accounts = new HashMap<>();
-    private UserFactory userFactory;
+
     private String activeUser = "";
+
 
     public UserDataAccessObject(String csvPath, UserFactory userFactory) throws IOException {
         this.userFactory = userFactory;
@@ -106,4 +107,5 @@ public class UserDataAccessObject implements UserDataAccessInterface, SignUpData
     public void setActive(User user) {
         this.activeUser = user.getUserId();
     }
+
 }

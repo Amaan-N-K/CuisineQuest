@@ -1,12 +1,13 @@
 package View;
 
 
-import InterfaceAdapters.RecipeSearchController;
-import InterfaceAdapters.RecipeSearchState;
-import InterfaceAdapters.RecipeSearchViewModel;
 import InterfaceAdapters.saveFavorite.RecipeSaveController;
 import InterfaceAdapters.saveFavorite.RecipeSaveState;
 import InterfaceAdapters.saveFavorite.RecipeSaveViewModel;
+import InterfaceAdapters.recipesearch.RecipeSearchController;
+import InterfaceAdapters.recipesearch.RecipeSearchState;
+import InterfaceAdapters.recipesearch.RecipeSearchViewModel;
+
 
 
 import javax.swing.*;
@@ -19,10 +20,11 @@ import java.util.List;
 
 public class RecipeSearchView extends JPanel implements PropertyChangeListener {
     private final RecipeSearchViewModel viewModel;
-
     private final RecipeSearchController controller;
     private final RecipeSaveController saveController;
     private final RecipeSaveViewModel recipeSaveViewModel;
+
+    public final String viewName = "recipe search";
 
 
     // UI Components
@@ -53,6 +55,12 @@ public class RecipeSearchView extends JPanel implements PropertyChangeListener {
         titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         this.add(titleLabel);
 
+        // Back Button
+        JButton backButton = new JButton("Back");
+        backButton.addActionListener(e -> controller.back());
+        backButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        this.add(backButton);
+
         // Calories Goal Input
         JLabel caloriesMinLabel = new JLabel("Calories Goal:");
         caloriesMinField = new JTextField(10);
@@ -60,6 +68,7 @@ public class RecipeSearchView extends JPanel implements PropertyChangeListener {
         caloriesMinPanel.add(caloriesMinLabel);
         caloriesMinPanel.add(caloriesMinField);
         this.add(caloriesMinPanel);
+
 
         // Ingredients Input
         JLabel ingredientsLabel = new JLabel("Ingredients:");
@@ -148,12 +157,14 @@ public class RecipeSearchView extends JPanel implements PropertyChangeListener {
         List<String> recipeNames = state.getRecipeNames();
         List<String> recipeDescriptions = state.getRecipeDescriptions();
         List<List<String>> recipeIngredients = state.getRecipeIngredients();
+        List<String> recipeIDs = state.getRecipeIDs();
 
         // Iterate over the names, descriptions, and ingredients to update the display
         for (int i = 0; i < recipeNames.size(); i++) {
             String name = recipeNames.get(i);
             String description = recipeDescriptions.get(i);
             List<String> ingredients = recipeIngredients.get(i);
+            String recipeID = recipeIDs.get(i);
 
             // Create a panel for each recipe
             JPanel recipePanel = new JPanel();

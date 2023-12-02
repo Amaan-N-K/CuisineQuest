@@ -10,4 +10,5 @@ public interface UserDataAccessInterface {
     void save(User existingUser);
 
     String getActive();
+
 }
