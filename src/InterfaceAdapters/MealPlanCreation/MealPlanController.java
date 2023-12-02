@@ -5,11 +5,10 @@ import UseCase.MealPlanCreation.MealPlanInputData;
 
 public class MealPlanController {
     private final MealPlanInputBoundary mealPlanInteractor;
-    private final MealPlanPresenter mealPlanPresenter;
 
-    public MealPlanController(MealPlanInputBoundary mealPlanInteractor, MealPlanPresenter mealPlanPresenter) {
+
+    public MealPlanController(MealPlanInputBoundary mealPlanInteractor) {
         this.mealPlanInteractor = mealPlanInteractor;
-        this.mealPlanPresenter = mealPlanPresenter;
     }
 
     public void createMealPlan(String startDate, String endDate, String diet, int calorieLimit) {
