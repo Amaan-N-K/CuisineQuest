@@ -84,5 +84,9 @@ public class MealPlanInteractor implements MealPlanInputBoundary{
         }
         return null;
     }
+    @Override
+    public void back(){
+        mealPlanPresenter.back();
+    }
 
 }

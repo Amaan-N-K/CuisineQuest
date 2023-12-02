@@ -15,4 +15,7 @@ public class MealPlanController {
         MealPlanInputData mealPlanInputData = new MealPlanInputData(startDate, endDate, diet, calorieLimit);
         mealPlanInteractor.createMealPlan(mealPlanInputData);
     }
+    public void back(){
+        mealPlanInteractor.back();
+    }
 }
