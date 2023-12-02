@@ -1,12 +1,12 @@
 package InterfaceAdapters.LogIn;
 
-import UseCase.LogIn.LogInInputBoundry;
+import UseCase.LogIn.LogInInputBoundary;
 import UseCase.LogIn.LogInInputData;
 
 public class LogInController {
-    final LogInInputBoundry logInInteractor;
+    final LogInInputBoundary logInInteractor;
 
-    public LogInController(LogInInputBoundry logInInteractor) {
+    public LogInController(LogInInputBoundary logInInteractor) {
         this.logInInteractor = logInInteractor;
     }
     public void execute(String username, String password){
