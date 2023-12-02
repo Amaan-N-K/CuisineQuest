@@ -1,4 +1,7 @@
 package Entities;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Nutrition {
     private int calorie;
     private int carbohydrates;
@@ -6,7 +9,7 @@ public class Nutrition {
     private int sugar;
     private int fiber;
 
-    Nutrition(int calorie, int carbohydrates, int protein, int sugar, int fiber){
+    public Nutrition(@JsonProperty("calories") int calorie, @JsonProperty("carbohydrates") int carbohydrates, @JsonProperty("protein") int protein, @JsonProperty("sugar") int sugar,  @JsonProperty("fiber") int fiber){
         this.calorie = calorie;
         this.carbohydrates = carbohydrates;
         this.fiber = fiber;

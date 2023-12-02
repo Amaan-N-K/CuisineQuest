@@ -6,7 +6,7 @@ public class MealPlanState {
     private String errorMessage;
     private String startDate;
     private String endDate;
-    private String diets;
+    private String diet;
     private int calorieLimit;
 
     public MealPlanState() {
@@ -20,7 +20,7 @@ public class MealPlanState {
         this.errorMessage = copy.errorMessage;
         this.startDate = copy.startDate;
         this.endDate = copy.endDate;
-        this.diets = copy.diets;
+        this.diet = copy.diet;
         this.calorieLimit = copy.calorieLimit;
     }
 
@@ -66,12 +66,12 @@ public class MealPlanState {
         this.endDate = endDate;
     }
 
-    public String getDiets() {
-        return diets;
+    public String getDiet() {
+        return diet;
     }
 
-    public void setDiets(String diets) {
-        this.diets = diets;
+    public void setDiet(String diet) {
+        this.diet = diet;
     }
 
     public int getCalorieLimit() {
@@ -88,7 +88,7 @@ public class MealPlanState {
         return "MealPlanState{" +
                 "startDate='" + startDate + '\'' +
                 ", endDate='" + endDate + '\'' +
-                ", diets='" + diets + '\'' + ", calorieLimit='" + calorieLimit + '\'' +
+                ", diet='" + diet + '\'' + ", calorieLimit='" + calorieLimit + '\'' +
                 '}';
     }
 }

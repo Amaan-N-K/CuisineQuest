@@ -1,7 +1,5 @@
 package UseCase.MealPlanCreation;
 
-import java.util.List;
-
 public class MealPlanInputData {
     private final String startDate;
     private final String endDate;
@@ -23,7 +21,7 @@ public class MealPlanInputData {
         return endDate;
     }
 
-    public String getDiets() { return diet; }
+    public String getDiet() { return diet; }
 
     public int getCalorieLimit() {
         return calorieLimit;

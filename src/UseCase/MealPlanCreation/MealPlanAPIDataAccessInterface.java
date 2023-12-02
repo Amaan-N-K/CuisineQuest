@@ -8,5 +8,5 @@ import java.util.List;
 
 public interface MealPlanAPIDataAccessInterface {
 
-    List<Recipe> findRecipes(String diets, int calorieLimit) throws IOException;
+    List<Recipe> findRecipes(String diet, int calorieLimit) throws IOException;
 }

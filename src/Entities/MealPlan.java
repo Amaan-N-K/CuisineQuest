@@ -3,6 +3,8 @@ package Entities;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class MealPlan {
     private final String identifier;
@@ -10,11 +12,12 @@ public class MealPlan {
     private final String endDate;
     private final String diet;
     private final int calorieLimit;
-    private List<MealPlanDay> recipes;
+    private List<MealPlanDay> mealPlanDays;
 
-    public MealPlan(String startDate, String endDate, String diet, int calorieLimit) {
-        this.identifier = startDate + "to" + endDate;
-        this.recipes = new ArrayList<>();
+    @JsonCreator
+    public MealPlan(@JsonProperty("startDate") String startDate, @JsonProperty("endDate")String endDate, @JsonProperty("diet") String diet, @JsonProperty("calorieLimit") int calorieLimit) {
+        this.identifier = startDate + " to " + endDate;
+        this.mealPlanDays = new ArrayList<>();
         this.startDate = startDate;
         this.endDate = endDate;
         this.diet = diet;
@@ -22,15 +25,15 @@ public class MealPlan {
     }
 
     public void addMealPlanDay(MealPlanDay mealPlanDay) {
-        recipes.add(mealPlanDay);
+        mealPlanDays.add(mealPlanDay);
     }
 
     public boolean removeMealPlanDay(MealPlanDay mealPlanDay) {
-        return recipes.remove(mealPlanDay);
+        return mealPlanDays.remove(mealPlanDay);
     }
 
-    public List<MealPlanDay> getRecipes() {
-        return Collections.unmodifiableList(recipes);
+    public List<MealPlanDay> getMealPlanDays() {
+        return Collections.unmodifiableList(mealPlanDays);
     }
 
     public String getIdentifier() { return identifier; }
@@ -39,7 +42,7 @@ public class MealPlan {
     public String getEndDate() {
         return endDate;
     }
-    public String getDiets() {
+    public String getDiet() {
         return diet;
     }
     public int getCalorieLimit() {

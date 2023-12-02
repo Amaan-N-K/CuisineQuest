@@ -4,7 +4,7 @@ import InterfaceAdapters.ViewManagerModel;
 import UseCase.MealPlanCreation.MealPlanOutputBoundary;
 import UseCase.MealPlanCreation.MealPlanOutputData;
 public class MealPlanPresenter implements MealPlanOutputBoundary {
-    private MealPlanViewModel mealPlanviewModel;
+    private final MealPlanViewModel mealPlanviewModel;
     private ViewManagerModel viewManagerModel;
 
     public MealPlanPresenter(ViewManagerModel viewManagerModel, MealPlanViewModel mealPlanViewModel){
