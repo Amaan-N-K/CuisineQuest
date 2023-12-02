@@ -10,6 +10,6 @@ public interface MealPlanDataAccessInterface {
 
     void saveMealPlan(String userId, MealPlan mealPlan) throws IOException;
 
-    MealPlan loadMealPlan(String userId, String identifier) throws IOException;
+    MealPlan loadMealPlan(String userId) throws IOException;
 
 }
