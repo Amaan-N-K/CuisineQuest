@@ -1,31 +1,20 @@
 package InterfaceAdapters.grocery_list;
 
-import UseCase.grocery_list.GroceryListInteractor;
-import InterfaceAdapters.grocery_list.GroceryListViewModel;
+import UseCase.grocery_list.GroceryListInputBoundary;
+import UseCase.grocery_list.GroceryListInputData;
+import entities.MealPlan;
 
 public class GroceryListController {
 
-    private final GroceryListInteractor interactor;
-    private final GroceryListView view;
-    private final GroceryListPresenter presenter;
+    private final GroceryListInputBoundary groceryListInteractor;
 
-    public GroceryListController(GroceryListInteractor interactor, GroceryListView view, GroceryListViewModel viewModel) {
-        this.interactor = interactor;
-        this.view = view;
-        this.presenter = new GroceryListPresenter(view);
-
-        this.view.addGenerateButtonListener(new GenerateButtonListener());
-
-        viewModel.addPropertyChangeListener(presenter);
+    public GroceryListController(GroceryListInputBoundary groceryListInteractor) {
+        this.groceryListInteractor = groceryListInteractor;
     }
 
+    public void generateGroceryList(MealPlan mealPlan) {
+        GroceryListInputData inputData = new GroceryListInputData(mealPlan);
 
-    private class GenerateButtonListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            MealPlan mealPlan = view.getMealPlan();
-            interactor.generateGroceryList(mealPlan);
-        }
+        groceryListInteractor.execute(inputData);
     }
-
 }
