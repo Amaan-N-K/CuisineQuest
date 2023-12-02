@@ -4,6 +4,7 @@ import InterfaceAdapters.dashboard.DashboardController;
 import InterfaceAdapters.dashboard.DashboardPresenter;
 //import InterfaceAdapters.dashboard.DashboardViewModel;
 import InterfaceAdapters.ViewManagerModel;
+import InterfaceAdapters.grocery_list.GroceryListViewModel;
 import InterfaceAdapters.recipesearch.RecipeSearchViewModel;
 import UseCase.dashboard.DashboardInputBoundary;
 import UseCase.dashboard.DashboardInteractor;
@@ -14,9 +15,9 @@ public class DashboardUseCaseFactory {
     private DashboardUseCaseFactory() {
     }
 
-    private static DashboardController createDashboardController(RecipeSearchViewModel recipeSearchViewModel, ViewManagerModel viewManagerModel) {
+    private static DashboardController createDashboardController(RecipeSearchViewModel recipeSearchViewModel, ViewManagerModel viewManagerModel, GroceryListViewModel groceryListViewModel) {
         // Create the output boundary (presenter)
-        DashboardOutputBoundary dashboardPresenter = new DashboardPresenter(recipeSearchViewModel, viewManagerModel);
+        DashboardOutputBoundary dashboardPresenter = new DashboardPresenter(recipeSearchViewModel, viewManagerModel, groceryListViewModel);
 
         // Create the interactor (use case) which will handle the dashboard logic
         DashboardInputBoundary dashboardInteractor = new DashboardInteractor(dashboardPresenter);
@@ -26,8 +27,9 @@ public class DashboardUseCaseFactory {
     }
 
     public static DashboardView createDashboardView(RecipeSearchViewModel recipeSearchViewModel,
-                                                    ViewManagerModel viewManagerModel) {
-        DashboardController dashboardController = createDashboardController(recipeSearchViewModel, viewManagerModel);
+                                                    ViewManagerModel viewManagerModel,
+                                                    GroceryListViewModel groceryListViewModel) {
+        DashboardController dashboardController = createDashboardController(recipeSearchViewModel, viewManagerModel, groceryListViewModel);
 
         return new DashboardView(dashboardController);
     }

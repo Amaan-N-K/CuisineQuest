@@ -2,6 +2,7 @@ package app;
 
 import InterfaceAdapters.dashboard.DashboardViewModel;
 import InterfaceAdapters.ViewManagerModel;
+import InterfaceAdapters.grocery_list.GroceryListViewModel;
 import InterfaceAdapters.recipesearch.RecipeSearchViewModel;
 import View.DashboardView;
 import View.RecipeSearchView;
@@ -24,6 +25,7 @@ public class Main {
 
         RecipeSearchViewModel recipeSearchViewModel = new RecipeSearchViewModel();
         DashboardViewModel dashboardViewModel = new DashboardViewModel();
+        GroceryListViewModel groceryListViewModel = new GroceryListViewModel();
         RecipeSearchAPIDataAccessObject recipeDataAccessObject = new RecipeSearchAPIDataAccessObject();
         ViewManagerModel viewManagerModel = new ViewManagerModel();
         new ViewManager(views, cardLayout, viewManagerModel);
@@ -34,7 +36,7 @@ public class Main {
         );
         views.add(recipeSearchView, recipeSearchView.viewName);
 
-        DashboardView dashboardView = DashboardUseCaseFactory.createDashboardView(recipeSearchViewModel, viewManagerModel);
+        DashboardView dashboardView = DashboardUseCaseFactory.createDashboardView(recipeSearchViewModel, viewManagerModel, groceryListViewModel);
         views.add(dashboardView, dashboardView.viewName);
 
         viewManagerModel.setActiveView(dashboardView.viewName);
