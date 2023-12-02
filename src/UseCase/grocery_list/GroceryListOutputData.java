@@ -5,7 +5,7 @@ import java.util.List;
 public class GroceryListOutputData {
     private final List<String> groceryList;
 
-    private boolean useCaseFailed;
+    private final boolean useCaseFailed;
 
     public GroceryListOutputData(List<String> groceryList, boolean useCaseFailed) {
         this.groceryList = groceryList;
@@ -14,5 +14,9 @@ public class GroceryListOutputData {
 
     public List<String> getGroceryList() {
         return groceryList;
+    }
+
+    public boolean getUsecaseFailed() {
+        return useCaseFailed;
     }
 }

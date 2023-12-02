@@ -2,7 +2,7 @@ package InterfaceAdapters.grocery_list;
 
 import UseCase.grocery_list.GroceryListInputBoundary;
 import UseCase.grocery_list.GroceryListInputData;
-import entities.MealPlan;
+
 
 public class GroceryListController {
 
@@ -12,9 +12,8 @@ public class GroceryListController {
         this.groceryListInteractor = groceryListInteractor;
     }
 
-    public void generateGroceryList(MealPlan mealPlan) {
-        GroceryListInputData inputData = new GroceryListInputData(mealPlan);
-
+    public void generateGroceryList() {
+        GroceryListInputData inputData = new GroceryListInputData(true);
         groceryListInteractor.execute(inputData);
     }
 }
