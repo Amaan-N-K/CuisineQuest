@@ -5,10 +5,10 @@ import Entities.User;
 
 public class RecipeSaveInputData {
     private final String recipeId;
-    private final String userId;
 
-    public RecipeSaveInputData(String userId, String recipeId) {
-        this.userId = userId;
+
+    public RecipeSaveInputData(String recipeId) {
+
         this.recipeId = recipeId;
     }
 
@@ -16,7 +16,4 @@ public class RecipeSaveInputData {
         return recipeId;
     }
 
-    public String getUserID() {
-        return userId;
-    }
 }

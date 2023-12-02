@@ -14,6 +14,7 @@ public class UserDataAccessObject implements UserDataAccessInterface, SignUpData
     private final Map<String, Integer> headers = new LinkedHashMap<>();
     private final Map<String, User> accounts = new HashMap<>();
     private UserFactory userFactory;
+    private String activeUser = "";
 
     public UserDataAccessObject(String csvPath, UserFactory userFactory) throws IOException {
         this.userFactory = userFactory;
@@ -58,6 +59,12 @@ public class UserDataAccessObject implements UserDataAccessInterface, SignUpData
         this.save();
 
     }
+
+    @Override
+    public String getActive() {
+        return activeUser;
+    }
+
     private void save() {
         BufferedWriter writer;
         try {
@@ -95,4 +102,8 @@ public class UserDataAccessObject implements UserDataAccessInterface, SignUpData
         return accounts.get(userId);
     }
 
+    @Override
+    public void setActive(User user) {
+        this.activeUser = user.getUserId();
+    }
 }

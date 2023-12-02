@@ -13,7 +13,7 @@ public class RecipeSaveInteractor implements RecipeSaveInputBoundry{
 
     @Override
     public void execute(RecipeSaveInputData recipeSaveInputData) {
-        String userId = recipeSaveInputData.getUserID();
+        String userId = dataAccess.getActive();
         String recipeId = recipeSaveInputData.getRecipeID();
         if (!dataAccess.existsByID(userId)) {
             RecipeSaveOutputData fail = new RecipeSaveOutputData("User doesn't exists!");
