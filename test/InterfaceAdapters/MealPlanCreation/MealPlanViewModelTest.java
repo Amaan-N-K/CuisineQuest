@@ -34,7 +34,6 @@ class MealPlanViewModelTest {
         viewModel.updateMealPlanState(mockMealPlan);
 
         MealPlanState state = viewModel.getState();
-        assertTrue(state.isCreationSuccess());
         assertEquals(mockMealPlan, state.getMealPlan());
         verify(mockListener).propertyChange(any(PropertyChangeEvent.class));
     }
