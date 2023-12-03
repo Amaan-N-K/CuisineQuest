@@ -57,7 +57,7 @@ public class Main {
 
         SignUpView signUpView = SignupUseCaseFactory.create(viewManagerModel, logInViewModel, signUpViewModel, userDataAccessObject);
         views.add(signUpView, signUpView.viewName);
-        System.out.println("before");
+
         LogInView logInView = LoginUseCaseFactory.create(viewManagerModel, logInViewModel, userDataAccessObject);
         views.add(logInView, logInView.viewName);
 
