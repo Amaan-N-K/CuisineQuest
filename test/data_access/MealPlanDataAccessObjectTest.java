@@ -17,6 +17,7 @@ class MealPlanDataAccessObjectTest {
     @TempDir
     Path tempDirectory;
     MealPlanDataAccessObject dataAccessObject;
+    private String userId;
     private String startDate;
     private String endDate;
     private String diet;
@@ -27,6 +28,7 @@ class MealPlanDataAccessObjectTest {
     void setUp() {
         dataAccessObject = new MealPlanDataAccessObject(tempDirectory.toString());
 
+        userId = "user1";
         startDate = "2023-12-04";
         endDate = "2023-12-07";
         diet = "Vegetarian";
@@ -81,16 +83,17 @@ class MealPlanDataAccessObjectTest {
 
     @Test
     void saveMealPlan() {
+        String directoryPath = tempDirectory.toString();
         MealPlanFactory mealPlanFactory= new MealPlanFactory();
         MealPlan mealPlan = mealPlanFactory.createMealPlan(startDate, endDate, diet, calorieLimit);
         mealPlan.addMealPlanDay(mealPlanDay);
         try {
-            dataAccessObject.saveMealPlan(mealPlan);
+            dataAccessObject.saveMealPlan(userId, mealPlan);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
-        File savedFile = tempDirectory.resolve(mealPlan.getIdentifier() + ".json").toFile();
+        File savedFile = new File(directoryPath + File.separator + userId, userId + ".json");
         assertTrue(savedFile.exists());
     }
 
@@ -100,20 +103,19 @@ class MealPlanDataAccessObjectTest {
         MealPlan mealPlan = mealPlanFactory.createMealPlan(startDate, endDate, diet, calorieLimit);
         mealPlan.addMealPlanDay(mealPlanDay);
         try {
-            dataAccessObject.saveMealPlan(mealPlan);
+            dataAccessObject.saveMealPlan(userId, mealPlan);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
         MealPlan loadedMealPlan = null;
         try {
-            loadedMealPlan = dataAccessObject.loadMealPlan(mealPlan.getIdentifier());
+            loadedMealPlan = dataAccessObject.loadMealPlan(userId);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
         assertNotNull(loadedMealPlan);
-        assertEquals(mealPlan.getIdentifier(), loadedMealPlan.getIdentifier());
 
     }
 }

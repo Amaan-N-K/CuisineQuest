@@ -1,4 +1,5 @@
 package UseCase.MealPlanCreation;
 public interface MealPlanInputBoundary {
-    public void createMealPlan(MealPlanInputData mealPlanInputData);
+    void createMealPlan(MealPlanInputData mealPlanInputData);
+    void back();
 }
