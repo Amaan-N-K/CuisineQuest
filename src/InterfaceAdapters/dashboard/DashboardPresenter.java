@@ -1,5 +1,6 @@
 package InterfaceAdapters.dashboard;
 
+import InterfaceAdapters.MealPlanCreation.MealPlanViewModel;
 import InterfaceAdapters.ViewManagerModel;
 import InterfaceAdapters.grocery_list.GroceryListViewModel;
 import InterfaceAdapters.recipesearch.RecipeSearchViewModel;
@@ -13,11 +14,14 @@ public class DashboardPresenter implements DashboardOutputBoundary {
 
     private final GroceryListViewModel groceryListViewModel;
 
+    private final MealPlanViewModel mealPlanViewModel;
+
     public DashboardPresenter(RecipeSearchViewModel recipeSearchViewModel, ViewManagerModel viewManagerModel,
-                              GroceryListViewModel groceryListViewModel) {
+                              GroceryListViewModel groceryListViewModel, MealPlanViewModel mealPlanViewModel) {
         this.recipeSearchViewModel = recipeSearchViewModel;
         this.viewManagerModel = viewManagerModel;
         this.groceryListViewModel = groceryListViewModel;
+        this.mealPlanViewModel = mealPlanViewModel;
     }
 
     @Override
@@ -29,6 +33,9 @@ public class DashboardPresenter implements DashboardOutputBoundary {
             viewManagerModel.setActiveView(groceryListViewModel.viewName);
             viewManagerModel.firePropertyChanged();
 
+        } else if (outputData.getButtonName().equals("MealPlan")) {
+            viewManagerModel.setActiveView(mealPlanViewModel.viewName);
+            viewManagerModel.firePropertyChanged();
         }
     }
 }

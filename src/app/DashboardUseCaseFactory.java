@@ -1,5 +1,6 @@
 package app;
 
+import InterfaceAdapters.MealPlanCreation.MealPlanViewModel;
 import InterfaceAdapters.dashboard.DashboardController;
 import InterfaceAdapters.dashboard.DashboardPresenter;
 //import InterfaceAdapters.dashboard.DashboardViewModel;
@@ -15,9 +16,12 @@ public class DashboardUseCaseFactory {
     private DashboardUseCaseFactory() {
     }
 
-    private static DashboardController createDashboardController(RecipeSearchViewModel recipeSearchViewModel, ViewManagerModel viewManagerModel, GroceryListViewModel groceryListViewModel) {
+    private static DashboardController createDashboardController(RecipeSearchViewModel recipeSearchViewModel,
+                                                                 ViewManagerModel viewManagerModel,
+                                                                 GroceryListViewModel groceryListViewModel,
+                                                                 MealPlanViewModel mealPlanViewModel) {
         // Create the output boundary (presenter)
-        DashboardOutputBoundary dashboardPresenter = new DashboardPresenter(recipeSearchViewModel, viewManagerModel, groceryListViewModel);
+        DashboardOutputBoundary dashboardPresenter = new DashboardPresenter(recipeSearchViewModel, viewManagerModel, groceryListViewModel, mealPlanViewModel);
 
         // Create the interactor (use case) which will handle the dashboard logic
         DashboardInputBoundary dashboardInteractor = new DashboardInteractor(dashboardPresenter);
@@ -28,8 +32,9 @@ public class DashboardUseCaseFactory {
 
     public static DashboardView createDashboardView(RecipeSearchViewModel recipeSearchViewModel,
                                                     ViewManagerModel viewManagerModel,
-                                                    GroceryListViewModel groceryListViewModel) {
-        DashboardController dashboardController = createDashboardController(recipeSearchViewModel, viewManagerModel, groceryListViewModel);
+                                                    GroceryListViewModel groceryListViewModel,
+                                                    MealPlanViewModel mealPlanViewModel) {
+        DashboardController dashboardController = createDashboardController(recipeSearchViewModel, viewManagerModel, groceryListViewModel, mealPlanViewModel);
 
         return new DashboardView(dashboardController);
     }
