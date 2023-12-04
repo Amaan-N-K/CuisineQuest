@@ -64,8 +64,17 @@ public class MealPlanInteractor implements MealPlanInputBoundary{
             Recipe dinner = selectRecipeByMealType(filteredRecipes, "dinner");
             filteredRecipes.remove(dinner);
 
-            if (breakfast == null || lunch == null || dinner == null) {
-                return null;
+            if (breakfast == null){
+               breakfast = filteredRecipes.get(0);
+                filteredRecipes.remove(breakfast);
+            }
+            if (lunch == null){
+                lunch = filteredRecipes.get(0);
+                filteredRecipes.remove(lunch);
+            }
+            if (dinner == null){
+                dinner = filteredRecipes.get(0);
+                filteredRecipes.remove(dinner);
             }
 
             MealPlanDay mealPlanDay = new MealPlanDay(breakfast, lunch, dinner);

@@ -16,20 +16,22 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 public class MealPlanSearchView extends JPanel implements ActionListener, PropertyChangeListener {
     private MealPlanViewModel mealPlanViewModel;
     private MealPlanController mealPlanController;
+    public final String viewName = "meal plan";
 
     // UI Components
     private JTextField startDateField, endDateField;
-    private JList<String> dietTypeList, healthList;
+    private List<JCheckBox> dietCheckBoxes;
+    private List<JCheckBox> healthCheckBoxes;
     private JSpinner calorieSpinner;
     private JPanel mealPlanDisplayPanel;
-    private JFrame frame;
 
-    public final String viewName = "meal plan";
+
 
 
     public MealPlanSearchView(MealPlanController mealPlanController, MealPlanViewModel mealPlanViewModel) {
@@ -63,41 +65,45 @@ public class MealPlanSearchView extends JPanel implements ActionListener, Proper
         endDatePanel.add(endDateField);
         this.add(endDatePanel);
 
-        // Diet Types
+        // Diet Types as Checkboxes
+        JLabel dietTypeLabel = new JLabel("Diet Types:");
         String[] dietTypes = { "Balanced", "High-Fiber", "High-Protein", "Low-Carb", "Low-Fat", "Low-Sodium" };
-        dietTypeList = new JList<>(dietTypes); // Class level field
-        dietTypeList.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-        JScrollPane dietTypeScrollPane = new JScrollPane(dietTypeList);
-        dietTypeScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-        dietTypeScrollPane.setPreferredSize(new Dimension(200, 100));
-        this.add(dietTypeScrollPane);
+        JPanel dietPanel = new JPanel();
+        dietCheckBoxes = new ArrayList<>();
+        for (String diet : dietTypes) {
+            JCheckBox checkBox = new JCheckBox(diet);
+            dietCheckBoxes.add(checkBox);
+            dietPanel.add(checkBox);
+        }
+        this.add(dietTypeLabel);
+        this.add(dietPanel);
 
+        // Health Labels as Checkboxes
+        JLabel healthLabel = new JLabel("Health Labels:");
+        String[] healthOptions = {"Alcohol-Free", "Dairy-Free", "Gluten-Free", "Kosher", "Pork-Free", "Vegan", "Vegetarian"};
+        JPanel healthPanel = new JPanel();
+        healthCheckBoxes = new ArrayList<>();
+        for (String health : healthOptions) {
+            JCheckBox checkBox = new JCheckBox(health);
+            healthCheckBoxes.add(checkBox);
+            healthPanel.add(checkBox);
+        }
+        this.add(healthLabel);
+        this.add(healthPanel);
 
-        // Health Labels
-        String[] healthOptions = {"Alcohol-free", "Immuno-Supportive", "Celery-free", "Crustacean-free", "Dairy-free",
-                "Egg-free", "Fish-free", "FODMAP-free", "Gluten-free", "Keto-friendly", "Kidney-friendly", "Kosher",
-                "Low-potassium", "Lupine-free", "Mustard-free", "Low-fat-abs", "No-oil-added", "Low-sugar", "Paleo",
-                "Peanut-free", "Pescatarian", "Pork-free", "Red-meat-free", "Sesame-free", "Shellfish-free", "Soy-free",
-                "Sugar-conscious", "Tree-nut-free", "Vegan", "Vegetarian", "Wheat-free"};
-        healthList = new JList<>(healthOptions); // Class level field
-        healthList.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-        JScrollPane healthScrollPane = new JScrollPane(healthList);
-        healthScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-        healthScrollPane.setPreferredSize(new Dimension(200, 100));
-        this.add(healthScrollPane);
 
         // Calorie limit
         calorieSpinner = new JSpinner(new SpinnerNumberModel(2000, 1000, 5000, 100));
         JLabel calorieLimitLabel = new JLabel("Calorie Limit:");
-        JSpinner calorieSpinner = new JSpinner(new SpinnerNumberModel(2000, 1000, 5000, 100));
         calorieSpinner.setMaximumSize(calorieSpinner.getPreferredSize());
         JPanel caloriePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         caloriePanel.add(calorieLimitLabel);
         caloriePanel.add(calorieSpinner);
+        this.add(caloriePanel);
 
         // Generate Button
         JButton generateButton = new JButton("Generate Meal Plan");
-        generateButton.addActionListener(this);
+        generateButton.addActionListener(this::handleGenerateButtonAction);
         this.add(generateButton);
 
         mealPlanDisplayPanel = new JPanel(); // Class level field
@@ -110,26 +116,37 @@ public class MealPlanSearchView extends JPanel implements ActionListener, Proper
         if (e.getSource() instanceof JButton) {
             JButton button = (JButton) e.getSource();
             if (button.getText().equals("Generate Meal Plan")) {
-                handleGenerateButtonAction();
+                handleGenerateButtonAction(e);
             }
         }
     }
 
 
-        private void handleGenerateButtonAction(){
-            String startDate = startDateField.getText();
-            String endDate = endDateField.getText();
-            List<String> dietPreferences = dietTypeList.getSelectedValuesList();
-            List<String> healthPreferences = healthList.getSelectedValuesList();
-            List<String> combinedPreferences = new ArrayList<>(dietPreferences);
-            combinedPreferences.addAll(healthPreferences);
-            int calorieLimit = (Integer) calorieSpinner.getValue();
-            mealPlanController.createMealPlan(startDate, endDate, combinedPreferences.toString(), calorieLimit);
-        }
+    private void handleGenerateButtonAction(ActionEvent e){
+        String startDate = startDateField.getText();
+        String endDate = endDateField.getText();
+        List<String> dietPreferences = dietCheckBoxes.stream()
+                .filter(JCheckBox::isSelected)
+                .map(JCheckBox::getText)
+                .collect(Collectors.toList());
+
+        // Get selected health preferences
+        List<String> healthPreferences = healthCheckBoxes.stream()
+                .filter(JCheckBox::isSelected)
+                .map(JCheckBox::getText)
+                .collect(Collectors.toList());
+
+        // Combine preferences and create meal plan
+        List<String> combinedPreferences = new ArrayList<>(dietPreferences);
+        combinedPreferences.addAll(healthPreferences);
+        int calorieLimit = (Integer) calorieSpinner.getValue();
+        String preferences = String.join(", ", combinedPreferences);
+        mealPlanController.createMealPlan(startDate, endDate, preferences, calorieLimit);
+    }
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        if (evt.getPropertyName().equals("state")) {
+        if (evt.getPropertyName().equals("Display MealPlan")) {
             updateMealPlanDisplay(mealPlanViewModel.getState());
         }
     }

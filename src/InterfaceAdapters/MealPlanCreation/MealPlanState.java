@@ -1,19 +1,22 @@
 package InterfaceAdapters.MealPlanCreation;
 
 import Entities.MealPlan;
+import Entities.MealPlanDay;
+import UseCase.recipesearch.RecipeSearchDTO;
+
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MealPlanState {
     private MealPlan mealPlan;
     private String errorMessage;
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
 
-    public MealPlanState() {
-        this.errorMessage = "";
-    }
 
     // Private setters
+
     private void setMealPlan(MealPlan mealPlan) {
         this.mealPlan = mealPlan;
     }
@@ -25,9 +28,8 @@ public class MealPlanState {
 
     // Update the state with a new meal plan
     public void updateMealPlan(MealPlan newMealPlan) {
-        setMealPlan(newMealPlan);
-        firePropertyChanged("Display MealPlan", null, null);
-    }
+        this.mealPlan = newMealPlan;
+        firePropertyChanged("Display MealPlan", null, null);}
 
     public void addPropertyChangeListener(PropertyChangeListener listener) {
         support.addPropertyChangeListener(listener);
