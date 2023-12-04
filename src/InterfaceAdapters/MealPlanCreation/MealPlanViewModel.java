@@ -1,16 +1,13 @@
 package InterfaceAdapters.MealPlanCreation;
 
 import Entities.MealPlan;
-import InterfaceAdapters.ViewModel;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
-public class MealPlanViewModel extends ViewModel {
+public class MealPlanViewModel {
     private MealPlanState state = new MealPlanState();
-    public MealPlanViewModel() {
-        super("Meal Plan Search View");
-    }
+    public final String viewName = "meal plan";
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
 
     public void setState(MealPlanState state) {
@@ -21,7 +18,6 @@ public class MealPlanViewModel extends ViewModel {
         return state;
     }
 
-    @Override
     public void firePropertyChanged() {
         support.firePropertyChange("state", null, this.state);
     }

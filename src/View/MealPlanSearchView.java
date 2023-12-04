@@ -29,94 +29,80 @@ public class MealPlanSearchView extends JPanel implements ActionListener, Proper
     private JPanel mealPlanDisplayPanel;
     private JFrame frame;
 
+    public final String viewName = "meal plan";
+
 
     public MealPlanSearchView(MealPlanController mealPlanController, MealPlanViewModel mealPlanViewModel) {
 
         this.mealPlanController = mealPlanController;
         this.mealPlanViewModel = mealPlanViewModel;
         mealPlanViewModel.addPropertyChangeListener(this);
-        createAndShowGUI();
+        initializeGUI();
     }
 
-    public void createAndShowGUI() {
-        JPanel panel = new JPanel();
-        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+    public void initializeGUI() {
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         // Title
         JLabel titleLabel = new JLabel("Create Your Meal Plan");
         titleLabel.setFont(new Font("Arial", Font.BOLD, 20));
         titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        panel.add(titleLabel);
 
         // Date range selection
+        startDateField = new JTextField(10);
         JLabel startDateLabel = new JLabel("Start Date:");
-        JTextField startDateField = new JTextField(10);
         JPanel startDatePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         startDatePanel.add(startDateLabel);
         startDatePanel.add(startDateField);
-        panel.add(startDatePanel);
+        this.add(startDatePanel);
 
+        endDateField = new JTextField(10);
         JLabel endDateLabel = new JLabel("End Date:");
-        JTextField endDateField = new JTextField(10);
         JPanel endDatePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         endDatePanel.add(endDateLabel);
         endDatePanel.add(endDateField);
-        panel.add(endDatePanel);
+        this.add(endDatePanel);
 
         // Diet Types
-        JLabel dietTypeLabel = new JLabel("Diet Type:");
         String[] dietTypes = { "Balanced", "High-Fiber", "High-Protein", "Low-Carb", "Low-Fat", "Low-Sodium" };
-        JList<String> dietTypeList = new JList<>(dietTypes);
+        dietTypeList = new JList<>(dietTypes); // Class level field
         dietTypeList.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
         JScrollPane dietTypeScrollPane = new JScrollPane(dietTypeList);
         dietTypeScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         dietTypeScrollPane.setPreferredSize(new Dimension(200, 100));
+        this.add(dietTypeScrollPane);
+
 
         // Health Labels
-        JLabel healthLabel = new JLabel("Health Labels:");
         String[] healthOptions = {"Alcohol-free", "Immuno-Supportive", "Celery-free", "Crustacean-free", "Dairy-free",
                 "Egg-free", "Fish-free", "FODMAP-free", "Gluten-free", "Keto-friendly", "Kidney-friendly", "Kosher",
                 "Low-potassium", "Lupine-free", "Mustard-free", "Low-fat-abs", "No-oil-added", "Low-sugar", "Paleo",
                 "Peanut-free", "Pescatarian", "Pork-free", "Red-meat-free", "Sesame-free", "Shellfish-free", "Soy-free",
                 "Sugar-conscious", "Tree-nut-free", "Vegan", "Vegetarian", "Wheat-free"};
-        JList<String> healthList = new JList<>(healthOptions);
+        healthList = new JList<>(healthOptions); // Class level field
         healthList.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
         JScrollPane healthScrollPane = new JScrollPane(healthList);
         healthScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         healthScrollPane.setPreferredSize(new Dimension(200, 100));
-
-        // Main panel configuration
-        JPanel mainPanel = new JPanel();
-        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
-        mainPanel.add(dietTypeLabel);
-        mainPanel.add(dietTypeScrollPane);
-        mainPanel.add(healthLabel);
-        mainPanel.add(healthScrollPane);
-
-        // Adding main panel to the frame
-        frame.add(mainPanel, BorderLayout.CENTER);
-        frame.setVisible(true);
-
+        this.add(healthScrollPane);
 
         // Calorie limit
+        calorieSpinner = new JSpinner(new SpinnerNumberModel(2000, 1000, 5000, 100));
         JLabel calorieLimitLabel = new JLabel("Calorie Limit:");
         JSpinner calorieSpinner = new JSpinner(new SpinnerNumberModel(2000, 1000, 5000, 100));
         calorieSpinner.setMaximumSize(calorieSpinner.getPreferredSize());
         JPanel caloriePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         caloriePanel.add(calorieLimitLabel);
         caloriePanel.add(calorieSpinner);
-        panel.add(caloriePanel);
-
 
         // Generate Button
         JButton generateButton = new JButton("Generate Meal Plan");
         generateButton.addActionListener(this);
         this.add(generateButton);
 
-        mealPlanDisplayPanel = new JPanel();
+        mealPlanDisplayPanel = new JPanel(); // Class level field
         mealPlanDisplayPanel.setLayout(new BoxLayout(mealPlanDisplayPanel, BoxLayout.Y_AXIS));
         this.add(new JScrollPane(mealPlanDisplayPanel));
-
     }
 
     @Override

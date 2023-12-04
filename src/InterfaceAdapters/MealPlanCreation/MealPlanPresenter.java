@@ -20,10 +20,6 @@ public class MealPlanPresenter implements MealPlanOutputBoundary {
     public void presentMealPlan(MealPlanOutputData outputData){
         mealPlanviewModel.updateMealPlanState(outputData.getMealPlan());
         mealPlanviewModel.firePropertyChanged();
-
-        viewManagerModel.setActiveView("MealPlanDisplayView");
-        viewManagerModel.firePropertyChanged();
-
     }
 
     @Override

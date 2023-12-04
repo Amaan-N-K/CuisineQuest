@@ -2,13 +2,16 @@ package app;
 
 import Entities.UserFactory;
 import InterfaceAdapters.LogIn.LogInViewModel;
+import InterfaceAdapters.MealPlanCreation.MealPlanViewModel;
 import InterfaceAdapters.SignUp.SignUpViewModel;
 import InterfaceAdapters.dashboard.DashboardViewModel;
 import InterfaceAdapters.ViewManagerModel;
 import InterfaceAdapters.grocery_list.GroceryListViewModel;
 import InterfaceAdapters.recipesearch.RecipeSearchViewModel;
 import InterfaceAdapters.saveFavorite.RecipeSaveViewModel;
+import UseCase.MealPlanCreation.MealPlanAPIDataAccessInterface;
 import View.*;
+import data_access.EdamamAPIDataAccessObject;
 import data_access.RecipeSearchAPIDataAccessObject;
 import data_access.UserDataAccessObject;
 
@@ -20,7 +23,7 @@ import java.io.IOException;
 public class Main {
     public static void main(String[] args) throws IOException {
         // The main application window.
-        JFrame application = new JFrame("Login Example");
+        JFrame application = new JFrame("CuisineQuest");
         application.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         CardLayout cardLayout = new CardLayout();
@@ -35,9 +38,11 @@ public class Main {
         SignUpViewModel signUpViewModel = new SignUpViewModel();
         LogInViewModel logInViewModel = new LogInViewModel();
         RecipeSaveViewModel recipeSaveViewModel = new RecipeSaveViewModel();
+        MealPlanViewModel mealPlanViewModel = new MealPlanViewModel();
         new ViewManager(views, cardLayout, viewManagerModel);
 
         RecipeSearchAPIDataAccessObject recipeDataAccessObject = new RecipeSearchAPIDataAccessObject();
+        EdamamAPIDataAccessObject edamamAPIDataAccessObject = new EdamamAPIDataAccessObject();
 
 
         String csvPath = "src" + File.separator + "users.csv";
@@ -52,7 +57,7 @@ public class Main {
         );
         views.add(recipeSearchView, recipeSearchView.viewName);
 
-        DashboardView dashboardView = DashboardUseCaseFactory.createDashboardView(recipeSearchViewModel, viewManagerModel, groceryListViewModel);
+        DashboardView dashboardView = DashboardUseCaseFactory.createDashboardView(recipeSearchViewModel, viewManagerModel, groceryListViewModel, mealPlanViewModel);
         views.add(dashboardView, dashboardView.viewName);
 
         SignUpView signUpView = SignupUseCaseFactory.create(viewManagerModel, logInViewModel, signUpViewModel, userDataAccessObject);
@@ -60,6 +65,9 @@ public class Main {
 
         LogInView logInView = LoginUseCaseFactory.create(viewManagerModel, logInViewModel, userDataAccessObject);
         views.add(logInView, logInView.viewName);
+
+        MealPlanSearchView mealPlanSearchView = MealPlanUseCaseFactory.createMealPlanView(mealPlanViewModel, dashboardViewModel, edamamAPIDataAccessObject, viewManagerModel);
+        views.add(mealPlanSearchView, mealPlanSearchView.viewName);
 
         viewManagerModel.setActiveView(signUpView.viewName);
         viewManagerModel.firePropertyChanged();

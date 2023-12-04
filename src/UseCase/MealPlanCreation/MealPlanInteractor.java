@@ -35,7 +35,6 @@ public class MealPlanInteractor implements MealPlanInputBoundary{
         }
 
         MealPlan mealPlan = generateMealPlan(startDate, endDate, filteredRecipes, mealPlanInputData);
-
         if (mealPlan != null) {
             MealPlanOutputData mealPlanOutputData = new MealPlanOutputData(mealPlan);
             mealPlanPresenter.presentMealPlan(mealPlanOutputData);
