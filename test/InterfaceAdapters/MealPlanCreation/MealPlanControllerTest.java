@@ -31,4 +31,10 @@ class MealPlanControllerTest {
                         mealPlanInputData.getCalorieLimit() == calorieLimit
         ));
     }
+
+    @Test
+    void back() {
+        controller.back();
+        verify(interactorMock).back();
+    }
 }
