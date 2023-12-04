@@ -4,12 +4,12 @@ package InterfaceAdapters.SignUp;
 import InterfaceAdapters.LogIn.LogInState;
 import InterfaceAdapters.LogIn.LogInViewModel;
 import InterfaceAdapters.ViewManagerModel;
-import UseCase.SignUp.SignUpOutputBoundry;
+import UseCase.SignUp.SignUpOutputBoundary;
 import UseCase.SignUp.SignUpOutputData;
 
 import java.util.Objects;
 
-public class SignUpPresenter implements SignUpOutputBoundry {
+public class SignUpPresenter implements SignUpOutputBoundary {
     private final SignUpViewModel signupViewModel;
     private final LogInViewModel loginViewModel;
     private ViewManagerModel viewManagerModel;
@@ -50,7 +50,7 @@ public class SignUpPresenter implements SignUpOutputBoundry {
         signupViewModel.setState(signupState);
         signupViewModel.firePropertyChanged();
         // Change the view to Dashboard
-        viewManagerModel.setActiveView("MainDashboardView"); // Assuming "MainDashboardView" is the name of the dashboard view
+        viewManagerModel.setActiveView("dashboard");
         viewManagerModel.firePropertyChanged();
 
 

@@ -134,7 +134,6 @@ public class RecipeSearchView extends JPanel implements PropertyChangeListener {
     public void propertyChange(PropertyChangeEvent evt) {
         // The property name to check against is updated based on the latest convention used in ViewModel
         if ("recipes".equals(evt.getPropertyName())) {
-            // Update the view with the new state
             updateRecipeDisplay(viewModel.getState());
         }
         if ("state".equals(evt.getPropertyName())) {
@@ -157,42 +156,37 @@ public class RecipeSearchView extends JPanel implements PropertyChangeListener {
         List<String> recipeNames = state.getRecipeNames();
         List<String> recipeDescriptions = state.getRecipeDescriptions();
         List<List<String>> recipeIngredients = state.getRecipeIngredients();
-        List<String> recipeIDs = state.getRecipeIDs();
 
         // Iterate over the names, descriptions, and ingredients to update the display
         for (int i = 0; i < recipeNames.size(); i++) {
             String name = recipeNames.get(i);
             String description = recipeDescriptions.get(i);
             List<String> ingredients = recipeIngredients.get(i);
-            String recipeID = recipeIDs.get(i);
 
-            // Create a panel for each recipe
+
             JPanel recipePanel = new JPanel();
             recipePanel.setLayout(new BoxLayout(recipePanel, BoxLayout.Y_AXIS));
             recipePanel.setBorder(BorderFactory.createLineBorder(Color.BLACK)); // Set a border for the panel
 
-            // Add the name label
             JLabel nameLabel = new JLabel(name);
             recipePanel.add(nameLabel);
 
-            // Add the description label
             JLabel descriptionLabel = new JLabel(description);
             recipePanel.add(descriptionLabel);
 
-            // Create a JList for ingredients and add it to a scroll pane
             JList<String> ingredientsList = new JList<>(ingredients.toArray(new String[0]));
             JScrollPane ingredientsScrollPane = new JScrollPane(ingredientsList);
             recipePanel.add(ingredientsScrollPane);
 
-            // Create a favorite button and add it to the panel
             JButton favoriteButton = new JButton("Favorite");
             favoriteButton.addActionListener(e -> saveController.execute(description));
             recipePanel.add(favoriteButton);
 
-            // Add the complete recipe panel to the display panel
             recipeDisplayPanel.add(recipePanel);
         }
+
         recipeDisplayPanel.revalidate();
         recipeDisplayPanel.repaint();
+
     }
 }

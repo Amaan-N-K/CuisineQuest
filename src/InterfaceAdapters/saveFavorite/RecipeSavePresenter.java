@@ -1,9 +1,9 @@
 package InterfaceAdapters.saveFavorite;
 
-import UseCase.save_favorite.RecipeSaveOutputBoundry;
+import UseCase.save_favorite.RecipeSaveOutputBoundary;
 import UseCase.save_favorite.RecipeSaveOutputData;
 
-public class RecipeSavePresenter  implements RecipeSaveOutputBoundry {
+public class RecipeSavePresenter  implements RecipeSaveOutputBoundary {
     private final RecipeSaveViewModel recipesaveViewModel;
 
     public RecipeSavePresenter(RecipeSaveViewModel recipesaveViewModel) {
@@ -16,6 +16,7 @@ public class RecipeSavePresenter  implements RecipeSaveOutputBoundry {
         state.setSaveSuccessful(true);
         state.setMessage(outputData.getMessage());
         recipesaveViewModel.setState(state);
+        recipesaveViewModel.firePropertyChanged();
 
 
     }
@@ -26,6 +27,7 @@ public class RecipeSavePresenter  implements RecipeSaveOutputBoundry {
         state.setSaveSuccessful(false);
         state.setMessage(outputData.getMessage());
         recipesaveViewModel.setState(state);
+        recipesaveViewModel.firePropertyChanged();
 
     }
 }

@@ -2,6 +2,7 @@ package data_access;
 
 import Entities.User;
 import Entities.UserFactory;
+import UseCase.LogIn.LogInDataAccessInterface;
 import UseCase.SignUp.SignUpDataAccessInterface;
 import UseCase.save_favorite.UserDataAccessInterface;
 
@@ -9,10 +10,12 @@ import java.io.*;
 import java.time.LocalDateTime;
 import java.util.*;
 
-public class UserDataAccessObject implements UserDataAccessInterface, SignUpDataAccessInterface {
+public class UserDataAccessObject implements UserDataAccessInterface, SignUpDataAccessInterface, LogInDataAccessInterface {
     final private File csv;
     private final Map<String, Integer> headers = new LinkedHashMap<>();
     private final Map<String, User> accounts = new HashMap<>();
+
+    private final UserFactory userFactory;
 
     private String activeUser = "";
 
@@ -106,6 +109,16 @@ public class UserDataAccessObject implements UserDataAccessInterface, SignUpData
     @Override
     public void setActive(User user) {
         this.activeUser = user.getUserId();
+    }
+
+    @Override
+    public User getByUsername(String username) {
+        for (User user : accounts.values()) {
+            if (user.getUsername().equals(username)) {
+                return user;
+            }
+        }
+        return null;
     }
 
 }

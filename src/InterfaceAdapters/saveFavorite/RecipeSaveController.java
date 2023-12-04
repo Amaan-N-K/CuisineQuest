@@ -1,14 +1,12 @@
 package InterfaceAdapters.saveFavorite;
 
-import Entities.Recipe;
-import Entities.User;
-import UseCase.save_favorite.RecipeSaveInputBoundry;
+import UseCase.save_favorite.RecipeSaveInputBoundary;
 import UseCase.save_favorite.RecipeSaveInputData;
 
 public class RecipeSaveController {
-    final RecipeSaveInputBoundry recipeSaveInteractor;
+    final RecipeSaveInputBoundary recipeSaveInteractor;
 
-    public RecipeSaveController(RecipeSaveInputBoundry recipeSaveInteractor){
+    public RecipeSaveController(RecipeSaveInputBoundary recipeSaveInteractor){
         this.recipeSaveInteractor = recipeSaveInteractor;
     }
 

@@ -7,14 +7,14 @@ import Entities.UserFactory;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-public class SignUpInteractor implements SignUpInputBoundry{
+public class SignUpInteractor implements SignUpInputBoundary {
 
     final private SignUpDataAccessInterface dataAccessObject;
-    final private SignUpOutputBoundry presenter;
+    final private SignUpOutputBoundary presenter;
     final private PasswordValidator passValidator;
     final private UserFactory userFactory;
 
-    public SignUpInteractor(SignUpDataAccessInterface dataAccessObject, SignUpOutputBoundry presenter,
+    public SignUpInteractor(SignUpDataAccessInterface dataAccessObject, SignUpOutputBoundary presenter,
                             PasswordValidator passValidator, UserFactory userFactory) {
         this.dataAccessObject = dataAccessObject;
         this.presenter = presenter;
