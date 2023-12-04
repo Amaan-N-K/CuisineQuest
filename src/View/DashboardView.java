@@ -28,7 +28,7 @@ public class DashboardView extends JPanel {
         add(titleLabel);
 
         // Create buttons
-        add(createButton("Grocery"));
+        add(createButton("GroceryList"));
         add(createButton("Mealplan"));
         add(createButton("RecipeSearch"));
         add(createButton("FavouriteRecipes"));

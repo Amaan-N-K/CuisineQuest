@@ -1,20 +1,20 @@
 package UseCase.grocery_list;
 
-import UseCase.grocery_list.GroceryListOutputBoundary;
-
 import java.util.List;
 
-public class GroceryListInteractor {
-    private final GroceryListDataAccessInteractor groceryListDataAccessInteractor;
+public class GroceryListInteractor implements GroceryListInputBoundary{
+    private final GroceryListDataAccessInterface groceryListDataAccessInterface;
+
     private final GroceryListOutputBoundary groceryListOutputBoundary;
 
-    public GroceryListInteractor(GroceryListDataAccessInteractor groceryListDataAccessInteractor, GroceryListOutputBoundary groceryListOutputBoundary) {
-        this.groceryListDataAccessInteractor = groceryListDataAccessInteractor;
+    public GroceryListInteractor(GroceryListDataAccessInterface groceryListDataAccessInterface, GroceryListOutputBoundary groceryListOutputBoundary) {
+        this.groceryListDataAccessInterface = groceryListDataAccessInterface;
         this.groceryListOutputBoundary = groceryListOutputBoundary;
     }
 
-    public void generateGroceryList() {
-        List<String> groceryItems = groceryListDataAccessInteractor.getGrocerylist();
+    @Override
+    public void execute(GroceryListInputData groceryListInputData) {
+        List<String> groceryItems = groceryListDataAccessInterface.getGrocerylist();
 
 
         GroceryListOutputData groceryListOutputData;

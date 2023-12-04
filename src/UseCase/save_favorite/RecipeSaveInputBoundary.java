@@ -1,5 +1,5 @@
 package UseCase.save_favorite;
 
-public interface RecipeSaveInputBoundry {
+public interface RecipeSaveInputBoundary {
     public void execute(RecipeSaveInputData recipeSaveInputData);
 }

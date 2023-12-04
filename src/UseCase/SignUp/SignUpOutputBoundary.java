@@ -1,6 +1,6 @@
 package UseCase.SignUp;
 
-public interface SignUpOutputBoundry {
+public interface SignUpOutputBoundary {
     void prepareFailView(String type, String message);
 
     void prepareSuccessView(SignUpOutputData outputData);

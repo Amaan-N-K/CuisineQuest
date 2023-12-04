@@ -2,13 +2,11 @@ package UseCase.LogIn;
 
 import Entities.User;
 
-import java.util.Optional;
-
-public class LogInInteractor implements LogInInputBoundry {
+public class LogInInteractor implements LogInInputBoundary {
     final private LogInDataAccessInterface dataAccessObject;
-    final private LogInOutputBoundry presenter;
+    final private LogInOutputBoundary presenter;
 
-    public LogInInteractor(LogInDataAccessInterface dataAccessObject, LogInOutputBoundry presenter) {
+    public LogInInteractor(LogInDataAccessInterface dataAccessObject, LogInOutputBoundary presenter) {
         this.dataAccessObject = dataAccessObject;
         this.presenter = presenter;
     }

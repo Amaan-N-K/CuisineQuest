@@ -1,6 +1,6 @@
 package UseCase.SignUp;
 
-public interface SignUpInputBoundry {
+public interface SignUpInputBoundary {
     void execute(SignUpInputData signUpInputData);
 
 }

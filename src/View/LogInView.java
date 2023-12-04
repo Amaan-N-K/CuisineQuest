@@ -75,7 +75,7 @@ public class LogInView extends JPanel implements ActionListener, PropertyChangeL
             @Override
             public void keyTyped(KeyEvent e) {
                 LogInState currentState = loginViewModel.getState();
-                currentState.setUsername(usernameInputField.getText());
+                currentState.setUsername(usernameInputField.getText() + e.getKeyChar());
                 loginViewModel.setState(currentState);
             }
 
@@ -135,12 +135,9 @@ public class LogInView extends JPanel implements ActionListener, PropertyChangeL
             JOptionPane.showMessageDialog(this, state.getPasswordError());
 
         }
-        setFields(state);
+
     }
 
-    private void setFields(LogInState state) {
-        usernameInputField.setText(state.getUsername());
-        passwordInputField.setText(state.getPassword());
-    }
+
 
 }

@@ -6,6 +6,7 @@ import java.util.List;
 
 public class GroceryListViewModel {
 
+    public final String viewName = "grocery list";
     private GroceryListState state = new GroceryListState();
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
 
