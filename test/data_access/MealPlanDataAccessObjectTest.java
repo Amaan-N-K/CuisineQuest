@@ -4,6 +4,7 @@ import Entities.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
+import org.mockito.Mockito;
 
 import java.io.File;
 import java.io.IOException;
@@ -14,9 +15,10 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class MealPlanDataAccessObjectTest {
-    @TempDir
-    Path tempDirectory;
-    MealPlanDataAccessObject dataAccessObject;
+
+    private String testDirectory;
+    private MealPlanDataAccessObject dataAccessObject;
+    private UserDataAccessObject userDataAccessObjectMock;
     private String userId;
     private String startDate;
     private String endDate;
@@ -26,7 +28,9 @@ class MealPlanDataAccessObjectTest {
 
     @BeforeEach
     void setUp() {
-        dataAccessObject = new MealPlanDataAccessObject(tempDirectory.toString());
+        testDirectory = System.getProperty("java.io.tmpdir");
+        userDataAccessObjectMock = Mockito.mock(UserDataAccessObject.class);
+        dataAccessObject = new MealPlanDataAccessObject(testDirectory, userDataAccessObjectMock);
 
         userId = "user1";
         startDate = "2023-12-04";
@@ -83,7 +87,6 @@ class MealPlanDataAccessObjectTest {
 
     @Test
     void saveMealPlan() {
-        String directoryPath = tempDirectory.toString();
         MealPlanFactory mealPlanFactory= new MealPlanFactory();
         MealPlan mealPlan = mealPlanFactory.createMealPlan(startDate, endDate, diet, calorieLimit);
         mealPlan.addMealPlanDay(mealPlanDay);
@@ -93,7 +96,7 @@ class MealPlanDataAccessObjectTest {
             throw new RuntimeException(e);
         }
 
-        File savedFile = new File(directoryPath + File.separator + userId, userId + ".json");
+        File savedFile = new File(testDirectory + File.separator + userId, userId + ".json");
         assertTrue(savedFile.exists());
     }
 
