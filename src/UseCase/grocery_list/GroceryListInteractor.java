@@ -26,4 +26,9 @@ public class GroceryListInteractor implements GroceryListInputBoundary{
         }
         groceryListOutputBoundary.present(groceryListOutputData);
     }
+
+    @Override
+    public void back() {
+        groceryListOutputBoundary.back();
+    }
 }

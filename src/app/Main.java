@@ -72,6 +72,9 @@ public class Main {
         MealPlanSearchView mealPlanSearchView = MealPlanUseCaseFactory.createMealPlanView(mealPlanViewModel, dashboardViewModel, edamamAPIDataAccessObject, viewManagerModel, mealPlanDataAccessObject, userDataAccessObject);
         views.add(mealPlanSearchView, mealPlanSearchView.viewName);
 
+        GroceryListView groceryListView = GroceryListUseCaseFactory.createGroceryListView(groceryListViewModel, dashboardViewModel, mealPlanDataAccessObject, viewManagerModel);
+        views.add(groceryListView, groceryListView.viewName);
+
         viewManagerModel.setActiveView(signUpView.viewName);
         viewManagerModel.firePropertyChanged();
 
