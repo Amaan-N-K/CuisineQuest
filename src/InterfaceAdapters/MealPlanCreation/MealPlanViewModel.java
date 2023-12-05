@@ -19,8 +19,8 @@ public class MealPlanViewModel {
         return state;
     }
 
-    public void firePropertyChanged(String propertyName) {
-        support.firePropertyChange(propertyName, null, null);
+    public void firePropertyChanged(String propertyName, Object oldValue, Object newValue) {
+        support.firePropertyChange(propertyName, oldValue, newValue);
     }
 
 
@@ -30,6 +30,6 @@ public class MealPlanViewModel {
 
     public void updateMealPlanState(MealPlanOutputData mealPlanOutputData){
         state.updateMealPlan(mealPlanOutputData);
-        firePropertyChanged("Display MealPlan");
+        firePropertyChanged("Display MealPlan", null, null);
     }
 }

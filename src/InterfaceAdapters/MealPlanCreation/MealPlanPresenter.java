@@ -27,7 +27,7 @@ public class MealPlanPresenter implements MealPlanOutputBoundary {
         MealPlanState state = mealPlanviewModel.getState();
         state.setErrorMessage(error);
         mealPlanviewModel.setState(state);
-        mealPlanviewModel.firePropertyChanged(error);
+        mealPlanviewModel.firePropertyChanged(error, null, error);
     }
 
     @Override
