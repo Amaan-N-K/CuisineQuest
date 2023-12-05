@@ -1,9 +1,5 @@
 package View;
 
-
-import Entities.MealPlan;
-import Entities.MealPlanDay;
-
 import InterfaceAdapters.MealPlanCreation.MealPlanController;
 import InterfaceAdapters.MealPlanCreation.MealPlanViewModel;
 import InterfaceAdapters.MealPlanCreation.MealPlanState;
@@ -52,6 +48,11 @@ public class MealPlanSearchView extends JPanel implements ActionListener, Proper
         JLabel titleLabel = new JLabel("Create Your Meal Plan");
         titleLabel.setFont(new Font("Arial", Font.BOLD, 20));
         titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        // Back button
+        JButton backButton = new JButton("Back");
+        backButton.addActionListener(this);
+        this.add(backButton);
 
         // Date range selection
         startDateField = new JTextField(10);
@@ -121,10 +122,13 @@ public class MealPlanSearchView extends JPanel implements ActionListener, Proper
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() instanceof JButton) {
-            JButton button = (JButton) e.getSource();
+        Object source = e.getSource();
+        if (source instanceof JButton) {
+            JButton button = (JButton) source;
             if (button.getText().equals("Generate Meal Plan")) {
                 handleGenerateButtonAction(e);
+            } else if (button.getText().equals("Back")) {
+                mealPlanController.back();
             }
         }
     }
