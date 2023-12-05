@@ -76,9 +76,9 @@ class MealPlanInteractorTest {
 
     @Test
     void createMealPlan_ValidInput(){
-        // Arrange
-        MealPlanInputData inputData = new MealPlanInputData("2023-12-04", "2023-12-07", "Vegetarian", 2000);
-        List<Recipe> mockRecipes = Arrays.asList(breakfast, lunch, dinner);
+
+        MealPlanInputData inputData = new MealPlanInputData("2023-12-07", "2023-12-07", "Vegetarian", 2000);
+        List<Recipe> mockRecipes = new ArrayList<>(Arrays.asList(breakfast, lunch, dinner));
         try {
             when(dataAccess.findRecipes("Vegetarian", 2000)).thenReturn(mockRecipes);
         } catch (IOException e) {
@@ -103,5 +103,12 @@ class MealPlanInteractorTest {
 
         verify(presenter).prepareFailView("Invalid dates.");
         verifyNoInteractions(dataAccess);
+    }
+
+    @Test
+    void testBack() {
+        interactor.back();
+
+        verify(presenter).back();
     }
 }

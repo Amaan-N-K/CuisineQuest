@@ -38,6 +38,7 @@ class MealPlanPresenterTest {
     void setUp() {
         viewManagerModelMock = mock(ViewManagerModel.class);
         mealPlanViewModelMock = mock(MealPlanViewModel.class);
+        dashBoardViewModelMock = mock(DashboardViewModel.class);
         presenter = new MealPlanPresenter(viewManagerModelMock, mealPlanViewModelMock, dashBoardViewModelMock);
         MealPlanState mockState = new MealPlanState();
         when(mealPlanViewModelMock.getState()).thenReturn(mockState);
@@ -113,12 +114,22 @@ class MealPlanPresenterTest {
     @Test
     void prepareFailView() {
         String errorMessage = "Error message";
+        MealPlanState mockState = new MealPlanState();
+        when(mealPlanViewModelMock.getState()).thenReturn(mockState);
 
         presenter.prepareFailView(errorMessage);
 
-        verify(mealPlanViewModelMock).setState(argThat(state ->
-                state.getErrorMessage().equals(errorMessage)
-        ));
+        assertEquals(errorMessage, mockState.getErrorMessage());
+
+        verify(mealPlanViewModelMock).setState(mockState);
         verify(mealPlanViewModelMock).firePropertyChanged();
+    }
+
+    @Test
+    void back() {
+        String dashboardViewName = "dashboard";
+        presenter.back();
+        verify(viewManagerModelMock).setActiveView(dashboardViewName);
+        verify(viewManagerModelMock).firePropertyChanged();
     }
 }

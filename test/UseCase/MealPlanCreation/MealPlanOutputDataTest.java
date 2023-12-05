@@ -1,38 +1,30 @@
-package data_access;
+package UseCase.MealPlanCreation;
 
-import Entities.*;
+import Entities.MealPlan;
+import Entities.MealPlanDay;
+import Entities.Nutrition;
+import Entities.Recipe;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.io.TempDir;
-import org.mockito.Mockito;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class MealPlanDataAccessObjectTest {
+class MealPlanOutputDataTest {
 
-    private String testDirectory;
-    private MealPlanDataAccessObject dataAccessObject;
-    private UserDataAccessObject userDataAccessObjectMock;
-    private String userId;
+    private String identifier;
     private String startDate;
     private String endDate;
     private String diet;
     private int calorieLimit;
+    private MealPlan mealPlan;
     private MealPlanDay mealPlanDay;
 
     @BeforeEach
     void setUp() {
-        testDirectory = System.getProperty("java.io.tmpdir");
-        userDataAccessObjectMock = Mockito.mock(UserDataAccessObject.class);
-        dataAccessObject = new MealPlanDataAccessObject(testDirectory, userDataAccessObjectMock);
-
-        userId = "user1";
+        identifier = "2023-12-04 to 2023-12-07";
         startDate = "2023-12-04";
         endDate = "2023-12-07";
         diet = "Vegetarian";
@@ -49,7 +41,7 @@ class MealPlanDataAccessObjectTest {
         healthB.add("Alcohol-Free");
         List<String> cuisineTypeB = new ArrayList<>();
         cuisineTypeB.add("n/a");
-        Nutrition nutritionB = new Nutrition(40, 11, 0, 10,0);
+        Nutrition nutritionB = new Nutrition(40, 11, 0, 10, 0);
         String descriptionB = "Stir it all together and serve over ice.";
         Recipe breakfast = new Recipe("id1", "WaterMelon Lemonade recipes", ingredientsB, mealTypeB, dietB, healthB, cuisineTypeB, nutritionB, descriptionB);
 
@@ -64,7 +56,7 @@ class MealPlanDataAccessObjectTest {
         healthL.add("Balanced");
         List<String> cuisineTypeL = new ArrayList<>();
         cuisineTypeL.add("n/a");
-        Nutrition nutritionL = new Nutrition(164, 17, 14, 14,1);
+        Nutrition nutritionL = new Nutrition(164, 17, 14, 14, 1);
         String descriptionL = "Mix it all together.";
         Recipe lunch = new Recipe("id2", "WaterMelon Star Salads", ingredientsL, mealTypeL, dietL, healthL, cuisineTypeL, nutritionL, descriptionL);
 
@@ -79,46 +71,20 @@ class MealPlanDataAccessObjectTest {
         healthD.add("Gluten-Free");
         List<String> cuisineTypeD = new ArrayList<>();
         cuisineTypeD.add("n/a");
-        Nutrition nutritionD = new Nutrition(258, 41, 6, 29,4);
+        Nutrition nutritionD = new Nutrition(258, 41, 6, 29, 4);
         String descriptionD = "Slice the watermelon and top with onion.";
         Recipe dinner = new Recipe("id3", "WaterMelon Pizza", ingredientsD, mealTypeD, dietD, healthD, cuisineTypeD, nutritionD, descriptionD);
+
         mealPlanDay = new MealPlanDay(breakfast, lunch, dinner);
+
+        mealPlan = new MealPlan(startDate, endDate, diet, calorieLimit);
     }
 
-    @Test
-    void saveMealPlan() {
-        MealPlanFactory mealPlanFactory= new MealPlanFactory();
-        MealPlan mealPlan = mealPlanFactory.createMealPlan(startDate, endDate, diet, calorieLimit);
-        mealPlan.addMealPlanDay(mealPlanDay);
-        try {
-            dataAccessObject.saveMealPlan(userId, mealPlan);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-        File savedFile = new File(testDirectory + File.separator + userId, userId + ".json");
-        assertTrue(savedFile.exists());
-    }
 
     @Test
-    void loadMealPlan() {
-        MealPlanFactory mealPlanFactory= new MealPlanFactory();
-        MealPlan mealPlan = mealPlanFactory.createMealPlan(startDate, endDate, diet, calorieLimit);
-        mealPlan.addMealPlanDay(mealPlanDay);
-        try {
-            dataAccessObject.saveMealPlan(userId, mealPlan);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+    void getMealPlan() {
+        MealPlanOutputData outputData = new MealPlanOutputData(mealPlan);
 
-        MealPlan loadedMealPlan = null;
-        try {
-            loadedMealPlan = dataAccessObject.loadMealPlan(userId);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-        assertNotNull(loadedMealPlan);
-
+        assertSame(mealPlan, outputData.getMealPlan(), "The meal plan returned should be the one that was set.");
     }
 }
