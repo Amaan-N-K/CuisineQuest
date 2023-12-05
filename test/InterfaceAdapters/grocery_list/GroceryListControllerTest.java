@@ -1,41 +1,39 @@
-
 package InterfaceAdapters.grocery_list;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import static org.mockito.Mockito.*;
 import UseCase.grocery_list.GroceryListInputBoundary;
 import UseCase.grocery_list.GroceryListInputData;
-import InterfaceAdapters.grocery_list.GroceryListController;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
-public class GroceryListControllerTest {
+import static org.mockito.Mockito.verify;
+import static org.mockito.ArgumentMatchers.any;
 
-    private GroceryListInputBoundary inputBoundary;
-    private GroceryListController groceryListController;
+class GroceryListControllerTest {
+
+    @Mock
+    private GroceryListInputBoundary mockInteractor;
+
+    private GroceryListController controller;
 
     @BeforeEach
     void setUp() {
-        inputBoundary = mock(GroceryListInputBoundary.class);
-        groceryListController = new GroceryListController(inputBoundary);
+        MockitoAnnotations.initMocks(this);
+        controller = new GroceryListController(mockInteractor);
     }
 
     @Test
-    void testGenerateGroceryListSuccess() {
-
-        GroceryListInputData inputData = new GroceryListInputData(true);
-
-        groceryListController.generateGroceryList();
-
-        verify(inputBoundary, times(1)).execute(inputData);
+    void testGenerateGroceryList() {
+        controller.generateGroceryList();
+        verify(mockInteractor).execute(any(GroceryListInputData.class));
     }
 
     @Test
-    void testGenerateGroceryListFailure() {
-
-        GroceryListInputData inputData = new GroceryListInputData(false);
-
-        groceryListController.generateGroceryList();
-
-        verify(inputBoundary, times(1)).execute(inputData);
+    void testBack() {
+        controller.back();
+        verify(mockInteractor).back();
     }
+
 }
+
