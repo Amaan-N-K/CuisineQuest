@@ -1,16 +1,20 @@
 package InterfaceAdapters.grocery_list;
 
 import InterfaceAdapters.ViewManagerModel;
+import InterfaceAdapters.dashboard.DashboardViewModel;
 import UseCase.grocery_list.GroceryListOutputBoundary;
 import UseCase.grocery_list.GroceryListOutputData;
 
 public class GroceryListPresenter implements GroceryListOutputBoundary {
     private final GroceryListViewModel groceryListViewModel;
-    private final ViewManagerModel viewManagerModel; // Assuming this exists in your architecture
+    private final ViewManagerModel viewManagerModel;
 
-    public GroceryListPresenter(ViewManagerModel viewManagerModel, GroceryListViewModel groceryListViewModel) {
+    private final DashboardViewModel dashboardViewModel;
+
+    public GroceryListPresenter(ViewManagerModel viewManagerModel, GroceryListViewModel groceryListViewModel, DashboardViewModel dashboardViewModel) {
         this.groceryListViewModel = groceryListViewModel;
         this.viewManagerModel = viewManagerModel;
+        this.dashboardViewModel = dashboardViewModel;
     }
 
     @Override
@@ -21,6 +25,12 @@ public class GroceryListPresenter implements GroceryListOutputBoundary {
         else {
             groceryListViewModel.errorMessage();
         }
+    }
+
+    @Override
+    public void back(){
+        viewManagerModel.setActiveView(dashboardViewModel.viewName);
+        viewManagerModel.firePropertyChanged();
     }
 
 

@@ -1,3 +1,6 @@
+
+package InterfaceAdapters.grocery_list;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.mockito.Mockito.*;

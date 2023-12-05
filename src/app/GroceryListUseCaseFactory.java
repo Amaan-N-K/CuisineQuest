@@ -17,7 +17,7 @@ public class GroceryListUseCaseFactory {
     private static GroceryListController createGroceryListController(GroceryListViewModel groceryListViewModel, DashboardViewModel dashboardViewModel,
                                                                      GroceryListDataAccessInterface groceryListDataAccessObject, ViewManagerModel viewManagerModel) {
 
-        GroceryListOutputBoundary groceryListPresenter = new GroceryListPresenter(viewManagerModel, groceryListViewModel);
+        GroceryListOutputBoundary groceryListPresenter = new GroceryListPresenter(viewManagerModel, groceryListViewModel, dashboardViewModel);
 
         GroceryListInputBoundary groceryListInteractor = new GroceryListInteractor(groceryListDataAccessObject, groceryListPresenter);
 

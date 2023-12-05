@@ -34,7 +34,7 @@ public class EdamamAPIDataAccessObject implements MealPlanAPIDataAccessInterface
         try (Response response = client.newCall(request).execute()) {
             if (response.isSuccessful() && response.body() != null) {
                 String responseBody = response.body().string();
-                boolean b = recipes.addAll(parseRecipes(responseBody));
+                recipes.addAll(parseRecipes(responseBody));
             } else {
                 System.err.println("API request failed with status code: " + response.code());
             }
@@ -45,13 +45,55 @@ public class EdamamAPIDataAccessObject implements MealPlanAPIDataAccessInterface
         return recipes;
     }
     private HttpUrl buildUrl(String diet, int calorieLimit) {
+        int minCalories = (int) (calorieLimit * 0.75); // 75% of calorieLimit
+        int maxCalories = (int) (calorieLimit * 1.25); // 125% of calorieLimit
+
         HttpUrl.Builder urlBuilder = HttpUrl.parse(API_URL).newBuilder()
                 .addQueryParameter("app_id", APP_ID)
                 .addQueryParameter("app_key", APP_KEY)
-                .addQueryParameter("q", diet)
-                .addQueryParameter("calories", calorieLimit + "+");
+                .addQueryParameter("q", "")
+                .addQueryParameter("calories", minCalories + "-" + maxCalories);
 
-        // Add more parameters as needed for your use case
+
+        if (diet.contains("Balanced")){
+            urlBuilder.addQueryParameter("diet", "balanced");
+        }
+        if (diet.contains("High-Fiber")){
+            urlBuilder.addQueryParameter("diet", "high-fiber");
+        }
+        if (diet.contains("High-Protein")){
+            urlBuilder.addQueryParameter("diet", "high-protein");
+        }
+        if (diet.contains("Low-Carb")){
+            urlBuilder.addQueryParameter("diet", "low-carb");
+        }
+        if (diet.contains("Low-Fat")){
+            urlBuilder.addQueryParameter("diet", "low-fat");
+        }
+        if (diet.contains("Low-Sodium")){
+            urlBuilder.addQueryParameter("diet", "low-sodium");
+        }
+        if (diet.contains("Alcohol-Free")){
+            urlBuilder.addQueryParameter("health", "alcohol-free");
+        }
+        if (diet.contains("Dairy-Free")){
+            urlBuilder.addQueryParameter("health", "dairy-free");
+        }
+        if (diet.contains("Gluten-Free")){
+            urlBuilder.addQueryParameter("health", "gluten-free");
+        }
+        if (diet.contains("Kosher")){
+            urlBuilder.addQueryParameter("health", "kosher");
+        }
+        if (diet.contains("Pork-Free")){
+            urlBuilder.addQueryParameter("health", "pork_free");
+        }
+        if (diet.contains("Vegan")){
+            urlBuilder.addQueryParameter("health", "vegan");
+        }
+        if (diet.contains("Vegetarian")){
+            urlBuilder.addQueryParameter("health", "vegetarian");
+        }
 
         return urlBuilder.build();
     }
