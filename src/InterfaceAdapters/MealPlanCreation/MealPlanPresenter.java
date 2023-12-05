@@ -18,8 +18,8 @@ public class MealPlanPresenter implements MealPlanOutputBoundary {
 
     @Override
     public void presentMealPlan(MealPlanOutputData outputData){
-        mealPlanviewModel.updateMealPlanState(outputData.getMealPlan());
-        mealPlanviewModel.firePropertyChanged("Display MealPlan");
+
+        mealPlanviewModel.updateMealPlanState(outputData);
     }
 
     @Override

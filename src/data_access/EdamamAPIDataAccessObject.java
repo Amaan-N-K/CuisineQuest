@@ -45,11 +45,15 @@ public class EdamamAPIDataAccessObject implements MealPlanAPIDataAccessInterface
         return recipes;
     }
     private HttpUrl buildUrl(String diet, int calorieLimit) {
+        int minCalories = (int) (calorieLimit * 0.75); // 75% of calorieLimit
+        int maxCalories = (int) (calorieLimit * 1.25); // 125% of calorieLimit
+
         HttpUrl.Builder urlBuilder = HttpUrl.parse(API_URL).newBuilder()
                 .addQueryParameter("app_id", APP_ID)
                 .addQueryParameter("app_key", APP_KEY)
-                .addQueryParameter("q","")
-                .addQueryParameter("calories", calorieLimit + "+");
+                .addQueryParameter("q", "")
+                .addQueryParameter("calories", minCalories + "-" + maxCalories);
+
 
         if (diet.contains("Balanced")){
             urlBuilder.addQueryParameter("diet", "balanced");

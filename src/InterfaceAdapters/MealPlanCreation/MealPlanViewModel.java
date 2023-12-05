@@ -1,6 +1,6 @@
 package InterfaceAdapters.MealPlanCreation;
 
-import Entities.MealPlan;
+import UseCase.MealPlanCreation.MealPlanOutputData;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
@@ -28,8 +28,8 @@ public class MealPlanViewModel {
         support.addPropertyChangeListener(listener);
     }
 
-    public void updateMealPlanState(MealPlan mealPlan){
-        state.updateMealPlan(mealPlan);
+    public void updateMealPlanState(MealPlanOutputData mealPlanOutputData){
+        state.updateMealPlan(mealPlanOutputData);
         firePropertyChanged("Display MealPlan");
     }
 }

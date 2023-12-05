@@ -3,48 +3,48 @@ package data_access;
 import Entities.MealPlan;
 import Entities.MealPlanDay;
 import UseCase.MealPlanCreation.MealPlanDataAccessInterface;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 import UseCase.grocery_list.GroceryListDataAccessInterface;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
-public class MealPlanDataAccessObject implements MealPlanDataAccessInterface, GroceryListDataAccessInterface {
-    private final UserDataAccessObject userDataAccessObject;
-    private final ObjectMapper objectMapper;
-    private final String directoryPath;
+import java.io.File;
+import java.io.IOException;
+import java.util.*;
 
-    public MealPlanDataAccessObject(String directoryPath, UserDataAccessObject userDataAccessObject) {
-        this.directoryPath = directoryPath;
+public class MealPlanDataAccessObject implements MealPlanDataAccessInterface, GroceryListDataAccessInterface {
+    private final ObjectMapper objectMapper;
+    private final String filePath;
+
+    private final UserDataAccessObject userDataAccessObject;
+
+    public MealPlanDataAccessObject(String filePath, UserDataAccessObject userDataAccessObject) {
+        this.filePath = filePath;
         this.objectMapper = new ObjectMapper();
         objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
         this.userDataAccessObject = userDataAccessObject;
     }
 
-    public void saveMealPlan(String userId, MealPlan mealPlan) throws IOException {
-        String userDirectoryPath = directoryPath + File.separator + userId;
-        File userDirectory = new File(userDirectoryPath);
-        if (!userDirectory.exists()) {
-            userDirectory.mkdirs();
+    private Map<String, MealPlan> loadAllMealPlans() throws IOException {
+        File file = new File(filePath);
+        if (file.exists()) {
+            return objectMapper.readValue(file, new TypeReference<Map<String, MealPlan>>() {});
+        } else {
+            return new HashMap<>();
         }
+    }
 
-        // Save using userId as the filename, assuming each user has only one meal plan
-        File file = new File(userDirectory, userId + ".json");
-        objectMapper.writeValue(file, mealPlan);
+    public void saveMealPlan(String userId, MealPlan mealPlan) throws IOException {
+        Map<String, MealPlan> mealPlans = loadAllMealPlans();
+        mealPlans.put(userId, mealPlan);
+
+        File file = new File(filePath);
+        objectMapper.writeValue(file, mealPlans);
     }
 
     public MealPlan loadMealPlan(String userId) throws IOException {
-        File file = new File(directoryPath + File.separator + userId, userId + ".json");
-        if (!file.exists()) {
-            return null;
-        }
-        return objectMapper.readValue(file, MealPlan.class);
+        Map<String, MealPlan> mealPlans = loadAllMealPlans();
+        return mealPlans.getOrDefault(userId, null);
     }
 
     @Override

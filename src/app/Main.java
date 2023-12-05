@@ -12,6 +12,7 @@ import InterfaceAdapters.saveFavorite.RecipeSaveViewModel;
 import UseCase.MealPlanCreation.MealPlanAPIDataAccessInterface;
 import View.*;
 import data_access.EdamamAPIDataAccessObject;
+import data_access.MealPlanDataAccessObject;
 import data_access.RecipeSearchAPIDataAccessObject;
 import data_access.UserDataAccessObject;
 
@@ -46,8 +47,10 @@ public class Main {
 
 
         String csvPath = "src" + File.separator + "users.csv";
+        String jsonPath = "src" + File.separator + "mealPlans.json";
         UserFactory userFactory = new UserFactory();
         UserDataAccessObject userDataAccessObject = new UserDataAccessObject(csvPath, userFactory);
+        MealPlanDataAccessObject mealPlanDataAccessObject = new MealPlanDataAccessObject(jsonPath, userDataAccessObject);
 
 
         RecipeSearchView recipeSearchView = RecipeSearchUseCaseFactory.createRecipeSearchView(
@@ -66,11 +69,10 @@ public class Main {
         LogInView logInView = LoginUseCaseFactory.create(viewManagerModel, logInViewModel, userDataAccessObject);
         views.add(logInView, logInView.viewName);
 
-        MealPlanSearchView mealPlanSearchView = MealPlanUseCaseFactory.createMealPlanView(mealPlanViewModel, dashboardViewModel, edamamAPIDataAccessObject, viewManagerModel);
+        MealPlanSearchView mealPlanSearchView = MealPlanUseCaseFactory.createMealPlanView(mealPlanViewModel, dashboardViewModel, edamamAPIDataAccessObject, viewManagerModel, mealPlanDataAccessObject, userDataAccessObject);
         views.add(mealPlanSearchView, mealPlanSearchView.viewName);
 
-        viewManagerModel.setActiveView(dashboardView.viewName);
-        //viewManagerModel.setActiveView(signUpView.viewName);
+        viewManagerModel.setActiveView(signUpView.viewName);
         viewManagerModel.firePropertyChanged();
 
         application.pack();
