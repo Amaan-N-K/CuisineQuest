@@ -1,21 +1,34 @@
 package UseCase.MealPlanCreation;
+import Entities.MealPlan;
+import Entities.MealPlanDay;
+import Entities.Nutrition;
+import Entities.Recipe;
+import data_access.UserDataAccessObject;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+
+import java.io.IOException;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 import static org.mockito.Mockito.*;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-import Entities.Nutrition;
-import Entities.Recipe;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-
 class MealPlanInteractorTest {
-    private MealPlanAPIDataAccessInterface dataAccess;
-    private MealPlanOutputBoundary presenter;
+
+    @Mock
+    private MealPlanAPIDataAccessInterface mockApiAccess;
+    @Mock
+    private MealPlanOutputBoundary mockPresenter;
+    @Mock
+    private MealPlanDataAccessInterface mockDataAccess;
+    @Mock
+    private UserDataAccessObject mockUserDataAccess;
+
     private MealPlanInteractor interactor;
     private Recipe breakfast;
     private Recipe lunch;
@@ -23,19 +36,17 @@ class MealPlanInteractorTest {
 
     @BeforeEach
     void setUp() {
-        dataAccess = mock(MealPlanAPIDataAccessInterface.class);
-        presenter = mock(MealPlanOutputBoundary.class);
-        interactor = new MealPlanInteractor(dataAccess, presenter);
-
+        MockitoAnnotations.initMocks(this);
+        interactor = new MealPlanInteractor(mockApiAccess, mockPresenter, mockDataAccess, mockUserDataAccess);
         List<String> ingredientsB = new ArrayList<>();
         ingredientsB.add("watermelon");
         ingredientsB.add("lemon juice");
         List<String> mealTypeB = new ArrayList<>();
         mealTypeB.add("breakfast");
         List<String> dietB = new ArrayList<>();
-        dietB.add("Vegetarian");
+        dietB.add("Low-Fat");
         List<String> healthB = new ArrayList<>();
-        healthB.add("Alcohol-Free");
+        healthB.add("Vegetarian");
         List<String> cuisineTypeB = new ArrayList<>();
         cuisineTypeB.add("n/a");
         Nutrition nutritionB = new Nutrition(40, 11, 0, 10,0);
@@ -71,44 +82,34 @@ class MealPlanInteractorTest {
         Nutrition nutritionD = new Nutrition(258, 41, 6, 29,4);
         String descriptionD = "Slice the watermelon and top with onion.";
         dinner = new Recipe("id3", "WaterMelon Pizza", ingredientsD, mealTypeD, dietD, healthD, cuisineTypeD, nutritionD, descriptionD);
-
     }
 
     @Test
-    void createMealPlan_ValidInput(){
-
-        MealPlanInputData inputData = new MealPlanInputData("2023-12-07", "2023-12-07", "Vegetarian", 2000);
-        List<Recipe> mockRecipes = new ArrayList<>(Arrays.asList(breakfast, lunch, dinner));
-        try {
-            when(dataAccess.findRecipes("Vegetarian", 2000)).thenReturn(mockRecipes);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+    void createMealPlan_ValidDateRange_Success() throws IOException {
+        MealPlanInputData inputData = new MealPlanInputData("2023-06-01", "2023-06-01", "Vegetarian", 2000);
+        List<Recipe> mockRecipes = Arrays.asList(breakfast, lunch, dinner);
+        when(mockApiAccess.findRecipes(anyString(), anyInt())).thenReturn(mockRecipes);
+        when(mockUserDataAccess.getActive()).thenReturn("user123");
 
         interactor.createMealPlan(inputData);
 
-        try {
-            verify(dataAccess).findRecipes("Vegetarian", 2000);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        verify(presenter).presentMealPlan(any(MealPlanOutputData.class));
+        verify(mockApiAccess).findRecipes("Vegetarian", 2000);
+        verify(mockDataAccess).saveMealPlan(eq("user123"), any(MealPlan.class));
+        verify(mockPresenter).presentMealPlan(any(MealPlanOutputData.class));
     }
 
     @Test
-    void createMealPlan_InvalidDateRange() {
-        MealPlanInputData inputData = new MealPlanInputData("2023-12-07", "2023-12-04", "Vegetarian", 2000);
+    void createMealPlan_InvalidDateRange_Failure() {
+        MealPlanInputData inputData = new MealPlanInputData("2023-06-07", "2023-06-01", "Vegetarian", 2000);
 
         interactor.createMealPlan(inputData);
 
-        verify(presenter).prepareFailView("Invalid dates.");
-        verifyNoInteractions(dataAccess);
+        verify(mockPresenter).prepareFailView("Invalid dates.");
+        verifyNoMoreInteractions(mockApiAccess, mockDataAccess, mockPresenter);
     }
-
     @Test
-    void testBack() {
+    void back() {
         interactor.back();
-
-        verify(presenter).back();
+        verify(mockPresenter).back();
     }
 }
