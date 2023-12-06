@@ -1,4 +1,4 @@
-package InterfaceAdapters.recipesearch;
+package data_access;
 
 import Entities.Recipe;
 import UseCase.recipesearch.RecipeSearchInputData;
