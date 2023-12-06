@@ -1,9 +1,9 @@
 package data_access;
 
-import Entities.MealPlan;
-import Entities.MealPlanDay;
-import Entities.Nutrition;
-import Entities.Recipe;
+import entities.MealPlan;
+import entities.MealPlanDay;
+import entities.Nutrition;
+import entities.Recipe;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;

@@ -1,11 +1,11 @@
 package data_access;
 
-import Entities.User;
-import Entities.UserFactory;
-import UseCase.LogIn.LogInDataAccessInterface;
-import UseCase.SignUp.SignUpDataAccessInterface;
-import UseCase.ViewFavorites.ViewFavoritesDataAccessInterface;
-import UseCase.save_favorite.UserDataAccessInterface;
+import entities.User;
+import entities.UserFactory;
+import use_case.login.LogInDataAccessInterface;
+import use_case.signup.SignUpDataAccessInterface;
+import use_case.view_favorites.ViewFavoritesDataAccessInterface;
+import use_case.save_favorite.UserDataAccessInterface;
 
 import java.io.*;
 import java.time.LocalDateTime;

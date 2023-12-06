@@ -1,21 +1,21 @@
 package app;
 
-import InterfaceAdapters.ViewManagerModel;
-import InterfaceAdapters.recipesearch.RecipeSearchController;
-import InterfaceAdapters.recipesearch.RecipeSearchPresenter;
-import InterfaceAdapters.recipesearch.RecipeSearchViewModel;
-import InterfaceAdapters.dashboard.DashboardViewModel;
-import InterfaceAdapters.saveFavorite.RecipeSaveController;
-import InterfaceAdapters.saveFavorite.RecipeSavePresenter;
-import InterfaceAdapters.saveFavorite.RecipeSaveViewModel;
-import UseCase.recipesearch.RecipeDataAccessInterface;
-import UseCase.recipesearch.RecipeSearchInputBoundary;
-import UseCase.recipesearch.RecipeSearchInteractor;
-import UseCase.recipesearch.RecipeSearchOutputBoundary;
-import UseCase.save_favorite.RecipeSaveInputBoundary;
-import UseCase.save_favorite.RecipeSaveInteractor;
-import UseCase.save_favorite.RecipeSaveOutputBoundary;
-import View.RecipeSearchView;
+import interface_adapter.ViewManagerModel;
+import interface_adapter.recipe_search.RecipeSearchController;
+import interface_adapter.recipe_search.RecipeSearchPresenter;
+import interface_adapter.recipe_search.RecipeSearchViewModel;
+import interface_adapter.dashboard.DashboardViewModel;
+import interface_adapter.save_favorite.RecipeSaveController;
+import interface_adapter.save_favorite.RecipeSavePresenter;
+import interface_adapter.save_favorite.RecipeSaveViewModel;
+import use_case.recipe_search.RecipeDataAccessInterface;
+import use_case.recipe_search.RecipeSearchInputBoundary;
+import use_case.recipe_search.RecipeSearchInteractor;
+import use_case.recipe_search.RecipeSearchOutputBoundary;
+import use_case.save_favorite.RecipeSaveInputBoundary;
+import use_case.save_favorite.RecipeSaveInteractor;
+import use_case.save_favorite.RecipeSaveOutputBoundary;
+import view.RecipeSearchView;
 import data_access.UserDataAccessObject;
 
 public class RecipeSearchUseCaseFactory {

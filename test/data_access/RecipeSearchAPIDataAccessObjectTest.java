@@ -1,7 +1,7 @@
 package data_access;
 
-import Entities.Recipe;
-import UseCase.recipesearch.RecipeSearchInputData;
+import entities.Recipe;
+import use_case.recipe_search.RecipeSearchInputData;
 import okhttp3.*;
 import org.junit.jupiter.api.Test;
 import static org.mockito.Mockito.*;

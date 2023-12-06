@@ -1,9 +1,9 @@
 package data_access;
 
-import Entities.RecipeFactory;
-import UseCase.recipesearch.RecipeDataAccessInterface;
-import UseCase.recipesearch.RecipeSearchInputData;
-import Entities.Recipe;
+import entities.RecipeFactory;
+import use_case.recipe_search.RecipeDataAccessInterface;
+import use_case.recipe_search.RecipeSearchInputData;
+import entities.Recipe;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;

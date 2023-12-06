@@ -1,15 +1,15 @@
 package app;
 
-import Entities.UserFactory;
-import InterfaceAdapters.LogIn.LogInController;
-import InterfaceAdapters.LogIn.LogInPresenter;
-import InterfaceAdapters.LogIn.LogInViewModel;
-import InterfaceAdapters.ViewManagerModel;
-import UseCase.LogIn.LogInDataAccessInterface;
-import UseCase.LogIn.LogInInputBoundary;
-import UseCase.LogIn.LogInInteractor;
-import UseCase.LogIn.LogInOutputBoundary;
-import View.LogInView;
+import entities.UserFactory;
+import interface_adapter.login.LogInController;
+import interface_adapter.login.LogInPresenter;
+import interface_adapter.login.LogInViewModel;
+import interface_adapter.ViewManagerModel;
+import use_case.login.LogInDataAccessInterface;
+import use_case.login.LogInInputBoundary;
+import use_case.login.LogInInteractor;
+import use_case.login.LogInOutputBoundary;
+import view.LogInView;
 
 import javax.swing.*;
 import java.io.IOException;

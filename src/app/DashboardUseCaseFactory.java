@@ -1,23 +1,17 @@
 package app;
 
-import InterfaceAdapters.MealPlanCreation.MealPlanViewModel;
-import InterfaceAdapters.ViewFavorites.ViewFavoritesController;
-import InterfaceAdapters.ViewFavorites.ViewFavoritesPresenter;
-import InterfaceAdapters.ViewFavorites.ViewFavoritesViewModel;
-import InterfaceAdapters.dashboard.DashboardController;
-import InterfaceAdapters.dashboard.DashboardPresenter;
+import interface_adapter.meal_plan_creation.MealPlanViewModel;
+import interface_adapter.view_favorites.ViewFavoritesController;
+import interface_adapter.dashboard.DashboardController;
+import interface_adapter.dashboard.DashboardPresenter;
 //import InterfaceAdapters.dashboard.DashboardViewModel;
-import InterfaceAdapters.ViewManagerModel;
-import InterfaceAdapters.grocery_list.GroceryListViewModel;
-import InterfaceAdapters.recipesearch.RecipeSearchViewModel;
-import UseCase.ViewFavorites.ViewFavoritesDataAccessInterface;
-import UseCase.ViewFavorites.ViewFavoritesInputBoundary;
-import UseCase.ViewFavorites.ViewFavoritesInteractor;
-import UseCase.ViewFavorites.ViewFavoritesOutputBoundary;
-import UseCase.dashboard.DashboardInputBoundary;
-import UseCase.dashboard.DashboardInteractor;
-import UseCase.dashboard.DashboardOutputBoundary;
-import View.DashboardView;
+import interface_adapter.ViewManagerModel;
+import interface_adapter.grocery_list.GroceryListViewModel;
+import interface_adapter.recipe_search.RecipeSearchViewModel;
+import use_case.dashboard.DashboardInputBoundary;
+import use_case.dashboard.DashboardInteractor;
+import use_case.dashboard.DashboardOutputBoundary;
+import view.DashboardView;
 
 public class DashboardUseCaseFactory {
     private DashboardUseCaseFactory() {
