@@ -56,14 +56,14 @@ public class MealPlanSearchView extends JPanel implements ActionListener, Proper
 
         // Date range selection
         startDateField = new JTextField(10);
-        JLabel startDateLabel = new JLabel("Start Date:");
+        JLabel startDateLabel = new JLabel("Start Date (YYYY-MM-DD):");
         JPanel startDatePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         startDatePanel.add(startDateLabel);
         startDatePanel.add(startDateField);
         this.add(startDatePanel);
 
         endDateField = new JTextField(10);
-        JLabel endDateLabel = new JLabel("End Date:");
+        JLabel endDateLabel = new JLabel("End Date (YYYY-MM-DD):");
         JPanel endDatePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         endDatePanel.add(endDateLabel);
         endDatePanel.add(endDateField);
