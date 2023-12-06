@@ -4,6 +4,7 @@ import Entities.UserFactory;
 import InterfaceAdapters.LogIn.LogInViewModel;
 import InterfaceAdapters.MealPlanCreation.MealPlanViewModel;
 import InterfaceAdapters.SignUp.SignUpViewModel;
+import InterfaceAdapters.ViewFavorites.ViewFavoritesController;
 import InterfaceAdapters.ViewFavorites.ViewFavoritesViewModel;
 import InterfaceAdapters.dashboard.DashboardViewModel;
 import InterfaceAdapters.ViewManagerModel;
@@ -61,8 +62,9 @@ public class Main {
                 recipeSaveViewModel, userDataAccessObject
         );
         views.add(recipeSearchView, recipeSearchView.viewName);
+        ViewFavoritesController viewFavoritesController = ViewFavoritesUseCaseFactory.createViewFavoritesController(viewManagerModel, viewFavoritesViewModel, userDataAccessObject);
 
-        DashboardView dashboardView = DashboardUseCaseFactory.createDashboardView(recipeSearchViewModel, viewManagerModel, groceryListViewModel, mealPlanViewModel);
+        DashboardView dashboardView = DashboardUseCaseFactory.createDashboardView(recipeSearchViewModel, viewManagerModel, groceryListViewModel, mealPlanViewModel, viewFavoritesController);
         views.add(dashboardView, dashboardView.viewName);
 
         SignUpView signUpView = SignupUseCaseFactory.create(viewManagerModel, logInViewModel, signUpViewModel, userDataAccessObject);

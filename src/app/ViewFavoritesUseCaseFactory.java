@@ -14,7 +14,6 @@ import javax.swing.*;
 
 public class ViewFavoritesUseCaseFactory {
     private ViewFavoritesUseCaseFactory() {}
-
     public static ViewFavoritesController createViewFavoritesController(
             ViewManagerModel viewManagerModel,
             ViewFavoritesViewModel viewFavoritesViewModel,
