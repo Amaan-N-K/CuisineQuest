@@ -1,15 +1,15 @@
 package app;
 
-import InterfaceAdapters.grocery_list.GroceryListController;
-import InterfaceAdapters.grocery_list.GroceryListPresenter;
-import InterfaceAdapters.grocery_list.GroceryListViewModel;
-import InterfaceAdapters.ViewManagerModel;
-import InterfaceAdapters.dashboard.DashboardViewModel;
-import UseCase.grocery_list.GroceryListDataAccessInterface;
-import UseCase.grocery_list.GroceryListInputBoundary;
-import UseCase.grocery_list.GroceryListInteractor;
-import UseCase.grocery_list.GroceryListOutputBoundary;
-import View.GroceryListView;
+import interface_adapter.grocery_list.GroceryListController;
+import interface_adapter.grocery_list.GroceryListPresenter;
+import interface_adapter.grocery_list.GroceryListViewModel;
+import interface_adapter.ViewManagerModel;
+import interface_adapter.dashboard.DashboardViewModel;
+import use_case.grocery_list.GroceryListDataAccessInterface;
+import use_case.grocery_list.GroceryListInputBoundary;
+import use_case.grocery_list.GroceryListInteractor;
+import use_case.grocery_list.GroceryListOutputBoundary;
+import view.GroceryListView;
 
 public class GroceryListUseCaseFactory {
     private GroceryListUseCaseFactory() {}

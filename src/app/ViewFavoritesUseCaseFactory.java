@@ -1,14 +1,14 @@
 package app;
 
-import InterfaceAdapters.ViewFavorites.ViewFavoritesController;
-import InterfaceAdapters.ViewFavorites.ViewFavoritesPresenter;
-import InterfaceAdapters.ViewFavorites.ViewFavoritesViewModel;
-import InterfaceAdapters.ViewManagerModel;
-import UseCase.ViewFavorites.ViewFavoritesDataAccessInterface;
-import UseCase.ViewFavorites.ViewFavoritesInputBoundary;
-import UseCase.ViewFavorites.ViewFavoritesInteractor;
-import UseCase.ViewFavorites.ViewFavoritesOutputBoundary;
-import View.ViewFavoritesView;
+import interface_adapter.view_favorites.ViewFavoritesController;
+import interface_adapter.view_favorites.ViewFavoritesPresenter;
+import interface_adapter.view_favorites.ViewFavoritesViewModel;
+import interface_adapter.ViewManagerModel;
+import use_case.view_favorites.ViewFavoritesDataAccessInterface;
+import use_case.view_favorites.ViewFavoritesInputBoundary;
+import use_case.view_favorites.ViewFavoritesInteractor;
+import use_case.view_favorites.ViewFavoritesOutputBoundary;
+import view.ViewFavoritesView;
 
 import javax.swing.*;
 

@@ -1,7 +1,7 @@
 package data_access;
 
-import Entities.User;
-import Entities.UserFactory;
+import entities.User;
+import entities.UserFactory;
 import org.junit.jupiter.api.*;
 import org.mockito.Mock;
 
@@ -15,7 +15,6 @@ import java.nio.file.*;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
-import java.util.ArrayList;
 
 class UserDataAccessObjectTest {
 

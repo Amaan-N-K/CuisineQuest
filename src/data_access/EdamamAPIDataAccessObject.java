@@ -1,8 +1,8 @@
 package data_access;
 
-import Entities.Recipe;
-import Entities.RecipeFactory;
-import UseCase.MealPlanCreation.MealPlanAPIDataAccessInterface;
+import entities.Recipe;
+import entities.RecipeFactory;
+import use_case.meal_plan_creation.MealPlanAPIDataAccessInterface;
 
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;

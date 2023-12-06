@@ -1,18 +1,17 @@
 package app;
 
-import Entities.PasswordValidator;
-import Entities.UserFactory;
-import InterfaceAdapters.LogIn.LogInViewModel;
-import InterfaceAdapters.SignUp.SignUpController;
-import InterfaceAdapters.SignUp.SignUpPresenter;
-import InterfaceAdapters.SignUp.SignUpViewModel;
-import InterfaceAdapters.ViewManagerModel;
-import InterfaceAdapters.saveFavorite.RecipeSaveViewModel;
-import UseCase.SignUp.SignUpDataAccessInterface;
-import UseCase.SignUp.SignUpInputBoundary;
-import UseCase.SignUp.SignUpInteractor;
-import UseCase.SignUp.SignUpOutputBoundary;
-import View.SignUpView;
+import entities.PasswordValidator;
+import entities.UserFactory;
+import interface_adapter.login.LogInViewModel;
+import interface_adapter.sign_up.SignUpController;
+import interface_adapter.sign_up.SignUpPresenter;
+import interface_adapter.sign_up.SignUpViewModel;
+import interface_adapter.ViewManagerModel;
+import use_case.signup.SignUpDataAccessInterface;
+import use_case.signup.SignUpInputBoundary;
+import use_case.signup.SignUpInteractor;
+import use_case.signup.SignUpOutputBoundary;
+import view.SignUpView;
 
 import javax.swing.*;
 import java.io.IOException;
