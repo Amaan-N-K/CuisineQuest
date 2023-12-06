@@ -2,6 +2,7 @@ package InterfaceAdapters.recipesearch;
 
 import Entities.Nutrition;
 import Entities.Recipe;
+import UseCase.recipesearch.RecipeSearchDTO;
 import org.junit.jupiter.api.*;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -13,7 +14,6 @@ import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Arrays;
-import UseCase.recipesearch.RecipeSearchDTO;
 
 class RecipeSearchViewModelTest {
 

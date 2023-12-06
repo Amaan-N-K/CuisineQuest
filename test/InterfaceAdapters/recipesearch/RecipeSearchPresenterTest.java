@@ -1,5 +1,7 @@
 package InterfaceAdapters.recipesearch;
 
+import UseCase.recipesearch.RecipeSearchDTO;
+import UseCase.recipesearch.RecipeSearchOutputData;
 import org.junit.jupiter.api.*;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -7,9 +9,8 @@ import static org.mockito.Mockito.*;
 
 import InterfaceAdapters.dashboard.DashboardViewModel;
 import InterfaceAdapters.ViewManagerModel;
-import UseCase.recipesearch.RecipeSearchOutputData;
+
 import java.util.List;
-import UseCase.recipesearch.RecipeSearchDTO;
 
 class RecipeSearchPresenterTest {
 

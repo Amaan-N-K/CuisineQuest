@@ -1,5 +1,6 @@
 package InterfaceAdapters.recipesearch;
 
+import UseCase.recipesearch.RecipeSearchInputBoundary;
 import UseCase.recipesearch.RecipeSearchInputData;
 import org.junit.jupiter.api.*;
 import org.mockito.ArgumentCaptor;
@@ -8,8 +9,6 @@ import org.mockito.MockitoAnnotations;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
-
-import UseCase.recipesearch.RecipeSearchInputBoundary;
 
 import java.util.Arrays;
 import java.util.List;
