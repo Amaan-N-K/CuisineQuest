@@ -4,13 +4,15 @@ import Entities.User;
 import Entities.UserFactory;
 import UseCase.LogIn.LogInDataAccessInterface;
 import UseCase.SignUp.SignUpDataAccessInterface;
+import UseCase.ViewFavorites.ViewFavoritesDataAccessInterface;
 import UseCase.save_favorite.UserDataAccessInterface;
 
 import java.io.*;
 import java.time.LocalDateTime;
 import java.util.*;
 
-public class UserDataAccessObject implements UserDataAccessInterface, SignUpDataAccessInterface, LogInDataAccessInterface {
+public class UserDataAccessObject implements UserDataAccessInterface, SignUpDataAccessInterface,
+        LogInDataAccessInterface, ViewFavoritesDataAccessInterface {
     final private File csv;
     private final Map<String, Integer> headers = new LinkedHashMap<>();
     private final Map<String, User> accounts = new HashMap<>();

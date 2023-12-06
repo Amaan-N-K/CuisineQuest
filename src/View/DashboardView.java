@@ -1,5 +1,6 @@
 package View;
 
+import InterfaceAdapters.ViewFavorites.ViewFavoritesController;
 import InterfaceAdapters.dashboard.DashboardController;
 //import InterfaceAdapters.dashboard.DashboardViewModel;
 
@@ -12,10 +13,12 @@ public class DashboardView extends JPanel {
 
     public final String viewName = "dashboard";
     private DashboardController dashboardController;
+    private ViewFavoritesController viewFavoritesController;
 //    private DashboardViewModel dashboardViewModel;
 
-    public DashboardView(DashboardController dashboardController) {
+    public DashboardView(DashboardController dashboardController, ViewFavoritesController viewFavoritesController) {
         this.dashboardController = dashboardController;
+        this.viewFavoritesController = viewFavoritesController;
 //        this.dashboardViewModel = dashboardViewModel;
         initializeUI();
     }
@@ -31,7 +34,8 @@ public class DashboardView extends JPanel {
         add(createButton("GroceryList"));
         add(createButton("MealPlan"));
         add(createButton("RecipeSearch"));
-        add(createButton("FavouriteRecipes"));
+        add(createFavoritesButton());
+
     }
 
     private JButton createButton(String name) {
@@ -43,6 +47,12 @@ public class DashboardView extends JPanel {
                 dashboardController.execute(name);
             }
         });
+        return button;
+    }
+    private JButton createFavoritesButton() {
+        JButton button = new JButton("FavouriteRecipes");
+        button.setAlignmentX(Component.CENTER_ALIGNMENT);
+        button.addActionListener(e -> viewFavoritesController.execute());
         return button;
     }
 }

@@ -1,12 +1,19 @@
 package app;
 
 import InterfaceAdapters.MealPlanCreation.MealPlanViewModel;
+import InterfaceAdapters.ViewFavorites.ViewFavoritesController;
+import InterfaceAdapters.ViewFavorites.ViewFavoritesPresenter;
+import InterfaceAdapters.ViewFavorites.ViewFavoritesViewModel;
 import InterfaceAdapters.dashboard.DashboardController;
 import InterfaceAdapters.dashboard.DashboardPresenter;
 //import InterfaceAdapters.dashboard.DashboardViewModel;
 import InterfaceAdapters.ViewManagerModel;
 import InterfaceAdapters.grocery_list.GroceryListViewModel;
 import InterfaceAdapters.recipesearch.RecipeSearchViewModel;
+import UseCase.ViewFavorites.ViewFavoritesDataAccessInterface;
+import UseCase.ViewFavorites.ViewFavoritesInputBoundary;
+import UseCase.ViewFavorites.ViewFavoritesInteractor;
+import UseCase.ViewFavorites.ViewFavoritesOutputBoundary;
 import UseCase.dashboard.DashboardInputBoundary;
 import UseCase.dashboard.DashboardInteractor;
 import UseCase.dashboard.DashboardOutputBoundary;
@@ -33,9 +40,10 @@ public class DashboardUseCaseFactory {
     public static DashboardView createDashboardView(RecipeSearchViewModel recipeSearchViewModel,
                                                     ViewManagerModel viewManagerModel,
                                                     GroceryListViewModel groceryListViewModel,
-                                                    MealPlanViewModel mealPlanViewModel) {
+                                                    MealPlanViewModel mealPlanViewModel,
+                                                    ViewFavoritesController viewFavoritesController) {
         DashboardController dashboardController = createDashboardController(recipeSearchViewModel, viewManagerModel, groceryListViewModel, mealPlanViewModel);
 
-        return new DashboardView(dashboardController);
+        return new DashboardView(dashboardController, viewFavoritesController);
     }
 }

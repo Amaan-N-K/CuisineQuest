@@ -4,6 +4,8 @@ import Entities.UserFactory;
 import InterfaceAdapters.LogIn.LogInViewModel;
 import InterfaceAdapters.MealPlanCreation.MealPlanViewModel;
 import InterfaceAdapters.SignUp.SignUpViewModel;
+import InterfaceAdapters.ViewFavorites.ViewFavoritesController;
+import InterfaceAdapters.ViewFavorites.ViewFavoritesViewModel;
 import InterfaceAdapters.dashboard.DashboardViewModel;
 import InterfaceAdapters.ViewManagerModel;
 import InterfaceAdapters.grocery_list.GroceryListViewModel;
@@ -40,6 +42,7 @@ public class Main {
         LogInViewModel logInViewModel = new LogInViewModel();
         RecipeSaveViewModel recipeSaveViewModel = new RecipeSaveViewModel();
         MealPlanViewModel mealPlanViewModel = new MealPlanViewModel();
+        ViewFavoritesViewModel viewFavoritesViewModel = new ViewFavoritesViewModel();
         new ViewManager(views, cardLayout, viewManagerModel);
 
         RecipeSearchAPIDataAccessObject recipeDataAccessObject = new RecipeSearchAPIDataAccessObject();
@@ -59,8 +62,9 @@ public class Main {
                 recipeSaveViewModel, userDataAccessObject
         );
         views.add(recipeSearchView, recipeSearchView.viewName);
+        ViewFavoritesController viewFavoritesController = ViewFavoritesUseCaseFactory.createViewFavoritesController(viewManagerModel, viewFavoritesViewModel, userDataAccessObject);
 
-        DashboardView dashboardView = DashboardUseCaseFactory.createDashboardView(recipeSearchViewModel, viewManagerModel, groceryListViewModel, mealPlanViewModel);
+        DashboardView dashboardView = DashboardUseCaseFactory.createDashboardView(recipeSearchViewModel, viewManagerModel, groceryListViewModel, mealPlanViewModel, viewFavoritesController);
         views.add(dashboardView, dashboardView.viewName);
 
         SignUpView signUpView = SignupUseCaseFactory.create(viewManagerModel, logInViewModel, signUpViewModel, userDataAccessObject);
@@ -74,7 +78,8 @@ public class Main {
 
         GroceryListView groceryListView = GroceryListUseCaseFactory.createGroceryListView(groceryListViewModel, dashboardViewModel, mealPlanDataAccessObject, viewManagerModel);
         views.add(groceryListView, groceryListView.viewName);
-
+        ViewFavoritesView viewFavoritesView = ViewFavoritesUseCaseFactory.create(viewManagerModel, viewFavoritesViewModel);
+        views.add(viewFavoritesView, viewFavoritesView.viewName);
         viewManagerModel.setActiveView(signUpView.viewName);
         viewManagerModel.firePropertyChanged();
 
