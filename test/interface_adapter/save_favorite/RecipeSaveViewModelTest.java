@@ -1,4 +1,4 @@
-package InterfaceAdapters.saveFavorite;
+package interface_adapter.save_favorite;
 
 import org.junit.jupiter.api.*;
 import org.mockito.Mock;

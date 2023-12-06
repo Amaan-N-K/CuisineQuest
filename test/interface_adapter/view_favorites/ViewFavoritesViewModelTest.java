@@ -1,4 +1,4 @@
-package InterfaceAdapters.ViewFavorites;
+package interface_adapter.view_favorites;
 
 import org.junit.jupiter.api.*;
 import org.mockito.Mock;

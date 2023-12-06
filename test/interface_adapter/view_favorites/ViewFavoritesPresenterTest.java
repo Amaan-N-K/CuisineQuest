@@ -1,7 +1,7 @@
-package InterfaceAdapters.ViewFavorites;
+package interface_adapter.view_favorites;
 
-import InterfaceAdapters.ViewManagerModel;
-import UseCase.ViewFavorites.ViewFavoritesOutputData;
+import interface_adapter.ViewManagerModel;
+import use_case.view_favorites.ViewFavoritesOutputData;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;

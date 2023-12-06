@@ -1,6 +1,6 @@
-package UseCase.save_favorite;
+package use_case.save_favorite;
 
-import Entities.User;
+import entities.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;

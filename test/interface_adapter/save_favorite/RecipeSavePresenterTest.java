@@ -1,6 +1,6 @@
-package InterfaceAdapters.saveFavorite;
+package interface_adapter.save_favorite;
 
-import UseCase.save_favorite.RecipeSaveOutputData;
+import use_case.save_favorite.RecipeSaveOutputData;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;

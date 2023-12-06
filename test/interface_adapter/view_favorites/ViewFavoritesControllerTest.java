@@ -1,6 +1,6 @@
-package InterfaceAdapters.ViewFavorites;
+package interface_adapter.view_favorites;
 
-import UseCase.ViewFavorites.ViewFavoritesInputBoundary;
+import use_case.view_favorites.ViewFavoritesInputBoundary;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;

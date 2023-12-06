@@ -1,7 +1,7 @@
-package InterfaceAdapters.saveFavorite;
+package interface_adapter.save_favorite;
 
-import UseCase.save_favorite.RecipeSaveInputBoundary;
-import UseCase.save_favorite.RecipeSaveInputData;
+import use_case.save_favorite.RecipeSaveInputBoundary;
+import use_case.save_favorite.RecipeSaveInputData;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
