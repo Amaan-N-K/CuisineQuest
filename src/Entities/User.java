@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class User {
+public class User implements UserInterface {
     private final String userId;
     private final String username;
     private final String password;

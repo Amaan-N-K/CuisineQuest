@@ -3,7 +3,7 @@ package Entities;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class MealPlanDay {
+public class MealPlanDay implements MealPlanDayInterface {
     private final Recipe breakfastRecipe;
     private final Recipe lunchRecipe;
     private final Recipe dinnerRecipe;

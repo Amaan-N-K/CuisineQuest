@@ -5,7 +5,7 @@ import java.util.Collections;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class Recipe {
+public class Recipe implements RecipeInterface {
 
     private final String recipeId; // New parameter
     private final String name;
