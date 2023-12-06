@@ -1,12 +1,11 @@
 package data_access;
 
-import Entities.Recipe;
+import entities.Recipe;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.io.IOException;
 import java.util.List;
 
 class EdamamAPIDataAccessObjectTest {

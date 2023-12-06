@@ -1,9 +1,9 @@
 package data_access;
 
-import Entities.MealPlan;
-import Entities.MealPlanDay;
-import UseCase.MealPlanCreation.MealPlanDataAccessInterface;
-import UseCase.grocery_list.GroceryListDataAccessInterface;
+import entities.MealPlan;
+import entities.MealPlanDay;
+import use_case.meal_plan_creation.MealPlanDataAccessInterface;
+import use_case.grocery_list.GroceryListDataAccessInterface;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;

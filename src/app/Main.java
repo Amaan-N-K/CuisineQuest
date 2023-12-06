@@ -1,18 +1,17 @@
 package app;
 
-import Entities.UserFactory;
-import InterfaceAdapters.LogIn.LogInViewModel;
-import InterfaceAdapters.MealPlanCreation.MealPlanViewModel;
-import InterfaceAdapters.SignUp.SignUpViewModel;
-import InterfaceAdapters.ViewFavorites.ViewFavoritesController;
-import InterfaceAdapters.ViewFavorites.ViewFavoritesViewModel;
-import InterfaceAdapters.dashboard.DashboardViewModel;
-import InterfaceAdapters.ViewManagerModel;
-import InterfaceAdapters.grocery_list.GroceryListViewModel;
-import InterfaceAdapters.recipesearch.RecipeSearchViewModel;
-import InterfaceAdapters.saveFavorite.RecipeSaveViewModel;
-import UseCase.MealPlanCreation.MealPlanAPIDataAccessInterface;
-import View.*;
+import entities.UserFactory;
+import interface_adapter.login.LogInViewModel;
+import interface_adapter.meal_plan_creation.MealPlanViewModel;
+import interface_adapter.sign_up.SignUpViewModel;
+import interface_adapter.view_favorites.ViewFavoritesController;
+import interface_adapter.view_favorites.ViewFavoritesViewModel;
+import interface_adapter.dashboard.DashboardViewModel;
+import interface_adapter.ViewManagerModel;
+import interface_adapter.grocery_list.GroceryListViewModel;
+import interface_adapter.recipe_search.RecipeSearchViewModel;
+import interface_adapter.save_favorite.RecipeSaveViewModel;
+import view.*;
 import data_access.EdamamAPIDataAccessObject;
 import data_access.MealPlanDataAccessObject;
 import data_access.RecipeSearchAPIDataAccessObject;
@@ -62,6 +61,8 @@ public class Main {
                 recipeSaveViewModel, userDataAccessObject
         );
         views.add(recipeSearchView, recipeSearchView.viewName);
+        recipeSearchViewModel.addPropertyChangeListener(recipeSearchView);
+
         ViewFavoritesController viewFavoritesController = ViewFavoritesUseCaseFactory.createViewFavoritesController(viewManagerModel, viewFavoritesViewModel, userDataAccessObject);
 
         DashboardView dashboardView = DashboardUseCaseFactory.createDashboardView(recipeSearchViewModel, viewManagerModel, groceryListViewModel, mealPlanViewModel, viewFavoritesController);
