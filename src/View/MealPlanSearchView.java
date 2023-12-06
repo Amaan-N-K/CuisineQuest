@@ -160,6 +160,12 @@ public class MealPlanSearchView extends JPanel implements ActionListener, Proper
     public void propertyChange(PropertyChangeEvent evt) {
         if (evt.getPropertyName().equals("Display MealPlan")) {
             updateMealPlanDisplay(mealPlanViewModel.getState());
+        }else if ("Invalid dates.".equals(evt.getPropertyName())) {
+            // Display error message
+            String errorMessage = mealPlanViewModel.getState().getErrorMessage();
+            if (errorMessage != null && !errorMessage.isEmpty()) {
+                JOptionPane.showMessageDialog(this, errorMessage, "Error", JOptionPane.ERROR_MESSAGE);
+            }
         }
     }
 

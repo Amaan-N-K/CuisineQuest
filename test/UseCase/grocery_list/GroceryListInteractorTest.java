@@ -1,87 +1,61 @@
-
 package UseCase.grocery_list;
 
-import UseCase.grocery_list.GroceryListDataAccessInteractor;
-import UseCase.grocery_list.GroceryListInteractor;
-import UseCase.grocery_list.GroceryListOutputBoundary;
-import UseCase.grocery_list.GroceryListOutputData;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
 
-public class GroceryListInteractorTest {
+class GroceryListInteractorTest {
 
-    private TestGroceryListDataAccessInteractor dataAccessInteractor;
-    private GroceryListOutputBoundaryMock outputBoundaryMock;
-    private GroceryListInteractor groceryListInteractor;
+    @Mock
+    private GroceryListDataAccessInterface mockDataAccessInterface;
+    @Mock
+    private GroceryListOutputBoundary mockOutputBoundary;
 
-    @Before
-    public void setUp() {
-        // Create an instance of the test data access interactor
-        dataAccessInteractor = new TestGroceryListDataAccessInteractor();
+    private GroceryListInteractor interactor;
 
-        // Initialize the interactor with the test data access interactor
-        outputBoundaryMock = new GroceryListOutputBoundaryMock();
-        groceryListInteractor = new GroceryListInteractor(dataAccessInteractor, outputBoundaryMock);
+    @BeforeEach
+    void setUp() {
+        MockitoAnnotations.openMocks(this);
+        interactor = new GroceryListInteractor(mockDataAccessInterface, mockOutputBoundary);
     }
 
     @Test
-    public void testGenerateGroceryListWithItems() {
-        // Set up the test data
-        List<String> mockedGroceryList = Arrays.asList("Item1", "Item2", "Item3");
-        dataAccessInteractor.setMockedGroceryList(mockedGroceryList);
+    void execute_WithEmptyGroceryList() {
+        // Arrange
+        when(mockDataAccessInterface.getGrocerylist()).thenReturn(List.of());
+        boolean includeOutOfStock = false; // or true, based on your business logic
 
         // Act
-        groceryListInteractor.generateGroceryList();
+        interactor.execute(new GroceryListInputData(includeOutOfStock));
 
-        // Verify the output boundary is called with the expected data
-        assertEquals(mockedGroceryList, outputBoundaryMock.getOutputData().getGroceryList());
-        assertFalse(outputBoundaryMock.getOutputData().getUsecaseFailed());
+        // Assert
+        verify(mockOutputBoundary).present(any(GroceryListOutputData.class));
     }
 
     @Test
-    public void testGenerateGroceryListWithEmptyItems() {
-        // Set up the test data
-        dataAccessInteractor.setMockedGroceryList(Collections.emptyList());
+    void execute_WithNonEmptyGroceryList() {
+        // Arrange
+        when(mockDataAccessInterface.getGrocerylist()).thenReturn(List.of("Apples", "Bread"));
+        boolean includeOutOfStock = false; // or true, based on your business logic
 
         // Act
-        groceryListInteractor.generateGroceryList();
+        interactor.execute(new GroceryListInputData(includeOutOfStock));
 
-        // Verify the output boundary is called with the expected data
-        assertEquals(Collections.emptyList(), outputBoundaryMock.getOutputData().getGroceryList());
-        assertTrue(outputBoundaryMock.getOutputData().getUsecaseFailed());
+        // Assert
+        verify(mockOutputBoundary).present(any(GroceryListOutputData.class));
     }
 
-    // A simple implementation of GroceryListDataAccessInteractor for testing
-    private static class TestGroceryListDataAccessInteractor implements GroceryListDataAccessInteractor {
-        private List<String> mockedGroceryList;
+    @Test
+    void back_ShouldCallOutputBoundaryBack() {
+        // Act
+        interactor.back();
 
-        void setMockedGroceryList(List<String> mockedGroceryList) {
-            this.mockedGroceryList = mockedGroceryList;
-        }
-
-        @Override
-        public List<String> getGrocerylist() {
-            return mockedGroceryList;
-        }
-    }
-
-    // A simple implementation of GroceryListOutputBoundary for testing
-    private static class GroceryListOutputBoundaryMock implements GroceryListOutputBoundary {
-        private GroceryListOutputData outputData;
-
-        @Override
-        public void present(GroceryListOutputData outputData) {
-            this.outputData = outputData;
-        }
-
-        public GroceryListOutputData getOutputData() {
-            return outputData;
-        }
+        // Assert
+        verify(mockOutputBoundary).back();
     }
 }

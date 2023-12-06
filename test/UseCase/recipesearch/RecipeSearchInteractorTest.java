@@ -1,13 +1,7 @@
-package InterfaceAdapters.recipesearch;
+package UseCase.recipesearch;
 
 import Entities.Nutrition;
 import Entities.Recipe;
-import UseCase.recipesearch.RecipeDataAccessInterface;
-import UseCase.recipesearch.RecipeSearchInputData;
-import UseCase.recipesearch.RecipeSearchInteractor;
-import UseCase.recipesearch.RecipeSearchOutputBoundary;
-import UseCase.recipesearch.RecipeSearchOutputData;
-import UseCase.recipesearch.RecipeSearchDTO;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,7 +10,6 @@ import org.mockito.MockitoAnnotations;
 
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.List;
 
 import static org.mockito.Mockito.*;
 public class RecipeSearchInteractorTest {

@@ -1,39 +1,41 @@
 package data_access;
 
-import Entities.*;
+import Entities.MealPlan;
+import Entities.MealPlanDay;
+import Entities.Nutrition;
+import Entities.Recipe;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.io.TempDir;
-import org.mockito.Mockito;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
 class MealPlanDataAccessObjectTest {
 
-    private String testDirectory;
-    private MealPlanDataAccessObject dataAccessObject;
-    private UserDataAccessObject userDataAccessObjectMock;
-    private String userId;
+    private MealPlanDataAccessObject mealPlanDataAccessObject;
+
+    @Mock
+    private UserDataAccessObject userDataAccessObject;
+    private String identifier;
     private String startDate;
     private String endDate;
     private String diet;
     private int calorieLimit;
+    private MealPlan mealPlan;
     private MealPlanDay mealPlanDay;
 
     @BeforeEach
     void setUp() {
-        testDirectory = System.getProperty("java.io.tmpdir");
-        userDataAccessObjectMock = Mockito.mock(UserDataAccessObject.class);
-        dataAccessObject = new MealPlanDataAccessObject(testDirectory, userDataAccessObjectMock);
-
-        userId = "user1";
-        startDate = "2023-12-04";
+        MockitoAnnotations.openMocks(this);
+        mealPlanDataAccessObject = new MealPlanDataAccessObject("testFilePath", userDataAccessObject);
+        identifier = "2023-12-04 to 2023-12-07";
+        startDate = "2023-12-07";
         endDate = "2023-12-07";
         diet = "Vegetarian";
         calorieLimit = 1000;
@@ -82,43 +84,40 @@ class MealPlanDataAccessObjectTest {
         Nutrition nutritionD = new Nutrition(258, 41, 6, 29,4);
         String descriptionD = "Slice the watermelon and top with onion.";
         Recipe dinner = new Recipe("id3", "WaterMelon Pizza", ingredientsD, mealTypeD, dietD, healthD, cuisineTypeD, nutritionD, descriptionD);
+
         mealPlanDay = new MealPlanDay(breakfast, lunch, dinner);
+
+        mealPlan = new MealPlan(startDate, endDate, diet, calorieLimit);
     }
+
 
     @Test
-    void saveMealPlan() {
-        MealPlanFactory mealPlanFactory= new MealPlanFactory();
-        MealPlan mealPlan = mealPlanFactory.createMealPlan(startDate, endDate, diet, calorieLimit);
-        mealPlan.addMealPlanDay(mealPlanDay);
-        try {
-            dataAccessObject.saveMealPlan(userId, mealPlan);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+    void testSaveMealPlan() throws IOException {
+        String userId = "testUser";
+        MealPlan testMealPlan = new MealPlan("2021-01-01", "2021-01-07", "Balanced", 2000);
 
-        File savedFile = new File(testDirectory + File.separator + userId, userId + ".json");
-        assertTrue(savedFile.exists());
+        mealPlanDataAccessObject.saveMealPlan(userId, testMealPlan);
+
+        MealPlan loadedMealPlan = mealPlanDataAccessObject.loadMealPlan(userId);
+        assertEquals(testMealPlan.getStartDate(), loadedMealPlan.getStartDate());
+        assertEquals(testMealPlan.getEndDate(), loadedMealPlan.getEndDate());
+        assertEquals(testMealPlan.getDiet(), loadedMealPlan.getDiet());
+        assertEquals(testMealPlan.getCalorieLimit(), loadedMealPlan.getCalorieLimit());
     }
+
 
     @Test
-    void loadMealPlan() {
-        MealPlanFactory mealPlanFactory= new MealPlanFactory();
-        MealPlan mealPlan = mealPlanFactory.createMealPlan(startDate, endDate, diet, calorieLimit);
+    void testGetGrocerylist() throws IOException {
+        String userId = "testUser";
+        MealPlan testMealPlan = mealPlan;
         mealPlan.addMealPlanDay(mealPlanDay);
-        try {
-            dataAccessObject.saveMealPlan(userId, mealPlan);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        mealPlanDataAccessObject.saveMealPlan(userId, testMealPlan);
 
-        MealPlan loadedMealPlan = null;
-        try {
-            loadedMealPlan = dataAccessObject.loadMealPlan(userId);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        when(userDataAccessObject.getActive()).thenReturn(userId);
 
-        assertNotNull(loadedMealPlan);
+        List<String> groceryList = mealPlanDataAccessObject.getGrocerylist();
 
+        assertTrue(groceryList.contains("watermelon"));
     }
+
 }

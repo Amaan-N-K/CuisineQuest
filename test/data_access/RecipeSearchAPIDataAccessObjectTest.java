@@ -1,8 +1,7 @@
-package InterfaceAdapters.recipesearch;
+package data_access;
 
 import Entities.Recipe;
 import UseCase.recipesearch.RecipeSearchInputData;
-import data_access.RecipeSearchAPIDataAccessObject;
 import okhttp3.*;
 import org.junit.jupiter.api.Test;
 import static org.mockito.Mockito.*;
