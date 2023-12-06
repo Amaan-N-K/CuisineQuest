@@ -12,7 +12,6 @@ import java.beans.PropertyChangeListener;
 import java.util.List;
 
 public class GroceryListView extends JPanel implements PropertyChangeListener {
-    private final GroceryListViewModel viewModel;
     private final GroceryListController controller;
 
     public final String viewName = "grocery list";
@@ -24,8 +23,6 @@ public class GroceryListView extends JPanel implements PropertyChangeListener {
 
     public GroceryListView(GroceryListController controller, GroceryListViewModel viewModel) {
         this.controller = controller;
-        this.viewModel = viewModel;
-        viewModel.addPropertyChangeListener(this);
         initializeUI();
     }
 
@@ -66,7 +63,7 @@ public class GroceryListView extends JPanel implements PropertyChangeListener {
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         if ("groceryList".equals(evt.getPropertyName())) {
-            updateGroceryList(viewModel.getState());
+            updateGroceryList((GroceryListState) evt.getNewValue());
         } else if ("groceryError".equals(evt.getPropertyName())) {
             showErrorMessage();
         }

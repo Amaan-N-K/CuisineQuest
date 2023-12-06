@@ -79,6 +79,8 @@ public class Main {
 
         GroceryListView groceryListView = GroceryListUseCaseFactory.createGroceryListView(groceryListViewModel, dashboardViewModel, mealPlanDataAccessObject, viewManagerModel);
         views.add(groceryListView, groceryListView.viewName);
+        groceryListViewModel.addPropertyChangeListener(groceryListView);
+
         ViewFavoritesView viewFavoritesView = ViewFavoritesUseCaseFactory.create(viewManagerModel, viewFavoritesViewModel);
         views.add(viewFavoritesView, viewFavoritesView.viewName);
         viewManagerModel.setActiveView(signUpView.viewName);
