@@ -4,23 +4,24 @@ import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class UserFactoryTest {
+public class UserFactoryTest {
 
     @Test
-    void create() {
-        UserFactory factory = new UserFactory();
-        String expectedUserId = "user123";
-        String expectedUsername = "testUser";
-        String expectedPassword = "testPass";
-        LocalDateTime expectedCreationTime = LocalDateTime.now();
+    void testCreateUser() {
+        UserFactory userFactory = new UserFactory();
 
-        User user = factory.create(expectedUserId, expectedUsername, expectedPassword, expectedCreationTime);
+        String userId = "123";
+        String username = "testUser";
+        String password = "testPass";
+        LocalDateTime creationTime = LocalDateTime.now();
 
-        assertNotNull(user, "User should not be null");
-        assertEquals(expectedUserId, user.getUserId(), "User ID should match");
-        assertEquals(expectedUsername, user.getUsername(), "Username should match");
-        assertEquals(expectedPassword, user.getPassword());
+        User user = userFactory.create(userId, username, password, creationTime);
+
+        assertEquals(userId, user.getUserId(), "User ID should match the input value");
+        assertEquals(username, user.getUsername(), "Username should match the input value");
+        assertEquals(password, user.getPassword(), "Password should match the input value");
+        assertEquals(creationTime, user.getCreationTime(), "Creation time should match the input value");
     }
 }

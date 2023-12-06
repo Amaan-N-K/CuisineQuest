@@ -16,4 +16,8 @@ public class GroceryListController {
         GroceryListInputData inputData = new GroceryListInputData(true);
         groceryListInteractor.execute(inputData);
     }
+
+    public void back(){
+        groceryListInteractor.back();
+    }
 }

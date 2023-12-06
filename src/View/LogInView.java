@@ -135,6 +135,9 @@ public class LogInView extends JPanel implements ActionListener, PropertyChangeL
             JOptionPane.showMessageDialog(this, state.getPasswordError());
 
         }
+
     }
+
+
 
 }

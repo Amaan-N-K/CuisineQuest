@@ -16,6 +16,7 @@ public class RecipeSavePresenter  implements RecipeSaveOutputBoundary {
         state.setSaveSuccessful(true);
         state.setMessage(outputData.getMessage());
         recipesaveViewModel.setState(state);
+        recipesaveViewModel.firePropertyChanged();
 
 
     }
@@ -26,6 +27,7 @@ public class RecipeSavePresenter  implements RecipeSaveOutputBoundary {
         state.setSaveSuccessful(false);
         state.setMessage(outputData.getMessage());
         recipesaveViewModel.setState(state);
+        recipesaveViewModel.firePropertyChanged();
 
     }
 }

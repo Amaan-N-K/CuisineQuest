@@ -19,8 +19,8 @@ public class RecipeSearchController {
                 calorieGoal, ingredients, isHalal, isKosher,
                 isGlutenFree, isVegetarian, isVegan
         );
-
         recipeSearch.execute(inputData);
+
     }
 
     public void back(){

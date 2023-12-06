@@ -5,6 +5,7 @@ import Entities.MealPlanDay;
 import Entities.Nutrition;
 import Entities.Recipe;
 import InterfaceAdapters.ViewManagerModel;
+import InterfaceAdapters.dashboard.DashboardViewModel;
 import UseCase.MealPlanCreation.MealPlanOutputData;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,6 +21,7 @@ class MealPlanPresenterTest {
 
     private ViewManagerModel viewManagerModelMock;
     private MealPlanViewModel mealPlanViewModelMock;
+    private DashboardViewModel dashBoardViewModelMock;
     private MealPlanPresenter presenter;
     private Recipe breakfast;
     private Recipe lunch;
@@ -36,7 +38,8 @@ class MealPlanPresenterTest {
     void setUp() {
         viewManagerModelMock = mock(ViewManagerModel.class);
         mealPlanViewModelMock = mock(MealPlanViewModel.class);
-        presenter = new MealPlanPresenter(viewManagerModelMock, mealPlanViewModelMock);
+        dashBoardViewModelMock = mock(DashboardViewModel.class);
+        presenter = new MealPlanPresenter(viewManagerModelMock, mealPlanViewModelMock, dashBoardViewModelMock);
         MealPlanState mockState = new MealPlanState();
         when(mealPlanViewModelMock.getState()).thenReturn(mockState);
 
@@ -101,10 +104,9 @@ class MealPlanPresenterTest {
 
         presenter.presentMealPlan(outputData);
 
-        verify(mealPlanViewModelMock).setState(argThat(state ->
-                state.isCreationSuccess() && state.getMealPlan().equals(outputData.getMealPlan())
-        ));
+        verify(mealPlanViewModelMock).updateMealPlanState(any(MealPlan.class));
         verify(mealPlanViewModelMock).firePropertyChanged();
+
         verify(viewManagerModelMock).setActiveView("MealPlanDisplayView");
         verify(viewManagerModelMock).firePropertyChanged();
     }
@@ -112,12 +114,22 @@ class MealPlanPresenterTest {
     @Test
     void prepareFailView() {
         String errorMessage = "Error message";
+        MealPlanState mockState = new MealPlanState();
+        when(mealPlanViewModelMock.getState()).thenReturn(mockState);
 
         presenter.prepareFailView(errorMessage);
 
-        verify(mealPlanViewModelMock).setState(argThat(state ->
-                !state.isCreationSuccess() && state.getErrorMessage().equals(errorMessage)
-        ));
+        assertEquals(errorMessage, mockState.getErrorMessage());
+
+        verify(mealPlanViewModelMock).setState(mockState);
         verify(mealPlanViewModelMock).firePropertyChanged();
+    }
+
+    @Test
+    void back() {
+        String dashboardViewName = "dashboard";
+        presenter.back();
+        verify(viewManagerModelMock).setActiveView(dashboardViewName);
+        verify(viewManagerModelMock).firePropertyChanged();
     }
 }

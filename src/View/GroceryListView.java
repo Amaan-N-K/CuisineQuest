@@ -52,11 +52,11 @@ public class GroceryListView extends JPanel implements PropertyChangeListener {
         generateListButton.addActionListener(this::onGenerateList);
         add(generateListButton);
 
-//        // Back Button
-//        backButton = new JButton("Back");
-//        backButton.addActionListener(e -> controller.back());
-//        backButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-//        add(backButton);
+        // Back Button
+        backButton = new JButton("Back");
+        backButton.addActionListener(e -> controller.back());
+        backButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        add(backButton);
     }
 
     private void onGenerateList(ActionEvent e) {
