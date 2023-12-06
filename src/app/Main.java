@@ -4,6 +4,7 @@ import Entities.UserFactory;
 import InterfaceAdapters.LogIn.LogInViewModel;
 import InterfaceAdapters.MealPlanCreation.MealPlanViewModel;
 import InterfaceAdapters.SignUp.SignUpViewModel;
+import InterfaceAdapters.ViewFavorites.ViewFavoritesViewModel;
 import InterfaceAdapters.dashboard.DashboardViewModel;
 import InterfaceAdapters.ViewManagerModel;
 import InterfaceAdapters.grocery_list.GroceryListViewModel;
@@ -40,6 +41,7 @@ public class Main {
         LogInViewModel logInViewModel = new LogInViewModel();
         RecipeSaveViewModel recipeSaveViewModel = new RecipeSaveViewModel();
         MealPlanViewModel mealPlanViewModel = new MealPlanViewModel();
+        ViewFavoritesViewModel viewFavoritesViewModel = new ViewFavoritesViewModel();
         new ViewManager(views, cardLayout, viewManagerModel);
 
         RecipeSearchAPIDataAccessObject recipeDataAccessObject = new RecipeSearchAPIDataAccessObject();
@@ -74,7 +76,8 @@ public class Main {
 
         GroceryListView groceryListView = GroceryListUseCaseFactory.createGroceryListView(groceryListViewModel, dashboardViewModel, mealPlanDataAccessObject, viewManagerModel);
         views.add(groceryListView, groceryListView.viewName);
-
+        ViewFavoritesView viewFavoritesView = ViewFavoritesUseCaseFactory.create(viewManagerModel, viewFavoritesViewModel);
+        views.add(viewFavoritesView, viewFavoritesView.viewName);
         viewManagerModel.setActiveView(signUpView.viewName);
         viewManagerModel.firePropertyChanged();
 
