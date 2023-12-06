@@ -8,17 +8,19 @@ public class GroceryListViewModel {
 
     public final String viewName = "grocery list";
     private GroceryListState state = new GroceryListState();
-    private final PropertyChangeSupport support = new PropertyChangeSupport(this);
+    private PropertyChangeSupport support;
 
-    public GroceryListViewModel() {}
-
-    public void setState(GroceryListState state) {
-        this.state = state;
-        firePropertyChanged("state");
+    public GroceryListViewModel() {
+        this.state = new GroceryListState();
+        this.support = new PropertyChangeSupport(this);
     }
 
     public void addPropertyChangeListener(PropertyChangeListener listener) {
         support.addPropertyChangeListener(listener);
+    }
+
+    public void removePropertyChangeListener(PropertyChangeListener listener) {
+        support.removePropertyChangeListener(listener);
     }
 
     public GroceryListState getState() {
@@ -30,8 +32,10 @@ public class GroceryListViewModel {
     }
 
     public void updateGroceryList(List<String> groceryList) {
-        state.setGroceryList(groceryList);
-        firePropertyChanged("groceryList");
+        GroceryListState oldState = this.state;
+        GroceryListState newState = new GroceryListState();
+        newState.setGroceryList(groceryList);
+        support.firePropertyChange("groceryList", oldState, newState);
     }
 
     public void errorMessage() {
