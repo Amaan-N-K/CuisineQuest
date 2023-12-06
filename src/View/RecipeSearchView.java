@@ -6,7 +6,7 @@ import InterfaceAdapters.saveFavorite.RecipeSaveState;
 import InterfaceAdapters.saveFavorite.RecipeSaveViewModel;
 import InterfaceAdapters.recipesearch.RecipeSearchController;
 import InterfaceAdapters.recipesearch.RecipeSearchState;
-import InterfaceAdapters.recipesearch.RecipeSearchViewModel;
+
 
 
 
@@ -19,7 +19,6 @@ import java.util.Arrays;
 import java.util.List;
 
 public class RecipeSearchView extends JPanel implements PropertyChangeListener {
-    private final RecipeSearchViewModel viewModel;
     private final RecipeSearchController controller;
     private final RecipeSaveController saveController;
     private final RecipeSaveViewModel recipeSaveViewModel;
@@ -34,14 +33,12 @@ public class RecipeSearchView extends JPanel implements PropertyChangeListener {
     private JPanel recipeDisplayPanel; // This is where recipes will be displayed
 
 
-    public RecipeSearchView(RecipeSearchViewModel viewModel, RecipeSearchController controller,
+    public RecipeSearchView(RecipeSearchController controller,
                             RecipeSaveController saveController, RecipeSaveViewModel recipeSaveViewModel) {
-        this.viewModel = viewModel;
         this.recipeSaveViewModel = recipeSaveViewModel;
         this.controller = controller;
         this.saveController = saveController;
 
-        viewModel.addPropertyChangeListener(this);
         recipeSaveViewModel.addPropertyChangeListener(this);
         initializeUI();
     }
@@ -134,7 +131,7 @@ public class RecipeSearchView extends JPanel implements PropertyChangeListener {
     public void propertyChange(PropertyChangeEvent evt) {
         // The property name to check against is updated based on the latest convention used in ViewModel
         if ("recipes".equals(evt.getPropertyName())) {
-            updateRecipeDisplay(viewModel.getState());
+            updateRecipeDisplay((RecipeSearchState) evt.getNewValue());
         }
         if ("state".equals(evt.getPropertyName())) {
             handleSaveStateChange(recipeSaveViewModel.getState());

@@ -1,30 +1,47 @@
 package InterfaceAdapters.recipesearch;
 
 import UseCase.recipesearch.RecipeSearchDTO;
+
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.List;
 
 public class RecipeSearchViewModel {
 
+    private RecipeSearchState state;
+    private PropertyChangeSupport support;
+
     public final String viewName = "recipe search";
-    private RecipeSearchState state = new RecipeSearchState();
-    private final PropertyChangeSupport support = new PropertyChangeSupport(this);
+
+    public RecipeSearchViewModel() {
+        this.state = new RecipeSearchState();
+        this.support = new PropertyChangeSupport(this);
+    }
 
     public void addPropertyChangeListener(PropertyChangeListener listener) {
         support.addPropertyChangeListener(listener);
     }
 
-    public RecipeSearchState getState() {
-        return state;
+    public void removePropertyChangeListener(PropertyChangeListener listener) {
+        support.removePropertyChangeListener(listener);
     }
 
-    public void firePropertyChanged(String propertyName) {
-        support.firePropertyChange(propertyName, null, null);
+    public void setState(RecipeSearchState state) {
+        RecipeSearchState oldState = this.state;
+        this.state = state;
+        support.firePropertyChange("state", oldState, state);
     }
 
     public void presentRecipes(List<RecipeSearchDTO> recipeSearchDTOList) {
+        // Call the state's method to update the recipes
         state.setRecipes(recipeSearchDTOList);
-        firePropertyChanged("recipes");
+        // Then notify the listeners about this change
+        support.firePropertyChange("recipes", null, state);
     }
+
+    // Delegate getters to the state object
+    public List<String> getRecipeNames() {
+        return state.getRecipeNames();
+    }
+
 }

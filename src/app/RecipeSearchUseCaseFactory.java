@@ -56,6 +56,6 @@ public class RecipeSearchUseCaseFactory {
 
         RecipeSearchController recipeSearchController = createRecipeSearchController(recipeSearchViewModel, dashboardViewModel, recipeDataAccessObject, viewManagerModel);
         RecipeSaveController recipeSaveController = createRecipeSaveController(recipeSaveViewModel, userDataAccessObject);
-        return new RecipeSearchView(recipeSearchViewModel, recipeSearchController, recipeSaveController, recipeSaveViewModel);
+        return new RecipeSearchView(recipeSearchController, recipeSaveController, recipeSaveViewModel);
     }
 }

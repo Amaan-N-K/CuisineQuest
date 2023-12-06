@@ -11,8 +11,6 @@ public class RecipeSearchState {
     private List<String> recipeDescriptions = new ArrayList<>();
     private List<List<String>> recipeIngredients = new ArrayList<>();
 
-    private List<String> recipeIDs = new ArrayList<>();
-
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
 
     // Private setters that update individual aspects of the state
@@ -22,10 +20,6 @@ public class RecipeSearchState {
 
     private void setRecipeDescriptions(List<String> recipeDescriptions) {
         this.recipeDescriptions = new ArrayList<>(recipeDescriptions);
-    }
-
-    private void  setRecipeIDs(List<String> recipeIDs) {
-        this.recipeIDs = recipeIDs;
     }
 
     private void setRecipeIngredients(List<List<String>> recipeIngredients) {
@@ -40,13 +34,11 @@ public class RecipeSearchState {
         List<String> names = new ArrayList<>();
         List<String> descriptions = new ArrayList<>();
         List<List<String>> ingredients = new ArrayList<>();
-        List<String> recipeids = new ArrayList<>();
 
         for (RecipeSearchDTO dto : recipeSearchDTOList) {
             names.add(dto.getName());
             descriptions.add(dto.getDescription());
             ingredients.add(new ArrayList<>(dto.getIngredients()));
-            recipeids.add(dto.getRecipeID());
         }
 
         // Call the private setters to update the state
@@ -54,21 +46,12 @@ public class RecipeSearchState {
         setRecipeDescriptions(descriptions);
         setRecipeIngredients(ingredients);
 
-        // Notify observers that the entire recipes list has been updated
-        firePropertyChanged("recipes", null, null);
     }
 
     public void addPropertyChangeListener(PropertyChangeListener listener) {
         support.addPropertyChangeListener(listener);
     }
 
-    public void removePropertyChangeListener(PropertyChangeListener listener) {
-        support.removePropertyChangeListener(listener);
-    }
-
-    protected void firePropertyChanged(String propertyName, Object oldValue, Object newValue) {
-        support.firePropertyChange(propertyName, oldValue, newValue);
-    }
 
     // Getters for the view to use for displaying data
     public List<String> getRecipeNames() {
@@ -83,5 +66,4 @@ public class RecipeSearchState {
         return recipeIngredients;
     }
 
-    public List<String> getRecipeIDs() {return recipeIDs;}
 }

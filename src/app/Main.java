@@ -1,6 +1,6 @@
 package app;
 
-import Entities.UserFactory;
+import entities.UserFactory;
 import InterfaceAdapters.LogIn.LogInViewModel;
 import InterfaceAdapters.MealPlanCreation.MealPlanViewModel;
 import InterfaceAdapters.SignUp.SignUpViewModel;
@@ -11,7 +11,6 @@ import InterfaceAdapters.ViewManagerModel;
 import InterfaceAdapters.grocery_list.GroceryListViewModel;
 import InterfaceAdapters.recipesearch.RecipeSearchViewModel;
 import InterfaceAdapters.saveFavorite.RecipeSaveViewModel;
-import UseCase.MealPlanCreation.MealPlanAPIDataAccessInterface;
 import View.*;
 import data_access.EdamamAPIDataAccessObject;
 import data_access.MealPlanDataAccessObject;
@@ -62,6 +61,8 @@ public class Main {
                 recipeSaveViewModel, userDataAccessObject
         );
         views.add(recipeSearchView, recipeSearchView.viewName);
+        recipeSearchViewModel.addPropertyChangeListener(recipeSearchView);
+
         ViewFavoritesController viewFavoritesController = ViewFavoritesUseCaseFactory.createViewFavoritesController(viewManagerModel, viewFavoritesViewModel, userDataAccessObject);
 
         DashboardView dashboardView = DashboardUseCaseFactory.createDashboardView(recipeSearchViewModel, viewManagerModel, groceryListViewModel, mealPlanViewModel, viewFavoritesController);
