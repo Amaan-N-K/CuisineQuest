@@ -2,7 +2,7 @@ package Entities;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class Nutrition {
+public class Nutrition implements NutritionInterface {
     private int calorie;
     private int carbohydrates;
     private int protein;

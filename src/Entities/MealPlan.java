@@ -6,7 +6,7 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class MealPlan {
+public class MealPlan implements MealPlanInterface {
     private final String identifier;
     private final String startDate;
     private final String endDate;
