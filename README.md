@@ -20,10 +20,9 @@ This tool allows users to:
 
 Our meal planner is designed for those who wish to organize their culinary week ahead. Features include:
 - Crafting a comprehensive meal plan based on:
-  - BMR (weight in kg, height in cm, age in years)
-  - Available ingredients
+  - Start Date
+  - End Date
   - Caloric goals
-  - Specific cuisines
   - Dietary restrictions
 - Providing suggestions of recipe(s) that best fit user criteria and user information.
 - Summary of nutrition analysis.
