@@ -16,9 +16,7 @@ CuisineQuest is a Java-based application that provides personalized cooking and 
 
 - Create meal plans with custom start and end dates, caloric goals, and dietary preferences.
 - Receive recipe suggestions tailored to user's criteria.
-- Obtain nutrition analysis summaries.
 - Generate grocery lists based on meal plans.
-- Schedule meals for specific times and days.
 
 ## Getting Started
 
