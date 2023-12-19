@@ -2,48 +2,47 @@
 
 **Problem Domain:** Recipes
 
-This project focuses on offering users a tailored approach to cooking and meal planning. By leveraging the [edamam recipe API](https://developer.edamam.com/edamam-docs-recipe-api) and [edamam nutrition API](https://developer.edamam.com/edamam-docs-nutrition-api )
-, we will develope an application with two core mechanisms:
+CuisineQuest is a Java-based application that provides personalized cooking and meal planning solutions. It uses the [Edamam Recipe API](https://developer.edamam.com/edamam-docs-recipe-api) and [Edamam Nutrition API](https://developer.edamam.com/edamam-docs-nutrition-api) to help users discover recipes and organize their meal plans efficiently.
 
-## 1. Recipe Finder
+## Key Features
 
-This tool allows users to:
-- Find a single recipe based on specific criteria such as:
-  - Ingredients on hand
-  - Preferred calorie range
-  - Desired cuisine type
-  - Dietary restrictions
-- Gain insights into preparation time, difficulty level, and more.
-- Save user's favourite recipes and meal plans.
+### 1. Recipe Finder
 
-## 2. Meal Planner
+- Search for recipes based on ingredients, calorie range, cuisine type, and dietary restrictions.
+- Access detailed information about preparation time, difficulty level, and more.
+- Save and manage favorite recipes and meal plans.
 
-Our meal planner is designed for those who wish to organize their culinary week ahead. Features include:
-- Crafting a comprehensive meal plan based on:
-  - Start Date
-  - End Date
-  - Caloric goals
-  - Dietary restrictions
-- Providing suggestions of recipe(s) that best fit user criteria and user information.
-- Summary of nutrition analysis.
-- Providing a grocery list of items needed.
-- Scheduling meals for specific times and days.
-  
-# Exploring API
-<img width="960" alt="Screenshot 2023-09-28 180512" src="https://github.com/Amaan-N-K/CuisineQuest/assets/113640712/84467900-d07c-4012-b1ef-446887e1fe57">
+### 2. Meal Planner
 
-# Example output of running Java code
+- Create meal plans with custom start and end dates, caloric goals, and dietary preferences.
+- Receive recipe suggestions tailored to user's criteria.
+- Obtain nutrition analysis summaries.
+- Generate grocery lists based on meal plans.
+- Schedule meals for specific times and days.
 
-```bash
-1/2 cup olive oil
-5 cloves garlic, peeled
-2 large russet potatoes, peeled and cut into chunks
-1 3-4 pound chicken, cut into 8 pieces (or 3 pound chicken legs)
-3/4 cup white wine
-3/4 cup chicken stock
-3 tablespoons chopped parsley
-1 tablespoon dried oregano
-Salt and pepper
-1 cup frozen peas, thawed
+## Getting Started
 
+### Prerequisites
 
+- Java Development Kit (JDK) 8 or higher
+- Apache Maven for dependency management
+- An active internet connection for API access
+
+### Installation
+
+1. Clone the repository:
+```
+git clone https://github.com/Amaan-N-K/CuisineQuest.git
+```
+2. Navigate to the project directory:
+```
+cd CuisineQuest
+```
+3. Use Maven to resolve dependencies and build the project:
+```
+mvn clean install
+
+```
+### Running the Application
+
+- To launch CuisineQuest, run the `app.Main` class: 
